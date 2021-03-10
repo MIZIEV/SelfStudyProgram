@@ -17,7 +17,6 @@ public class DBWorker {
 
     private Connection connection;
 
-
     private ArrayList<StringFromDB> QAList = new ArrayList<>();
 
     public DBWorker() {
