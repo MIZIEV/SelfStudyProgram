@@ -1,0 +1,9 @@
+.text-input{
+
+-fx-text-inner-color: red;
+-fx-text-inner-color: green;
+-fx-text-inner-color: orange;
+
+-fx-font-size: 20px;
+-fx-font-size: 16px;
+}

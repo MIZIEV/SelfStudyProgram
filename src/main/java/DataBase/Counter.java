@@ -1,6 +1,6 @@
 package DataBase;
 
-public class RandomDigit {
+public class Counter {
     private int digit;
 
     public int getDigit() {

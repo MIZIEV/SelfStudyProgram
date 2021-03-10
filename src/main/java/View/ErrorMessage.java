@@ -2,9 +2,9 @@ package View;
 
 import javafx.scene.control.*;
 
-public class ErrorMassage extends TextArea {
+public class ErrorMessage extends TextArea {
 
-     public ErrorMassage(){
+     public ErrorMessage(){
 
          this.setLayoutX(885);
          this.setLayoutY(50);

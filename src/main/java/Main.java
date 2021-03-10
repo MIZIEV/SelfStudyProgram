@@ -1,5 +1,5 @@
-import DataBase.DBWorker;
-import DataBase.RandomDigit;
+import Controller.*;
+import DataBase.*;
 import View.*;
 import javafx.application.*;
 import javafx.scene.*;
@@ -14,26 +14,32 @@ public class Main extends Application {
     }
 
     public void start(Stage myStage) {
-        DBWorker worker = new DBWorker();
-        RandomDigit digit = new RandomDigit();
-
         OutputText outputText = new OutputText();
         ResultMassage resultMassage = new ResultMassage();
-        ErrorMassage errorMassage = new ErrorMassage();
+        ErrorMessage errorMessage = new ErrorMessage();
+        outputText.setWrapText(true);
 
-        StartButton startButton = new StartButton(outputText, worker.getQAList(), digit);
+        outputText.setStyle("-fx-font-size: 16px;");
+        errorMessage.setStyle("-fx-text-inner-color: red; -fx-font-size: 20px;");
 
-        NextButton nextButton = new NextButton(outputText, worker.getQAList(), digit, errorMassage);
-        PreviousButton previousButton = new PreviousButton(outputText, worker.getQAList(), digit, errorMassage);
+        Counter digit = new Counter();
+        ResultCount resultCount = new ResultCount();
+        DBWorker worker = new DBWorker();
+        CountingResult countingResult = new CountingResult(worker, resultCount);
 
-        QuestionButton questionButton = new QuestionButton(outputText, worker.getQAList(), digit);
-        AnswerButton answerButton = new AnswerButton(outputText, worker.getQAList(), digit);
+        StartButtonController startButtonController = new StartButtonController(worker, digit);
+        NextButtonController nextButtonController = new NextButtonController(worker, digit,errorMessage);
+        PreviousButtonController previousButtonController = new PreviousButtonController(worker, digit,errorMessage);
+        QuestionButtonController questionButtonController = new QuestionButtonController(worker, digit);
+        AnswerButtonController answerButtonController = new AnswerButtonController(worker, digit);
+        YesButtonController yesButtonController = new YesButtonController(worker, digit, resultMassage, countingResult);
+        NoButtonController noButtonController = new NoButtonController(worker, digit);
 
-        startButton.buttonAction();
-        nextButton.buttonAction();
-        questionButton.buttonAction();
-        previousButton.buttonAction();
-        answerButton.buttonAction();
+        ButtonsDependence dependence = new ButtonsDependence(startButtonController, nextButtonController,
+                previousButtonController, questionButtonController, answerButtonController,
+                yesButtonController, noButtonController);
+
+        VisualConstructor constructor = new VisualConstructor(outputText, errorMessage, dependence);
 
         myStage.setTitle("Self study program");
         Pane rootNode = new Pane();
@@ -41,8 +47,11 @@ public class Main extends Application {
         myStage.setResizable(false);
         myStage.setScene(myScene);
 
-        rootNode.getChildren().addAll(startButton, nextButton, previousButton, questionButton, answerButton,
-                outputText, resultMassage, errorMassage);
+        rootNode.getChildren().addAll(constructor.getStartButton(), constructor.getNextButton(),
+                constructor.getPreviousButton(), constructor.getQuestionButton(),
+                constructor.getAnswerButton(), constructor.getYesButton(), constructor.getNoButton(),
+                outputText, resultMassage, errorMessage);
+
         myStage.show();
     }
 }
