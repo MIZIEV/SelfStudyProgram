@@ -15,13 +15,20 @@ public class QuestionButtonController {
     public String getRandomQuestion() {
         int randomDigit = (int) (Math.random() * worker.getQAList().size());
         counter.setDigit(randomDigit);
+        String question = "";
 
-        if (worker.getQAList().get(randomDigit).getYesNo() == true) {
-            //randomDigit = (int) (Math.random() * worker.getQAList().size());   //todo придумать норм логику!!!!
+        if (worker.getQAList().get(randomDigit).getYesNo() == false) {
 
+            question = worker.getQAList().get(randomDigit).getIndex() + " - " +
+                    worker.getQAList().get(randomDigit).getQuestion();
+        } else {
+            while (worker.getQAList().get(randomDigit).getYesNo() != false) {
+
+                randomDigit = (int) (Math.random() * worker.getQAList().size());
+                question = worker.getQAList().get(randomDigit).getIndex() + " - " +
+                        worker.getQAList().get(randomDigit).getQuestion();
+            }
         }
-
-        return worker.getQAList().get(randomDigit).getIndex() + " - " +
-                worker.getQAList().get(randomDigit).getQuestion();
+        return question;
     }
 }
