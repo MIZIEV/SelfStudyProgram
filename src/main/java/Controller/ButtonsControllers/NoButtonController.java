@@ -1,4 +1,4 @@
-package Controller;
+package Controller.ButtonsControllers;
 
 import DataBase.*;
 
@@ -13,6 +13,6 @@ public class NoButtonController {
 
     public void setNo() {
         int digit = counter.getDigit();
-        if (worker.getQAList().get(digit).getYesNo() != true) worker.getQAList().get(digit).setYesNo(false);
+        if (worker.getCoreList().get(digit).getYesNo() != true) worker.getCoreList().get(digit).setYesNo(false);
     }
 }

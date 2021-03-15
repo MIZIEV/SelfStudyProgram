@@ -1,4 +1,4 @@
-package Controller;
+package Controller.ButtonsControllers;
 
 import DataBase.*;
 
@@ -14,7 +14,8 @@ public class AnswerButtonController {
     public String getAnswer() {
         int digit = counter.getDigit();
 
-        return worker.getQAList().get(digit).getIndex() + " - " +
-                worker.getQAList().get(digit).getAnswer();
+        return worker.getBufferList().get(digit).getIndex()+" - "+
+                worker.getBufferList().get(digit).getTheme()+": "+"\n"+
+                worker.getBufferList().get(digit).getAnswer();
     }
 }

@@ -1,4 +1,4 @@
-package Controller;
+package Controller.ButtonsControllers;
 
 import DataBase.Counter;
 import DataBase.DBWorker;
@@ -25,7 +25,8 @@ public class PreviousButtonController {
         } else textCounter--;
 
         counter.setDigit(textCounter);
-        return worker.getQAList().get(textCounter).getIndex() + " - " +
-                worker.getQAList().get(textCounter).getQuestion();
+        return worker.getBufferList().get(textCounter).getIndex()+" - "+
+                worker.getBufferList().get(textCounter).getTheme()+": "+"\n"+
+                worker.getBufferList().get(textCounter).getQuestion();
     }
 }
