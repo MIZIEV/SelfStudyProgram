@@ -5,10 +5,12 @@ public class StringFromDB {
     private final int index;
     private final String question;
     private final String answer;
+    private final String theme;
     private boolean yesNo;
 
-    public StringFromDB(int i, String q, String a, boolean YN) {
+    public StringFromDB(int i, String t, String q, String a, boolean YN) {
         this.index = i;
+        this.theme = t;
         this.question = q;
         this.answer = a;
         this.yesNo = YN;
@@ -34,8 +36,12 @@ public class StringFromDB {
         return answer;
     }
 
+    public String getTheme() {
+        return theme;
+    }
+
     @Override
     public String toString() {
-        return index + " - " + question + '\'' + index + " - " + answer + '\'' + yesNo;
+        return theme + " " + index + " - " + question+"\n";
     }
 }

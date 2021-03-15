@@ -1,4 +1,4 @@
-package Controller;
+package Controller.ButtonsControllers;
 
 import DataBase.Counter;
 import DataBase.DBWorker;
@@ -18,14 +18,19 @@ public class NextButtonController {
     public String scrollText() {
         int textCounter = counter.getDigit();
 
-        if (textCounter >= worker.getQAList().size()-1) {
+        if (textCounter >= worker.getBufferList().size()-1) {
             textCounter = textCounter;
             errorMessage.setText("This is the last question!!!");
 
         } else textCounter++;
+
         counter.setDigit(textCounter);
 
-        return worker.getQAList().get(textCounter).getIndex() + " - " +
-                worker.getQAList().get(textCounter).getQuestion();
+       /* return worker.getCoreList().get(textCounter).getIndex() + " - " +
+                worker.getCoreList().get(textCounter).getQuestion();
+        */
+        return worker.getBufferList().get(textCounter).getIndex()+" - "+
+                worker.getBufferList().get(textCounter).getTheme()+": "+"\n"+
+                worker.getBufferList().get(textCounter).getQuestion();
     }
 }

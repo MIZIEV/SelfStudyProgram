@@ -13,7 +13,7 @@ public class CountingResult {
     public double counting() {
 
         double result = resultCount.getResult();
-        double addend = 100.0 / worker.getQAList().size();
+        double addend = 100.0 / worker.getBufferList().size();
 
         result = result + addend;
         resultCount.setResult(result);

@@ -1,6 +1,6 @@
 package View;
 
-import Controller.*;
+import Controller.ButtonsControllers.*;
 
 public class ButtonsDependence {
 
@@ -25,14 +25,9 @@ public class ButtonsDependence {
         this.yesButtonController = yesController;
         this.noButtonController = noController;
     }
+    public StartButtonController getStartButtonController() { return startButtonController; }
 
-    public StartButtonController getStartButtonController() {
-        return startButtonController;
-    }
-
-    public NextButtonController getNextButtonController() {
-        return nextButtonController;
-    }
+    public NextButtonController getNextButtonController() { return nextButtonController; }
 
     public PreviousButtonController getPreviousButtonController() {
         return previousButtonController;

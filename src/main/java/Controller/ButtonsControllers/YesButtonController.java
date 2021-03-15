@@ -1,4 +1,4 @@
-package Controller;
+package Controller.ButtonsControllers;
 
 import DataBase.*;
 import View.ResultMassage;
@@ -10,7 +10,7 @@ public class YesButtonController {
     private final Counter counter;
     private final CountingResult countingResult;
     private final ResultMassage resultMassage;
-    DecimalFormat df = new DecimalFormat("###.##");
+    private final DecimalFormat df = new DecimalFormat("###.##");
 
     public YesButtonController(DBWorker work, Counter count, ResultMassage result, CountingResult counting) {
         this.countingResult = counting;
@@ -22,9 +22,9 @@ public class YesButtonController {
     public void setYesNo() {
         int count = counter.getDigit();
 
-        if (worker.getQAList().get(count).getYesNo() != true) {
+        if (worker.getBufferList().get(count).getYesNo() != true) {
 
-            worker.getQAList().get(count).setYesNo(true);
+            worker.getBufferList().get(count).setYesNo(true);
             double result = countingResult.counting();
 
             if (result < 40) {
