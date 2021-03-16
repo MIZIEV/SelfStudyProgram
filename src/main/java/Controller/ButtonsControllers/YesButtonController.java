@@ -1,22 +1,19 @@
 package Controller.ButtonsControllers;
 
 import DataBase.*;
-import View.ResultMassage;
-
-import java.text.DecimalFormat;
+import View.ResultMessage;
 
 public class YesButtonController {
     private final DBWorker worker;
     private final Counter counter;
     private final CountingResult countingResult;
-    private final ResultMassage resultMassage;
-    private final DecimalFormat df = new DecimalFormat("###.##");
+    private final ResultMessage resultMessage;
 
-    public YesButtonController(DBWorker work, Counter count, ResultMassage result, CountingResult counting) {
+    public YesButtonController(DBWorker work, Counter count, ResultMessage result, CountingResult counting) {
         this.countingResult = counting;
         this.counter = count;
         this.worker = work;
-        this.resultMassage = result;
+        this.resultMessage = result;
     }
 
     public void setYesNo() {
@@ -25,17 +22,17 @@ public class YesButtonController {
         if (worker.getBufferList().get(count).getYesNo() != true) {
 
             worker.getBufferList().get(count).setYesNo(true);
-            double result = countingResult.counting();
+            String result = countingResult.counting();
 
-            if (result < 40) {
-                resultMassage.setStyle("-fx-text-inner-color: red;-fx-font-size: 20px;");
-            } else if (result < 80) {
-                resultMassage.setStyle("-fx-text-inner-color: orange;-fx-font-size: 20px;");
-            } else if (result > 80) {
-                resultMassage.setStyle("-fx-text-inner-color: green;-fx-font-size: 20px;");
+            if (countingResult.getResult() < 40) {
+                resultMessage.setStyle("-fx-text-inner-color: red;-fx-font-size: 16px;");
+            } else if (countingResult.getResult() < 80) {
+                resultMessage.setStyle("-fx-text-inner-color: orange;-fx-font-size: 16px;");
+            } else if (countingResult.getResult() > 80) {
+                resultMessage.setStyle("-fx-text-inner-color: green;-fx-font-size: 16px;");
             }
 
-            resultMassage.setText(df.format(result) + " %");
+               resultMessage.setText(result);
         }
     }
 }

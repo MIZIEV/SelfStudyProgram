@@ -1,21 +1,21 @@
 package Controller.ButtonsControllers;
 
 import DataBase.DBWorker;
-import View.ToggleButtonPattern;
+import View.TButtonPattern;
 
 public class StartLearningButtonController {
 
     private final DBWorker worker;
 
-    private final ToggleButtonPattern coreButton;
-    private final ToggleButtonPattern collectionButton;
-    private final ToggleButtonPattern java8Button;
-    private final ToggleButtonPattern IOandNIOButton;
-    private final ToggleButtonPattern serializationButton;
+    private final TButtonPattern coreButton;
+    private final TButtonPattern collectionButton;
+    private final TButtonPattern java8Button;
+    private final TButtonPattern IOandNIOButton;
+    private final TButtonPattern serializationButton;
 
-    public StartLearningButtonController(DBWorker worker, ToggleButtonPattern coreBut,
-                                         ToggleButtonPattern colBut, ToggleButtonPattern java8But,
-                                         ToggleButtonPattern ioButton, ToggleButtonPattern serButton) {
+    public StartLearningButtonController(DBWorker worker, TButtonPattern coreBut,
+                                         TButtonPattern colBut, TButtonPattern java8But,
+                                         TButtonPattern ioButton, TButtonPattern serButton) {
         this.coreButton = coreBut;
         this.collectionButton = colBut;
         this.java8Button = java8But;

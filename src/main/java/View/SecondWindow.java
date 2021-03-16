@@ -20,7 +20,7 @@ public class SecondWindow {
         generalDependence.getOutputText().setStyle("-fx-font-size: 16px;");
         generalDependence.getErrorMessage().setStyle("-fx-text-inner-color: red; -fx-font-size: 20px;");
 
-        CountingResult countingResult = new CountingResult(generalDependence.getWorker(), generalDependence.getResultCount());
+        CountingResult countingResult = new CountingResult(generalDependence.getWorker());
 
         StartButtonController startButtonController = new StartButtonController(generalDependence.getWorker(), generalDependence.getDigit());
         NextButtonController nextButtonController = new NextButtonController(generalDependence.getWorker(), generalDependence.getDigit(),generalDependence.getErrorMessage()/*errorMessage*/);
@@ -47,7 +47,7 @@ public class SecondWindow {
         rootNode.getChildren().addAll(constructor.getStartButton(), constructor.getNextButton(),
                 constructor.getPreviousButton(), constructor.getQuestionButton(),
                 constructor.getAnswerButton(), constructor.getYesButton(), constructor.getNoButton(),
-                generalDependence.getOutputText(),generalDependence.getResultMassage(),generalDependence.getErrorMessage());
+                generalDependence.getOutputText(),generalDependence.getResultMassage(), generalDependence.getErrorMessage());
 
         myStage.show();
     }

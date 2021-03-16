@@ -1,10 +1,10 @@
 package View;
 
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
-public class ResultMassage extends TextField {
+public class ResultMessage extends TextField {
 
-    public ResultMassage(){
+    public ResultMessage(){
         this.setLayoutX(15);
         this.setLayoutY(50);
         this.setPrefSize(135, 135);

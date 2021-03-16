@@ -9,15 +9,15 @@ public class GeneralDependence {
     private ResultCount resultCount = new ResultCount();
 
     private OutputText outputText = new OutputText();
-    private ResultMassage resultMassage = new ResultMassage();
+    private ResultMessage resultMessage = new ResultMessage();
     private ErrorMessage errorMessage = new ErrorMessage();
 
     public OutputText getOutputText() {
         return outputText;
     }
 
-    public ResultMassage getResultMassage() {
-        return resultMassage;
+    public ResultMessage getResultMassage() {
+        return resultMessage;
     }
 
     public ErrorMessage getErrorMessage() {

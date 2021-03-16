@@ -1,23 +1,33 @@
 package DataBase;
 
+import java.text.*;
+
 public class CountingResult {
 
     private final DBWorker worker;
-    private final ResultCount resultCount;
+    private final DecimalFormat df = new DecimalFormat("###.##");
+    private double result;
 
-    public CountingResult(DBWorker work, ResultCount result) {
-        this.resultCount = result;
+    public CountingResult(DBWorker work) {
         this.worker = work;
     }
 
-    public double counting() {
+    public String counting() {
 
-        double result = resultCount.getResult();
+        result = this.getResult();
         double addend = 100.0 / worker.getBufferList().size();
-
         result = result + addend;
-        resultCount.setResult(result);
+        this.setResult(result);
+        String stringResult = ("Result - " + df.format(result)) + " %";
 
+        return stringResult;
+    }
+
+    public double getResult() {
         return result;
+    }
+
+    public void setResult(double result) {
+        this.result = result;
     }
 }
