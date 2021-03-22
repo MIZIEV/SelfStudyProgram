@@ -2,7 +2,7 @@ package View;
 
 import javafx.scene.control.*;
 
-public class ResultMessage extends TextField {
+public class ResultMessage extends TextArea {
 
     public ResultMessage(){
         this.setLayoutX(15);

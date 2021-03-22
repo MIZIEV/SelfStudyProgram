@@ -10,6 +10,7 @@ public class YesButtonController {
     private final ResultMessage resultMessage;
 
     public YesButtonController(DBWorker work, Counter count, ResultMessage result, CountingResult counting) {
+
         this.countingResult = counting;
         this.counter = count;
         this.worker = work;
@@ -24,14 +25,13 @@ public class YesButtonController {
             worker.getBufferList().get(count).setYesNo(true);
             String result = countingResult.counting();
 
-            if (countingResult.getResult() < 40) {
-                resultMessage.setStyle("-fx-text-inner-color: red;-fx-font-size: 16px;");
-            } else if (countingResult.getResult() < 80) {
-                resultMessage.setStyle("-fx-text-inner-color: orange;-fx-font-size: 16px;");
-            } else if (countingResult.getResult() > 80) {
-                resultMessage.setStyle("-fx-text-inner-color: green;-fx-font-size: 16px;");
+            if (countingResult.getTotalResult() < 40) {
+                resultMessage.setStyle("-fx-text-inner-color: red;-fx-font-size: 14px;");
+            } else if (countingResult.getTotalResult() < 80) {
+                resultMessage.setStyle("-fx-text-inner-color: orange;-fx-font-size: 14px;");
+            } else if (countingResult.getTotalResult() > 80) {
+                resultMessage.setStyle("-fx-text-inner-color: green;-fx-font-size: 14px;");
             }
-
                resultMessage.setText(result);
         }
     }

@@ -20,14 +20,14 @@ public class SecondWindow {
         generalDependence.getOutputText().setStyle("-fx-font-size: 16px;");
         generalDependence.getErrorMessage().setStyle("-fx-text-inner-color: red; -fx-font-size: 20px;");
 
-        CountingResult countingResult = new CountingResult(generalDependence.getWorker());
+        CountingResult countingResult = new CountingResult(generalDependence.getWorker(),generalDependence.getDigit());
 
         StartButtonController startButtonController = new StartButtonController(generalDependence.getWorker(), generalDependence.getDigit());
-        NextButtonController nextButtonController = new NextButtonController(generalDependence.getWorker(), generalDependence.getDigit(),generalDependence.getErrorMessage()/*errorMessage*/);
-        PreviousButtonController previousButtonController = new PreviousButtonController(generalDependence.getWorker(), generalDependence.getDigit(),generalDependence.getErrorMessage()/*errorMessage*/);
+        NextButtonController nextButtonController = new NextButtonController(generalDependence.getWorker(), generalDependence.getDigit(),generalDependence.getErrorMessage());
+        PreviousButtonController previousButtonController = new PreviousButtonController(generalDependence.getWorker(), generalDependence.getDigit(),generalDependence.getErrorMessage());
         QuestionButtonController questionButtonController = new QuestionButtonController(generalDependence.getWorker(), generalDependence.getDigit());
         AnswerButtonController answerButtonController = new AnswerButtonController(generalDependence.getWorker(), generalDependence.getDigit());
-        YesButtonController yesButtonController = new YesButtonController(generalDependence.getWorker(), generalDependence.getDigit(), generalDependence.getResultMassage()/*resultMassage*/, countingResult);
+        YesButtonController yesButtonController = new YesButtonController(generalDependence.getWorker(), generalDependence.getDigit(), generalDependence.getResultMassage(), countingResult);
         NoButtonController noButtonController = new NoButtonController(generalDependence.getWorker(), generalDependence.getDigit());
 
         ButtonsDependence dependence = new ButtonsDependence(startButtonController, nextButtonController,
