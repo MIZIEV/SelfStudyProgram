@@ -15,22 +15,22 @@ public class DBWorker {
     private static final byte QUESTIONCOLUMM = 4;
     private static final byte ANSWERCOLUMM = 5;
 
-    private StringFromDB stringFromDB;
     private Connection connection;
 
-    private final ArrayList<StringFromDB> allQAList = new ArrayList<>();
+    private final ArrayList<StringFromDB> bufferList = new ArrayList<>();
+
     private final ArrayList<StringFromDB> coreList = new ArrayList<>();
     private final ArrayList<StringFromDB> collectionList = new ArrayList<>();
     private final ArrayList<StringFromDB> java8List = new ArrayList<>();
     private final ArrayList<StringFromDB> IOList = new ArrayList<>();
     private final ArrayList<StringFromDB> serializationList = new ArrayList<>();
-
     private final ArrayList<StringFromDB> MTList = new ArrayList<>();
 
-    private ArrayList<StringFromDB> bufferList = new ArrayList<>();
-
-
     public DBWorker() {
+
+        ArrayList<StringFromDB> allQAList = new ArrayList<>();
+        StringFromDB stringFromDB;
+
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException throwables) {
@@ -48,6 +48,7 @@ public class DBWorker {
                         resultSet.getString(ANSWERCOLUMM),
                         false
                 );
+
                 allQAList.add(stringFromDB);
             }
 
@@ -85,29 +86,17 @@ public class DBWorker {
         return connection;
     }
 
-    public ArrayList<StringFromDB> getCoreList() {
-        return coreList;
-    }
+    public ArrayList<StringFromDB> getBufferList() { return bufferList; }
 
-    public ArrayList<StringFromDB> getCollectionList() {
-        return collectionList;
-    }
+    public ArrayList<StringFromDB> getCoreList() { return coreList; }
 
-    public ArrayList<StringFromDB> getJava8List() {
-        return java8List;
-    }
+    public ArrayList<StringFromDB> getCollectionList() { return collectionList; }
 
-    public ArrayList<StringFromDB> getIOList() {
-        return IOList;
-    }
+    public ArrayList<StringFromDB> getJava8List() { return java8List; }
 
-    public ArrayList<StringFromDB> getSerializationList() {
-        return serializationList;
-    }
+    public ArrayList<StringFromDB> getIOList() { return IOList; }
 
-    public ArrayList<StringFromDB> getBufferList() {
-        return bufferList;
-    }
+    public ArrayList<StringFromDB> getSerializationList() { return serializationList; }
 
     public ArrayList<StringFromDB> getMTList() { return MTList; }
 }

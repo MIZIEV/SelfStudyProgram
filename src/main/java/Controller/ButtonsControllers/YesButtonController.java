@@ -25,14 +25,20 @@ public class YesButtonController {
             worker.getBufferList().get(count).setYesNo(true);
             String result = countingResult.counting();
 
-            if (countingResult.getTotalResult() < 40) {
+            if (countingResult.getTotalResult() < 20) {
                 resultMessage.setStyle("-fx-text-inner-color: red;-fx-font-size: 14px;");
-            } else if (countingResult.getTotalResult() < 80) {
+            } else if (countingResult.getTotalResult() < 40) {
+                resultMessage.setStyle("-fx-text-inner-color: OrangeRed;-fx-font-size: 14px;");
+            } else if (countingResult.getTotalResult() < 60) {
                 resultMessage.setStyle("-fx-text-inner-color: orange;-fx-font-size: 14px;");
-            } else if (countingResult.getTotalResult() > 80) {
-                resultMessage.setStyle("-fx-text-inner-color: green;-fx-font-size: 14px;");
+            } else if (countingResult.getTotalResult() < 80) {
+                resultMessage.setStyle("-fx-text-inner-color: gold;-fx-font-size: 14px;");
+            } else if (countingResult.getTotalResult() < 90) {
+                resultMessage.setStyle("-fx-text-inner-color: lime;-fx-font-size: 14px;");
+            } else if (countingResult.getTotalResult() > 90) {
+                resultMessage.setStyle("-fx-text-inner-color: DarkGreen;-fx-font-size: 14px;");
             }
-               resultMessage.setText(result);
+            resultMessage.setText(result);
         }
     }
 }
