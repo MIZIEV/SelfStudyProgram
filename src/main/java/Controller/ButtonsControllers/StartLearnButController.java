@@ -3,7 +3,7 @@ package Controller.ButtonsControllers;
 import DataBase.DBWorker;
 import View.TButtonPattern;
 
-public class StartLearningButtonController {
+public class StartLearnButController {
 
     private final DBWorker worker;
 
@@ -12,10 +12,12 @@ public class StartLearningButtonController {
     private final TButtonPattern java8Button;
     private final TButtonPattern IOandNIOButton;
     private final TButtonPattern serializationButton;
+    private final TButtonPattern MultithreadingButton;
 
-    public StartLearningButtonController(DBWorker worker, TButtonPattern coreBut,
-                                         TButtonPattern colBut, TButtonPattern java8But,
-                                         TButtonPattern ioButton, TButtonPattern serButton) {
+    public StartLearnButController(DBWorker worker, TButtonPattern coreBut, TButtonPattern colBut,
+                                   TButtonPattern java8But, TButtonPattern ioButton, TButtonPattern serButton,
+                                   TButtonPattern mtButton) {
+        this.MultithreadingButton = mtButton;
         this.coreButton = coreBut;
         this.collectionButton = colBut;
         this.java8Button = java8But;
@@ -41,6 +43,8 @@ public class StartLearningButtonController {
         if (serializationButton.isSelected()) {
             worker.getBufferList().addAll(worker.getSerializationList());
         }
-
+        if (MultithreadingButton.isSelected()) {
+            worker.getBufferList().addAll(worker.getMTList());
+        }
     }
 }

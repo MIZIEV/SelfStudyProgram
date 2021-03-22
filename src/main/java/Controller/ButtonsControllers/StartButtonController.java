@@ -23,6 +23,7 @@ public class StartButtonController {
         System.out.println("java 8 list size - " + worker.getJava8List().size());
         System.out.println("io/nio list size - " + worker.getIOList().size());
         System.out.println("Serialization list size - " + worker.getSerializationList().size());
+        System.out.println("MultiThreading list - size - "+worker.getMTList().size());
 
         return worker.getBufferList().get(startDigit).getIndex() + " - " +
                 worker.getBufferList().get(startDigit).getTheme() + ": " + "\n" +

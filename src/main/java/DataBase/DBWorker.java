@@ -25,6 +25,8 @@ public class DBWorker {
     private final ArrayList<StringFromDB> IOList = new ArrayList<>();
     private final ArrayList<StringFromDB> serializationList = new ArrayList<>();
 
+    private final ArrayList<StringFromDB> MTList = new ArrayList<>();
+
     private ArrayList<StringFromDB> bufferList = new ArrayList<>();
 
 
@@ -68,6 +70,9 @@ public class DBWorker {
                     case "Serialization":
                         serializationList.add(allQAList.get(counter));
                         break;
+                    case "Multithreading ":
+                        MTList.add(allQAList.get(counter));
+                        break;
                 }
                 counter++;
             }
@@ -104,7 +109,5 @@ public class DBWorker {
         return bufferList;
     }
 
-    public void setBufferList(ArrayList<StringFromDB> bufferList) {
-        this.bufferList = bufferList;
-    }
+    public ArrayList<StringFromDB> getMTList() { return MTList; }
 }

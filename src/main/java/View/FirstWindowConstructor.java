@@ -1,6 +1,6 @@
 package View;
 
-import Controller.TButtonsControllers.SABController;
+import Controller.TButtonsControllers.SelectAllButtonController;
 import javafx.scene.control.*;
 
 public class FirstWindowConstructor {
@@ -14,7 +14,7 @@ public class FirstWindowConstructor {
     private final TButtonPattern IOandNIOButton = new TButtonPattern(660, 100, 100, 50, "IO/NIO");
 
     private final TButtonPattern serializationButton = new TButtonPattern(50, 175, 100, 50, "Serialization");
-    private final TButtonPattern empty1Button1 = new TButtonPattern(200, 175, 100, 50, "empty - 1");
+    private final TButtonPattern MTButton = new TButtonPattern(200, 175, 100, 50, "Multithreading");
     private final TButtonPattern empty1Button2 = new TButtonPattern(510, 175, 100, 50, "empty - 2");
     private final TButtonPattern empty1Button3 = new TButtonPattern(660, 175, 100, 50, "empty - 3");
 
@@ -37,7 +37,7 @@ public class FirstWindowConstructor {
         title.setLayoutY(50);
 
         selectAllButton.setOnAction((event) -> {
-            SABController sabController = new SABController(this);
+            SelectAllButtonController selectAllButtonController = new SelectAllButtonController(this);
 
         });
     }
@@ -52,7 +52,7 @@ public class FirstWindowConstructor {
 
     public TButtonPattern getSerializationButton() { return serializationButton; }
 
-    public TButtonPattern getEmpty1Button1() { return empty1Button1; }
+    public TButtonPattern getMTButton() { return MTButton; }
 
     public TButtonPattern getEmpty1Button2() { return empty1Button2; }
 

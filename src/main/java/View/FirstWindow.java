@@ -1,6 +1,6 @@
 package View;
 
-import Controller.ButtonsControllers.StartLearningButtonController;
+import Controller.ButtonsControllers.StartLearnButController;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -19,16 +19,16 @@ public class FirstWindow {
         this.secondWindow = secWindow;
         FirstWindowConstructor firstWindowConstructor = new FirstWindowConstructor(this, secondWindow);
 
-        StartLearningButtonController startLearningButtonController = new StartLearningButtonController(
+        StartLearnButController startLearnButController = new StartLearnButController(
                 generalDependence.getWorker(), firstWindowConstructor.getCoreButton(),
                 firstWindowConstructor.getCollectionButton(), firstWindowConstructor.getJava8Button(),
-                firstWindowConstructor.getIOandNIOButton(), firstWindowConstructor.getSerializationButton());
-
+                firstWindowConstructor.getIOandNIOButton(), firstWindowConstructor.getSerializationButton(),
+                firstWindowConstructor.getMTButton());
 
         firstWindowConstructor.getStartLearningButton().setOnAction((event) -> {
             secondWindow.startWin();
             firstWindow.close();
-            startLearningButtonController.startProg();
+            startLearnButController.startProg();
         });
 
         Pane pane = new Pane();
@@ -37,7 +37,7 @@ public class FirstWindow {
         pane.getChildren().addAll(firstWindowConstructor.getStartLearningButton(),
                 firstWindowConstructor.getCoreButton(), firstWindowConstructor.getCollectionButton(),
                 firstWindowConstructor.getJava8Button(), firstWindowConstructor.getIOandNIOButton(),
-                firstWindowConstructor.getSerializationButton(), firstWindowConstructor.getEmpty1Button1(),
+                firstWindowConstructor.getSerializationButton(), firstWindowConstructor.getMTButton(),
                 firstWindowConstructor.getEmpty1Button2(), firstWindowConstructor.getEmpty1Button3(),
                 firstWindowConstructor.getEmpty1Button4(), firstWindowConstructor.getEmpty1Button5(),
                 firstWindowConstructor.getEmpty1Button6(), firstWindowConstructor.getEmpty1Button7(),
