@@ -23,7 +23,22 @@ public class SecondWindowConstructor {
         this.dependence = dependence;
         this.outputText = output;
 
-        startButton.setOnAction((event) -> output.setText(dependence.getStartButtonController().getTextFromList()));
+        nextButton.setDisable(true);
+        previousButton.setDisable(true);
+        questionButton.setDisable(true);
+        answerButton.setDisable(true);
+        yesButton.setDisable(true);
+
+        startButton.setOnAction((event) -> {
+            output.setText(dependence.getStartButtonController().getTextFromList());
+            startButton.setDisable(true);
+            nextButton.setDisable(false);
+            previousButton.setDisable(false);
+            questionButton.setDisable(false);
+            answerButton.setDisable(false);
+            yesButton.setDisable(false);
+        });
+
         nextButton.setOnAction((event) -> output.setText(dependence.getNextButtonController().scrollText()));
         previousButton.setOnAction((event) -> output.setText(dependence.getPreviousButtonController().scrollText()));
         questionButton.setOnAction((event) -> output.setText(dependence.getQuestionButtonController().getRandomQuestion()));
@@ -36,27 +51,15 @@ public class SecondWindowConstructor {
 
     }
 
-    public ButtonsPattern getStartButton() {
-        return startButton;
-    }
+    public ButtonsPattern getStartButton() { return startButton; }
 
-    public ButtonsPattern getNextButton() {
-        return nextButton;
-    }
+    public ButtonsPattern getNextButton() { return nextButton; }
 
-    public ButtonsPattern getPreviousButton() {
-        return previousButton;
-    }
+    public ButtonsPattern getPreviousButton() { return previousButton; }
 
-    public ButtonsPattern getQuestionButton() {
-        return questionButton;
-    }
+    public ButtonsPattern getQuestionButton() { return questionButton; }
 
-    public ButtonsPattern getAnswerButton() {
-        return answerButton;
-    }
+    public ButtonsPattern getAnswerButton() { return answerButton; }
 
-    public ButtonsPattern getYesButton() {
-        return yesButton;
-    }
+    public ButtonsPattern getYesButton() { return yesButton; }
 }

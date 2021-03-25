@@ -19,34 +19,36 @@ public class FirstWindow {
 
     public void startWindow(SecondWindow secWindow) {
         this.secondWindow = secWindow;
-        FirstWindowConstructor firstWindowConstructor = new FirstWindowConstructor(this, secondWindow);
+        FirstWinConstructor firstWinConstructor = new FirstWinConstructor(this, secondWindow);
 
         StartLearnButController startLearnButController = new StartLearnButController(
-                generalDependence.getWorker(), firstWindowConstructor.getCoreButton(),
-                firstWindowConstructor.getCollectionButton(), firstWindowConstructor.getJava8Button(),
-                firstWindowConstructor.getIOandNIOButton(), firstWindowConstructor.getSerializationButton(),
-                firstWindowConstructor.getMTButton(),firstWindowConstructor.getDataBaseButton(),
-                firstWindowConstructor.getSQLButton(),firstWindowConstructor.getJDBCButton(),
-                firstWindowConstructor.getXMLButton(),firstWindowConstructor.getHTMLButton(),
-                firstWindowConstructor.getCSSButton());
+                generalDependence.getWorker(), firstWinConstructor.getStartLearningButton(), firstWinConstructor.getCoreButton(),
+                firstWinConstructor.getCollectionButton(), firstWinConstructor.getJava8Button(),
+                firstWinConstructor.getIOandNIOButton(), firstWinConstructor.getSerializationButton(),
+                firstWinConstructor.getMTButton(), firstWinConstructor.getDataBaseButton(),
+                firstWinConstructor.getSQLButton(), firstWinConstructor.getJDBCButton(),
+                firstWinConstructor.getXMLButton(), firstWinConstructor.getHTMLButton(),
+                firstWinConstructor.getCSSButton());
 
-        firstWindowConstructor.getStartLearningButton().setOnAction((event) -> {
-            secondWindow.startWin();
-            firstWindow.close();
-            startLearnButController.startProg();
+        firstWinConstructor.getStartLearningButton().setOnAction((event) -> {
+            if (startLearnButController.ifNotSelected()) {
+                secondWindow.startWin();
+                firstWindow.close();
+                startLearnButController.startProg();
+            }
         });
 
         Pane pane = new Pane();
         Scene scene = new Scene(pane, 800, 400);
 
-        pane.getChildren().addAll(firstWindowConstructor.getStartLearningButton(),
-                firstWindowConstructor.getCoreButton(), firstWindowConstructor.getCollectionButton(),
-                firstWindowConstructor.getJava8Button(), firstWindowConstructor.getIOandNIOButton(),
-                firstWindowConstructor.getSerializationButton(), firstWindowConstructor.getMTButton(),
-                firstWindowConstructor.getDataBaseButton(), firstWindowConstructor.getSQLButton(),
-                firstWindowConstructor.getHTMLButton(), firstWindowConstructor.getCSSButton(),
-                firstWindowConstructor.getJDBCButton(), firstWindowConstructor.getXMLButton(),
-                firstWindowConstructor.getSelectAllButton());
+        pane.getChildren().addAll(firstWinConstructor.getStartLearningButton(),
+                firstWinConstructor.getCoreButton(), firstWinConstructor.getCollectionButton(),
+                firstWinConstructor.getJava8Button(), firstWinConstructor.getIOandNIOButton(),
+                firstWinConstructor.getSerializationButton(), firstWinConstructor.getMTButton(),
+                firstWinConstructor.getDataBaseButton(), firstWinConstructor.getSQLButton(),
+                firstWinConstructor.getHTMLButton(), firstWinConstructor.getCSSButton(),
+                firstWinConstructor.getJDBCButton(), firstWinConstructor.getXMLButton(),
+                firstWinConstructor.getSelectAllButton());
 
         firstWindow.setScene(scene);
         firstWindow.setTitle("Start");

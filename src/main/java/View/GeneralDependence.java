@@ -4,25 +4,16 @@ import Model.*;
 
 public class GeneralDependence {
 
-    private DBWorker worker = new DBWorker();
-    private Counter digit = new Counter();
+    private final DBWorker worker = new DBWorker();
+    private final Counter digit = new Counter();
+    private final OutputText outputText = new OutputText();
+    private final ResultMessage resultMessage = new ResultMessage();
 
-    private OutputText outputText = new OutputText();
-    private ResultMessage resultMessage = new ResultMessage();
+    public DBWorker getWorker() { return worker; }
 
-    public OutputText getOutputText() {
-        return outputText;
-    }
+    public Counter getDigit() { return digit; }
 
-    public ResultMessage getResultMassage() {
-        return resultMessage;
-    }
+    public OutputText getOutputText() { return outputText; }
 
-    public DBWorker getWorker() {
-        return worker;
-    }
-
-    public Counter getDigit() {
-        return digit;
-    }
+    public ResultMessage getResultMassage() { return resultMessage; }
 }

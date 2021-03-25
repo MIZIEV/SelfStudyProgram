@@ -6,7 +6,7 @@ import View.SecondWindow.SecondWindow;
 import View.buttonsPatterns.TButtonPattern;
 import javafx.scene.control.*;
 
-public class FirstWindowConstructor {
+public class FirstWinConstructor {
 
     private final SecondWindow secondWindow;
     private final FirstWindow firstWindow;
@@ -29,7 +29,7 @@ public class FirstWindowConstructor {
     private final TButtonPattern selectAllButton = new TButtonPattern(345, 175, 120, 125, "Select all");
     private final ButtonsPattern startLearningButton = new ButtonsPattern(345, 340, 120, 50, "Start learning");
 
-    public FirstWindowConstructor(FirstWindow firstW, SecondWindow secondW) {
+    public FirstWinConstructor(FirstWindow firstW, SecondWindow secondW) {
         this.firstWindow = firstW;
         this.secondWindow = secondW;
 
@@ -39,9 +39,10 @@ public class FirstWindowConstructor {
         title.setLayoutX(345);
         title.setLayoutY(50);
 
+        selectAllButton.setTooltip(new Tooltip("Select at least one theme"));
+        startLearningButton.setTooltip(new Tooltip("Select at least one theme"));
         selectAllButton.setOnAction((event) -> {
             SelectAllButtonController selectAllButtonController = new SelectAllButtonController(this);
-
         });
     }
 
