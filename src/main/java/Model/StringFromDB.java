@@ -1,4 +1,4 @@
-package DataBase;
+package Model;
 
 public class StringFromDB {
 

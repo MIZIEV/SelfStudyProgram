@@ -10,12 +10,10 @@ public class ButtonsDependence {
     private final QuestionButtonController questionButtonController;
     private final AnswerButtonController answerButtonController;
     private final YesButtonController yesButtonController;
-    private final NoButtonController noButtonController;
 
     public ButtonsDependence(StartButtonController startController, NextButtonController nextController,
                              PreviousButtonController previousController, QuestionButtonController questionController,
-                             AnswerButtonController answerController, YesButtonController yesController,
-                             NoButtonController noController) {
+                             AnswerButtonController answerController, YesButtonController yesController) {
 
         this.startButtonController = startController;
         this.nextButtonController = nextController;
@@ -23,7 +21,7 @@ public class ButtonsDependence {
         this.questionButtonController = questionController;
         this.answerButtonController = answerController;
         this.yesButtonController = yesController;
-        this.noButtonController = noController;
+
     }
     public StartButtonController getStartButtonController() { return startButtonController; }
 
@@ -43,9 +41,5 @@ public class ButtonsDependence {
 
     public YesButtonController getYesButtonController() {
         return yesButtonController;
-    }
-
-    public NoButtonController getNoButtonController() {
-        return noButtonController;
     }
 }

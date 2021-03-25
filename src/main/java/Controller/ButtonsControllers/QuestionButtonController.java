@@ -1,6 +1,6 @@
 package Controller.ButtonsControllers;
 
-import DataBase.*;
+import Model.*;
 
 public class QuestionButtonController {
 

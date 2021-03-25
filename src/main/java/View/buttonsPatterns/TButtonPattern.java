@@ -1,14 +1,14 @@
-package View;
+package View.buttonsPatterns;
 
-import javafx.scene.control.*;
+import javafx.scene.control.ToggleButton;
 
-public class ButtonsPattern extends Button {
+public class TButtonPattern extends ToggleButton {
+
     private int x, y;
     private int prefWidth, prefHeight;
     private final String name;
 
-    public ButtonsPattern(int x, int y, int width, int height, String name) {
-
+    public TButtonPattern(int x, int y, int width, int height, String name) {
         this.name = name;
         this.setText(name);
         this.x = x;

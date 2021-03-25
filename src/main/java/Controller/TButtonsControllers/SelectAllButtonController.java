@@ -1,6 +1,6 @@
 package Controller.TButtonsControllers;
 
-import View.FirstWindowConstructor;
+import View.FirstWindow.FirstWindowConstructor;
 
 public class SelectAllButtonController {
    FirstWindowConstructor firstWindowConstructor;
@@ -16,12 +16,12 @@ public class SelectAllButtonController {
             firstWindow.getIOandNIOButton().setSelected(true);
             firstWindow.getSerializationButton().setSelected(true);
             firstWindow.getMTButton().setSelected(true);
-            firstWindow.getEmpty1Button2().setSelected(true);
-            firstWindow.getEmpty1Button3().setSelected(true);
-            firstWindow.getEmpty1Button4().setSelected(true);
-            firstWindow.getEmpty1Button5().setSelected(true);
-            firstWindow.getEmpty1Button6().setSelected(true);
-            firstWindow.getEmpty1Button7().setSelected(true);
+            firstWindow.getDataBaseButton().setSelected(true);
+            firstWindow.getSQLButton().setSelected(true);
+            firstWindow.getHTMLButton().setSelected(true);
+            firstWindow.getCSSButton().setSelected(true);
+            firstWindow.getJDBCButton().setSelected(true);
+            firstWindow.getXMLButton().setSelected(true);
 
         } else if (!firstWindow.getSelectAllButton().isSelected()) {
 
@@ -31,12 +31,12 @@ public class SelectAllButtonController {
             firstWindow.getIOandNIOButton().setSelected(false);
             firstWindow.getSerializationButton().setSelected(false);
             firstWindow.getMTButton().setSelected(false);
-            firstWindow.getEmpty1Button2().setSelected(false);
-            firstWindow.getEmpty1Button3().setSelected(false);
-            firstWindow.getEmpty1Button4().setSelected(false);
-            firstWindow.getEmpty1Button5().setSelected(false);
-            firstWindow.getEmpty1Button6().setSelected(false);
-            firstWindow.getEmpty1Button7().setSelected(false);
+            firstWindow.getDataBaseButton().setSelected(false);
+            firstWindow.getSQLButton().setSelected(false);
+            firstWindow.getHTMLButton().setSelected(false);
+            firstWindow.getCSSButton().setSelected(false);
+            firstWindow.getJDBCButton().setSelected(false);
+            firstWindow.getXMLButton().setSelected(false);
         }
     }
 }

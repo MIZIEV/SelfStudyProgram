@@ -1,7 +1,7 @@
-package DataBase;
+package Model;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class DBWorker {
 
@@ -25,6 +25,12 @@ public class DBWorker {
     private final ArrayList<StringFromDB> IOList = new ArrayList<>();
     private final ArrayList<StringFromDB> serializationList = new ArrayList<>();
     private final ArrayList<StringFromDB> MTList = new ArrayList<>();
+    private final ArrayList<StringFromDB> dataBaseList = new ArrayList<>();
+    private final ArrayList<StringFromDB> SQLList = new ArrayList<>();
+    private final ArrayList<StringFromDB> JDBCList = new ArrayList<>();
+    private final ArrayList<StringFromDB> XMLList = new ArrayList<>();
+    private final ArrayList<StringFromDB> HTMLList = new ArrayList<>();
+    private final ArrayList<StringFromDB> CSSList = new ArrayList<>();
 
     public DBWorker() {
 
@@ -74,6 +80,24 @@ public class DBWorker {
                     case "Multithreading ":
                         MTList.add(allQAList.get(counter));
                         break;
+                    case "Model":
+                        dataBaseList.add(allQAList.get(counter));
+                        break;
+                    case "SQL":
+                        SQLList.add(allQAList.get(counter));
+                        break;
+                    case "JDBC":
+                        JDBCList.add(allQAList.get(counter));
+                        break;
+                    case "XML":
+                        XMLList.add(allQAList.get(counter));
+                        break;
+                    case "HTML":
+                        HTMLList.add(allQAList.get(counter));
+                        break;
+                    case "CSS":
+                        CSSList.add(allQAList.get(counter));
+                        break;
                 }
                 counter++;
             }
@@ -99,4 +123,16 @@ public class DBWorker {
     public ArrayList<StringFromDB> getSerializationList() { return serializationList; }
 
     public ArrayList<StringFromDB> getMTList() { return MTList; }
+
+    public ArrayList<StringFromDB> getDataBaseList() { return dataBaseList; }
+
+    public ArrayList<StringFromDB> getSQLList() { return SQLList; }
+
+    public ArrayList<StringFromDB> getJDBCList() { return JDBCList; }
+
+    public ArrayList<StringFromDB> getXMLList() { return XMLList; }
+
+    public ArrayList<StringFromDB> getHTMLList() { return HTMLList; }
+
+    public ArrayList<StringFromDB> getCSSList() { return CSSList; }
 }

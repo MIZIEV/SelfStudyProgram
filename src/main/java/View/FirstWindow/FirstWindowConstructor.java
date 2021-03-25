@@ -1,6 +1,9 @@
-package View;
+package View.FirstWindow;
 
 import Controller.TButtonsControllers.SelectAllButtonController;
+import View.buttonsPatterns.ButtonsPattern;
+import View.SecondWindow.SecondWindow;
+import View.buttonsPatterns.TButtonPattern;
 import javafx.scene.control.*;
 
 public class FirstWindowConstructor {
@@ -15,13 +18,13 @@ public class FirstWindowConstructor {
 
     private final TButtonPattern serializationButton = new TButtonPattern(50, 175, 100, 50, "Serialization");
     private final TButtonPattern MTButton = new TButtonPattern(200, 175, 100, 50, "Multithreading");
-    private final TButtonPattern empty1Button2 = new TButtonPattern(510, 175, 100, 50, "empty - 2");
-    private final TButtonPattern empty1Button3 = new TButtonPattern(660, 175, 100, 50, "empty - 3");
+    private final TButtonPattern dataBaseButton = new TButtonPattern(510, 175, 100, 50, "Data base");
+    private final TButtonPattern SQLButton = new TButtonPattern(660, 175, 100, 50, "SQL");
 
-    private final TButtonPattern empty1Button4 = new TButtonPattern(50, 250, 100, 50, "empty - 4");
-    private final TButtonPattern empty1Button5 = new TButtonPattern(200, 250, 100, 50, "empty - 5");
-    private final TButtonPattern empty1Button6 = new TButtonPattern(510, 250, 100, 50, "empty - 6");
-    private final TButtonPattern empty1Button7 = new TButtonPattern(660, 250, 100, 50, "empty - 7");
+    private final TButtonPattern HTMLButton = new TButtonPattern(50, 250, 100, 50, "HTML");
+    private final TButtonPattern CSSButton = new TButtonPattern(200, 250, 100, 50, "CSS");
+    private final TButtonPattern JDBCButton = new TButtonPattern(510, 250, 100, 50, "JDBC");
+    private final TButtonPattern XMLButton = new TButtonPattern(660, 250, 100, 50, "XML");
 
     private final TButtonPattern selectAllButton = new TButtonPattern(345, 175, 120, 125, "Select all");
     private final ButtonsPattern startLearningButton = new ButtonsPattern(345, 340, 120, 50, "Start learning");
@@ -54,17 +57,17 @@ public class FirstWindowConstructor {
 
     public TButtonPattern getMTButton() { return MTButton; }
 
-    public TButtonPattern getEmpty1Button2() { return empty1Button2; }
+    public TButtonPattern getDataBaseButton() { return dataBaseButton; }
 
-    public TButtonPattern getEmpty1Button3() { return empty1Button3; }
+    public TButtonPattern getSQLButton() { return SQLButton; }
 
-    public TButtonPattern getEmpty1Button4() { return empty1Button4; }
+    public TButtonPattern getHTMLButton() { return HTMLButton; }
 
-    public TButtonPattern getEmpty1Button5() { return empty1Button5; }
+    public TButtonPattern getCSSButton() { return CSSButton; }
 
-    public TButtonPattern getEmpty1Button6() { return empty1Button6; }
+    public TButtonPattern getJDBCButton() { return JDBCButton; }
 
-    public TButtonPattern getEmpty1Button7() { return empty1Button7; }
+    public TButtonPattern getXMLButton() { return XMLButton; }
 
     public TButtonPattern getSelectAllButton() { return selectAllButton; }
 

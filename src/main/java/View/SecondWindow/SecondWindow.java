@@ -1,7 +1,9 @@
-package View;
+package View.SecondWindow;
 
 import Controller.ButtonsControllers.*;
-import DataBase.*;
+import Model.*;
+import View.ButtonsDependence;
+import View.GeneralDependence;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,24 +20,21 @@ public class SecondWindow {
 
         generalDependence.getOutputText().setWrapText(true);
         generalDependence.getOutputText().setStyle("-fx-font-size: 16px;");
-        generalDependence.getErrorMessage().setStyle("-fx-text-inner-color: red; -fx-font-size: 20px;");
 
         CountingResult countingResult = new CountingResult(generalDependence.getWorker(),generalDependence.getDigit());
 
         StartButtonController startButtonController = new StartButtonController(generalDependence.getWorker(), generalDependence.getDigit());
-        NextButtonController nextButtonController = new NextButtonController(generalDependence.getWorker(), generalDependence.getDigit(),generalDependence.getErrorMessage());
-        PreviousButtonController previousButtonController = new PreviousButtonController(generalDependence.getWorker(), generalDependence.getDigit(),generalDependence.getErrorMessage());
+        NextButtonController nextButtonController = new NextButtonController(generalDependence.getWorker(), generalDependence.getDigit());
+        PreviousButtonController previousButtonController = new PreviousButtonController(generalDependence.getWorker(), generalDependence.getDigit());
         QuestionButtonController questionButtonController = new QuestionButtonController(generalDependence.getWorker(), generalDependence.getDigit());
         AnswerButtonController answerButtonController = new AnswerButtonController(generalDependence.getWorker(), generalDependence.getDigit());
         YesButtonController yesButtonController = new YesButtonController(generalDependence.getWorker(), generalDependence.getDigit(), generalDependence.getResultMassage(), countingResult);
-        NoButtonController noButtonController = new NoButtonController(generalDependence.getWorker(), generalDependence.getDigit());
 
         ButtonsDependence dependence = new ButtonsDependence(startButtonController, nextButtonController,
                 previousButtonController, questionButtonController, answerButtonController,
-                yesButtonController, noButtonController);
+                yesButtonController);
 
-        SecondWindowConstructor constructor = new SecondWindowConstructor(generalDependence.getOutputText(),
-                generalDependence.getErrorMessage(),dependence);
+        SecondWindowConstructor constructor = new SecondWindowConstructor(generalDependence.getOutputText(), dependence);
 
         Stage myStage = new Stage();
         myStage.setTitle("Self study program");
@@ -46,8 +45,8 @@ public class SecondWindow {
 
         rootNode.getChildren().addAll(constructor.getStartButton(), constructor.getNextButton(),
                 constructor.getPreviousButton(), constructor.getQuestionButton(),
-                constructor.getAnswerButton(), constructor.getYesButton(), constructor.getNoButton(),
-                generalDependence.getOutputText(),generalDependence.getResultMassage(), generalDependence.getErrorMessage());
+                constructor.getAnswerButton(), constructor.getYesButton(),
+                generalDependence.getOutputText(),generalDependence.getResultMassage());
 
         myStage.show();
     }

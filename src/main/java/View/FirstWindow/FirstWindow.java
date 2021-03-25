@@ -1,6 +1,8 @@
-package View;
+package View.FirstWindow;
 
 import Controller.ButtonsControllers.StartLearnButController;
+import View.GeneralDependence;
+import View.SecondWindow.SecondWindow;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -23,7 +25,10 @@ public class FirstWindow {
                 generalDependence.getWorker(), firstWindowConstructor.getCoreButton(),
                 firstWindowConstructor.getCollectionButton(), firstWindowConstructor.getJava8Button(),
                 firstWindowConstructor.getIOandNIOButton(), firstWindowConstructor.getSerializationButton(),
-                firstWindowConstructor.getMTButton());
+                firstWindowConstructor.getMTButton(),firstWindowConstructor.getDataBaseButton(),
+                firstWindowConstructor.getSQLButton(),firstWindowConstructor.getJDBCButton(),
+                firstWindowConstructor.getXMLButton(),firstWindowConstructor.getHTMLButton(),
+                firstWindowConstructor.getCSSButton());
 
         firstWindowConstructor.getStartLearningButton().setOnAction((event) -> {
             secondWindow.startWin();
@@ -38,9 +43,9 @@ public class FirstWindow {
                 firstWindowConstructor.getCoreButton(), firstWindowConstructor.getCollectionButton(),
                 firstWindowConstructor.getJava8Button(), firstWindowConstructor.getIOandNIOButton(),
                 firstWindowConstructor.getSerializationButton(), firstWindowConstructor.getMTButton(),
-                firstWindowConstructor.getEmpty1Button2(), firstWindowConstructor.getEmpty1Button3(),
-                firstWindowConstructor.getEmpty1Button4(), firstWindowConstructor.getEmpty1Button5(),
-                firstWindowConstructor.getEmpty1Button6(), firstWindowConstructor.getEmpty1Button7(),
+                firstWindowConstructor.getDataBaseButton(), firstWindowConstructor.getSQLButton(),
+                firstWindowConstructor.getHTMLButton(), firstWindowConstructor.getCSSButton(),
+                firstWindowConstructor.getJDBCButton(), firstWindowConstructor.getXMLButton(),
                 firstWindowConstructor.getSelectAllButton());
 
         firstWindow.setScene(scene);

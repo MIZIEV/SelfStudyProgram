@@ -1,27 +1,22 @@
 package Controller.ButtonsControllers;
 
-import DataBase.Counter;
-import DataBase.DBWorker;
-import View.ErrorMessage;
+import Model.Counter;
+import Model.DBWorker;
 
 public class PreviousButtonController {
     private final DBWorker worker;
     private final Counter counter;
-    private final ErrorMessage errorMessage;
 
-    public PreviousButtonController(DBWorker work, Counter count, ErrorMessage error) {
-        this.errorMessage = error;
+    public PreviousButtonController(DBWorker work, Counter count) {
         this.worker = work;
         this.counter = count;
     }
 
     public String scrollText() {
         int textCounter = counter.getDigit();
-
+//todo придумать заменитель "error messege"!!!!!
         if (textCounter <= 0) {
             textCounter = 0;
-            errorMessage.setText("This is the first question!!!");
-
         } else textCounter--;
 
         counter.setDigit(textCounter);

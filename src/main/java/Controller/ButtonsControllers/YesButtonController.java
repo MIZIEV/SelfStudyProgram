@@ -1,6 +1,6 @@
 package Controller.ButtonsControllers;
 
-import DataBase.*;
+import Model.*;
 import View.ResultMessage;
 
 public class YesButtonController {

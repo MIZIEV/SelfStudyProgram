@@ -1,7 +1,7 @@
 package Controller.ButtonsControllers;
 
-import DataBase.DBWorker;
-import View.TButtonPattern;
+import Model.DBWorker;
+import View.buttonsPatterns.TButtonPattern;
 
 public class StartLearnButController {
 
@@ -13,38 +13,57 @@ public class StartLearnButController {
     private final TButtonPattern IOandNIOButton;
     private final TButtonPattern serializationButton;
     private final TButtonPattern MultithreadingButton;
+    private final TButtonPattern dataBaseButton;
+    private final TButtonPattern SQLButton;
+    private final TButtonPattern JDBCButton;
+    private final TButtonPattern XMLButton;
+    private final TButtonPattern HTMLButton;
+    private final TButtonPattern CSSButton;
 
     public StartLearnButController(DBWorker worker, TButtonPattern coreBut, TButtonPattern colBut,
                                    TButtonPattern java8But, TButtonPattern ioButton, TButtonPattern serButton,
-                                   TButtonPattern mtButton) {
-        this.MultithreadingButton = mtButton;
+                                   TButtonPattern mtButton, TButtonPattern DBButton, TButtonPattern sqlButton,
+                                   TButtonPattern jdbcButton, TButtonPattern xmlButton, TButtonPattern htmlButton,
+                                   TButtonPattern cssButton) {
         this.coreButton = coreBut;
         this.collectionButton = colBut;
         this.java8Button = java8But;
         this.IOandNIOButton = ioButton;
         this.serializationButton = serButton;
+        this.MultithreadingButton = mtButton;
+        this.XMLButton = xmlButton;
+        this.JDBCButton = jdbcButton;
+        this.SQLButton = sqlButton;
+        this.dataBaseButton = DBButton;
+        this.HTMLButton = htmlButton;
+        this.CSSButton = cssButton;
         this.worker = worker;
     }
 
     public void startProg() {
 
-        if (coreButton.isSelected()) {
-            worker.getBufferList().addAll(worker.getCoreList());
-        }
-        if (collectionButton.isSelected()) {
-            worker.getBufferList().addAll(worker.getCollectionList());
-        }
-        if (java8Button.isSelected()) {
-            worker.getBufferList().addAll(worker.getJava8List());
-        }
-        if (IOandNIOButton.isSelected()) {
-            worker.getBufferList().addAll(worker.getIOList());
-        }
-        if (serializationButton.isSelected()) {
-            worker.getBufferList().addAll(worker.getSerializationList());
-        }
-        if (MultithreadingButton.isSelected()) {
-            worker.getBufferList().addAll(worker.getMTList());
-        }
+        if (coreButton.isSelected()) worker.getBufferList().addAll(worker.getCoreList());
+
+        if (collectionButton.isSelected()) worker.getBufferList().addAll(worker.getCollectionList());
+
+        if (java8Button.isSelected()) worker.getBufferList().addAll(worker.getJava8List());
+
+        if (IOandNIOButton.isSelected()) worker.getBufferList().addAll(worker.getIOList());
+
+        if (serializationButton.isSelected()) worker.getBufferList().addAll(worker.getSerializationList());
+
+        if (MultithreadingButton.isSelected()) worker.getBufferList().addAll(worker.getMTList());
+
+        if (dataBaseButton.isSelected()) worker.getBufferList().addAll(worker.getDataBaseList());
+
+        if (SQLButton.isSelected()) worker.getBufferList().addAll(worker.getSQLList());
+
+        if (JDBCButton.isSelected()) worker.getBufferList().addAll(worker.getJDBCList());
+
+        if (XMLButton.isSelected()) worker.getBufferList().addAll(worker.getXMLList());
+
+        if (HTMLButton.isSelected()) worker.getBufferList().addAll(worker.getHTMLList());
+
+        if (CSSButton.isSelected()) worker.getBufferList().addAll(worker.getCSSList());
     }
 }

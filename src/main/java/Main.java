@@ -1,10 +1,8 @@
-import Controller.*;
-import DataBase.*;
 import View.*;
+import View.FirstWindow.FirstWindow;
+import View.SecondWindow.SecondWindow;
 import javafx.application.*;
-import javafx.scene.*;
 import javafx.stage.*;
-import javafx.scene.layout.*;
 
 public class Main extends Application {
 
@@ -13,6 +11,7 @@ public class Main extends Application {
         launch(args);
     }
 
+    @Override
     public void start(Stage myStage) {
 
         GeneralDependence generalDependence = new GeneralDependence();
