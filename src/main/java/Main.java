@@ -1,5 +1,5 @@
-import View.*;
 import View.FirstWindow.FirstWindow;
+import View.GeneralDependence;
 import View.SecondWindow.SecondWindow;
 import javafx.application.*;
 import javafx.stage.*;
