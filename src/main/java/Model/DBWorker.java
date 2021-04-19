@@ -10,10 +10,10 @@ public class DBWorker {
     private static final String PASSWORD = "qw20011993QW";
     private static final String query = "SELECT * from java_learning.javalearning";
 
-    private static final byte INDEXCOLUMM = 2;
-    private static final byte THEMECOLUMM = 3;
-    private static final byte QUESTIONCOLUMM = 4;
-    private static final byte ANSWERCOLUMM = 5;
+    private static final byte INDEX_COLUMN = 2;
+    private static final byte THEME_COLUMN = 3;
+    private static final byte QUESTION_COLUMN = 4;
+    private static final byte ANSWER_COLUMN = 5;
 
     private Connection connection;
 
@@ -48,10 +48,10 @@ public class DBWorker {
 
             while (resultSet.next()) {
                 stringFromDB = new StringFromDB(
-                        resultSet.getInt(INDEXCOLUMM),
-                        resultSet.getString(THEMECOLUMM),
-                        resultSet.getString(QUESTIONCOLUMM),
-                        resultSet.getString(ANSWERCOLUMM),
+                        resultSet.getInt(INDEX_COLUMN),
+                        resultSet.getString(THEME_COLUMN),
+                        resultSet.getString(QUESTION_COLUMN),
+                        resultSet.getString(ANSWER_COLUMN),
                         false
                 );
 

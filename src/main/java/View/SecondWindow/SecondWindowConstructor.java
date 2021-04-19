@@ -3,20 +3,18 @@ package View.SecondWindow;
 import View.ButtonsDependence;
 import View.buttonsPatterns.ButtonsPattern;
 import View.OutputText;
-import javafx.scene.effect.*;
-import javafx.scene.paint.*;
 
 public class SecondWindowConstructor {
 
     private final ButtonsDependence dependence;
     private final OutputText outputText;
 
-    private final ButtonsPattern startButton = new ButtonsPattern(15, 50, 135, 50, "Start");
-    private final ButtonsPattern nextButton = new ButtonsPattern(90, 110, 60, 50, "-->");
-    private final ButtonsPattern previousButton = new ButtonsPattern(15, 110, 60, 50, "<--");
-    private final ButtonsPattern questionButton = new ButtonsPattern(15, 640, 135, 50, "Question");
-    private final ButtonsPattern answerButton = new ButtonsPattern(15, 700, 135, 50, "Answer");
-    private final ButtonsPattern yesButton = new ButtonsPattern(885, 360, 135, 135, "✓");
+    private final ButtonsPattern startButton = new ButtonsPattern(140, 50, "Start");
+    private final ButtonsPattern nextButton = new ButtonsPattern(60, 50, "→");
+    private final ButtonsPattern previousButton = new ButtonsPattern(60, 50, "←");
+    private final ButtonsPattern questionButton = new ButtonsPattern(140, 50, "Question");
+    private final ButtonsPattern answerButton = new ButtonsPattern(140, 50, "Answer");
+    private final ButtonsPattern yesButton = new ButtonsPattern(180, 140, "✓");
 
     public SecondWindowConstructor(OutputText output, ButtonsDependence dependence) {
 
@@ -29,6 +27,7 @@ public class SecondWindowConstructor {
         answerButton.setDisable(true);
         yesButton.setDisable(true);
 
+        startButton.getStyleClass().add("start-button-button");
         startButton.setOnAction((event) -> {
             output.setText(dependence.getStartButtonController().getTextFromList());
             startButton.setDisable(true);
@@ -44,11 +43,8 @@ public class SecondWindowConstructor {
         questionButton.setOnAction((event) -> output.setText(dependence.getQuestionButtonController().getRandomQuestion()));
         answerButton.setOnAction((event) -> output.setText(dependence.getAnswerButtonController().getAnswer()));
 
-        InnerShadow greenEffect = new InnerShadow(20.0, Color.GREEN);
-
-        yesButton.setEffect(greenEffect);
+        yesButton.getStyleClass().add("yes-button-button");
         yesButton.setOnAction((event) -> dependence.getYesButtonController().setYesNo());
-
     }
 
     public ButtonsPattern getStartButton() { return startButton; }

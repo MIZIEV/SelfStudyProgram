@@ -1,0 +1,61 @@
+.label{
+-fx-text-fill: white;
+-fx-font-size: 30px;
+}
+
+.text-fill{
+-fx-text-fill: white;
+-fx-font-size: 25px;
+}
+
+.top-border-pane{
+-fx-background-color: #6495ed;
+-fx-background-radius: 0 0 30 30;
+}
+.bottom-border-pane{
+-fx-background-color: #6495ed;
+-fx-background-radius: 30 30 0 0;
+}
+
+.button{
+-fx-border-radius: 20px;
+-fx-background-radius: 20px;
+-fx-base: white;
+-fx-border-color: white;
+}
+
+.button:hover{
+-fx-background-color:  #6495ed;
+-fx-text-fill: white;
+}
+
+.toggle-button{
+-fx-border-color: #6495ed;
+-fx-base: white;
+-fx-background-radius: 10px;
+-fx-border-radius: 10px;
+}
+
+.toggle-button: selected{
+-fx-base:#87ceeb;
+-fx-text-fill: white;
+}
+
+.toggle-button:hover{
+-fx-background-color:  #6495ed;
+-fx-text-fill: white;
+}
+
+.selectAll-toggle-button{
+-fx-background-radius: 20px;
+-fx-border-radius: 20px;
+}
+
+.selectAll-toggle-button: selected{
+-fx-base: #dc143c;
+}
+
+.selectAll-toggle-button: hover{
+-fx-background-color: #dc143c;
+-fx-text-fill: white;
+}
