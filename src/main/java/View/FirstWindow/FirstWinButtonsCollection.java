@@ -6,9 +6,11 @@ import View.SecondWindow.SecondWindow;
 import View.buttonsPatterns.TButtonPattern;
 import javafx.scene.control.*;
 
-public class FirstWinConstructor {
-    private static final int PREF_WIDTH = 100;
-    private static final int PREF_HEIGHT = 40;
+public class FirstWinButtonsCollection {
+    private static final short PREF_WIDTH = 100;
+    private static final short PREF_HEIGHT = 40;
+    private static final short PREF_WIDTH_CENTRAL_BUTTON = 150;
+    private static final short PREF_HEIGHT_CENTRAL_BUTTON = 60;
 
     private final SecondWindow secondWindow;
     private final FirstWindow firstWindow;
@@ -28,10 +30,10 @@ public class FirstWinConstructor {
     private final TButtonPattern JDBCButton = new TButtonPattern(PREF_WIDTH, PREF_HEIGHT, "JDBC");
     private final TButtonPattern XMLButton = new TButtonPattern(PREF_WIDTH, PREF_HEIGHT, "XML");
 
-    private final TButtonPattern selectAllButton = new TButtonPattern(150, 60, "Select all");
-    private final ButtonsPattern startLearningButton = new ButtonsPattern( 150, 60, "Start learning");
+    private final TButtonPattern selectAllButton = new TButtonPattern(PREF_WIDTH_CENTRAL_BUTTON, PREF_HEIGHT_CENTRAL_BUTTON, "Select all");
+    private final ButtonsPattern startLearningButton = new ButtonsPattern(PREF_WIDTH_CENTRAL_BUTTON, PREF_HEIGHT_CENTRAL_BUTTON, "Start learning");
 
-    public FirstWinConstructor(FirstWindow firstW, SecondWindow secondW) {
+    public FirstWinButtonsCollection(FirstWindow firstW, SecondWindow secondW) {
         this.firstWindow = firstW;
         this.secondWindow = secondW;
 
