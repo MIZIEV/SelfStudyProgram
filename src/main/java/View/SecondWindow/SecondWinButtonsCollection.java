@@ -4,19 +4,25 @@ import View.ButtonsDependence;
 import View.buttonsPatterns.ButtonsPattern;
 import View.OutputText;
 
-public class SecondWindowConstructor {
+public class SecondWinButtonsCollection {
+
+    private final static short PREF_HEIGHT = 50;
+    private final static short PREF_WIDTH_SMALL = 60;
+    private final static short PREF_WIDTH_STANDARD = 140;
+    private final static short PREF_WIDTH_YESBUTTON = 180;
+    private final static short PREF_HEIGHT_YESBUTTON = 140;
 
     private final ButtonsDependence dependence;
     private final OutputText outputText;
 
-    private final ButtonsPattern startButton = new ButtonsPattern(140, 50, "Start");
-    private final ButtonsPattern nextButton = new ButtonsPattern(60, 50, "→");
-    private final ButtonsPattern previousButton = new ButtonsPattern(60, 50, "←");
-    private final ButtonsPattern questionButton = new ButtonsPattern(140, 50, "Question");
-    private final ButtonsPattern answerButton = new ButtonsPattern(140, 50, "Answer");
-    private final ButtonsPattern yesButton = new ButtonsPattern(180, 140, "✓");
+    private final ButtonsPattern startButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Start");
+    private final ButtonsPattern nextButton = new ButtonsPattern(PREF_WIDTH_SMALL, PREF_HEIGHT, "→");
+    private final ButtonsPattern previousButton = new ButtonsPattern(PREF_WIDTH_SMALL, PREF_HEIGHT, "←");
+    private final ButtonsPattern questionButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Random question");
+    private final ButtonsPattern answerButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Answer");
+    private final ButtonsPattern yesButton = new ButtonsPattern(PREF_WIDTH_YESBUTTON, PREF_HEIGHT_YESBUTTON, "✓");
 
-    public SecondWindowConstructor(OutputText output, ButtonsDependence dependence) {
+    public SecondWinButtonsCollection(OutputText output, ButtonsDependence dependence) {
 
         this.dependence = dependence;
         this.outputText = output;
@@ -26,7 +32,7 @@ public class SecondWindowConstructor {
         questionButton.setDisable(true);
         answerButton.setDisable(true);
         yesButton.setDisable(true);
-
+                                                              // add listeners to all buttons
         startButton.getStyleClass().add("start-button-button");
         startButton.setOnAction((event) -> {
             output.setText(dependence.getStartButtonController().getTextFromList());
