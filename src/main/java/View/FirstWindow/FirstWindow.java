@@ -33,18 +33,18 @@ public class FirstWindow {
 
     public void startWindow(SecondWindow secWindow) {
         this.secondWindow = secWindow;
-        FirstWinConstructor firstWinConstructor = new FirstWinConstructor(this, secondWindow);
+        FirstWinButtonsCollection firstWinButtonsCollection = new FirstWinButtonsCollection(this, secondWindow);
 
         StartLearnButController startLearnButController = new StartLearnButController(
-                generalDependence.getWorker(), firstWinConstructor.getStartLearningButton(), firstWinConstructor.getCoreButton(),
-                firstWinConstructor.getCollectionButton(), firstWinConstructor.getJava8Button(),
-                firstWinConstructor.getIOandNIOButton(), firstWinConstructor.getSerializationButton(),
-                firstWinConstructor.getMTButton(), firstWinConstructor.getDataBaseButton(),
-                firstWinConstructor.getSQLButton(), firstWinConstructor.getJDBCButton(),
-                firstWinConstructor.getXMLButton(), firstWinConstructor.getHTMLButton(),
-                firstWinConstructor.getCSSButton());
+                generalDependence.getWorker(), firstWinButtonsCollection.getStartLearningButton(), firstWinButtonsCollection.getCoreButton(),
+                firstWinButtonsCollection.getCollectionButton(), firstWinButtonsCollection.getJava8Button(),
+                firstWinButtonsCollection.getIOandNIOButton(), firstWinButtonsCollection.getSerializationButton(),
+                firstWinButtonsCollection.getMTButton(), firstWinButtonsCollection.getDataBaseButton(),
+                firstWinButtonsCollection.getSQLButton(), firstWinButtonsCollection.getJDBCButton(),
+                firstWinButtonsCollection.getXMLButton(), firstWinButtonsCollection.getHTMLButton(),
+                firstWinButtonsCollection.getCSSButton());
 
-        firstWinConstructor.getStartLearningButton().setOnAction((event) -> {
+        firstWinButtonsCollection.getStartLearningButton().setOnAction((event) -> {
             if (startLearnButController.ifNotSelected()) {
                 secondWindow.startWin();
                 firstWindow.close();
@@ -63,7 +63,7 @@ public class FirstWindow {
 
         BorderPane insertBottomPane = new BorderPane();
         insertBottomPane.setPrefSize(PREFERRED_DECORATE_PANEL_WIDTH, PREFERRED_DECORATE_PANEL_HEIGHT);
-        insertBottomPane.setCenter(firstWinConstructor.getStartLearningButton());
+        insertBottomPane.setCenter(firstWinButtonsCollection.getStartLearningButton());
         insertBottomPane.getStyleClass().add("bottom-border-pane");
 
         HBox leftHBox = new HBox(INTERVAL);                  //set left box with buttons
@@ -74,11 +74,11 @@ public class FirstWindow {
         firstLiftVBox.setAlignment(Pos.CENTER);
         secondLeftVBox.setAlignment(Pos.CENTER);
 
-        firstLiftVBox.getChildren().addAll(firstWinConstructor.getCoreButton(),
-                firstWinConstructor.getSerializationButton(), firstWinConstructor.getHTMLButton());
+        firstLiftVBox.getChildren().addAll(firstWinButtonsCollection.getCoreButton(),
+                firstWinButtonsCollection.getSerializationButton(), firstWinButtonsCollection.getHTMLButton());
 
-        secondLeftVBox.getChildren().addAll(firstWinConstructor.getCollectionButton(),
-                firstWinConstructor.getMTButton(), firstWinConstructor.getCSSButton());
+        secondLeftVBox.getChildren().addAll(firstWinButtonsCollection.getCollectionButton(),
+                firstWinButtonsCollection.getMTButton(), firstWinButtonsCollection.getCSSButton());
 
         leftHBox.getChildren().addAll(firstLiftVBox, secondLeftVBox);
 
@@ -90,18 +90,18 @@ public class FirstWindow {
         firstRightVBox.setAlignment(Pos.CENTER);
         secondRightVBox.setAlignment(Pos.CENTER);
 
-        firstRightVBox.getChildren().addAll(firstWinConstructor.getJava8Button(),
-                firstWinConstructor.getDataBaseButton(), firstWinConstructor.getJDBCButton());
+        firstRightVBox.getChildren().addAll(firstWinButtonsCollection.getJava8Button(),
+                firstWinButtonsCollection.getDataBaseButton(), firstWinButtonsCollection.getJDBCButton());
 
-        secondRightVBox.getChildren().addAll(firstWinConstructor.getIOandNIOButton(),
-                firstWinConstructor.getSQLButton(), firstWinConstructor.getXMLButton());
+        secondRightVBox.getChildren().addAll(firstWinButtonsCollection.getIOandNIOButton(),
+                firstWinButtonsCollection.getSQLButton(), firstWinButtonsCollection.getXMLButton());
 
         rightHBox.getChildren().addAll(firstRightVBox, secondRightVBox);
 
         generalPane.setTop(insertTopPane);
         generalPane.setBottom(insertBottomPane);
-        firstWinConstructor.getSelectAllButton().getStyleClass().add("selectAll-toggle-button");
-        generalPane.setCenter(firstWinConstructor.getSelectAllButton());
+        firstWinButtonsCollection.getSelectAllButton().getStyleClass().add("selectAll-toggle-button");
+        generalPane.setCenter(firstWinButtonsCollection.getSelectAllButton());
         generalPane.setLeft(leftHBox);
         generalPane.setRight(rightHBox);
 
