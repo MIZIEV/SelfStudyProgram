@@ -3,7 +3,7 @@ package Controller.ButtonsControllers;
 import Model.Counter;
 import Model.DBWorker;
 
-public class NextButtonController {
+public class NextButtonController implements Changer {
     private final DBWorker worker;
     private final Counter counter;
 
@@ -12,7 +12,8 @@ public class NextButtonController {
         this.counter = count;
     }
 
-    public String scrollText() {
+    @Override
+    public String changeQuestion() {
         int textCounter = counter.getDigit();
 //todo придумать заменитель "error messege"!!!!!
         if (textCounter >= worker.getBufferList().size() - 1) {
