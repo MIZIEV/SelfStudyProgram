@@ -10,38 +10,37 @@
 -fx-background-color: #6495ed;
 -fx-background-radius: 30 0 0 0;
 }
+
 .button{
 -fx-base: white;
 -fx-border-radius: 20px;
 -fx-background-radius: 20px;
 -fx-border-color: #6495ed;
 }
-
 .button: hover{
 -fx-base: #6495ed;
 -fx-text-fill: white;
 }
 
-.start-button-button{
+.start-button{
 -fx-base: white;
 -fx-border-radius: 20px;
 -fx-background-radius: 20px;
 -fx-border-color: #dc143c;
 }
-
-.start-button-button: hover{
+.start-button: hover{
 -fx-base: #dc143c;
 -fx-text-fill: white;
 }
 
-.yes-button-button{
+.yes-button{
 -fx-base: white;
 -fx-border-radius: 20px;
 -fx-background-radius: 20px;
 -fx-border-color: #3cb371;
 -fx-font-size: 40px;
 }
-.yes-button-button: hover{
+.yes-button: hover{
 -fx-base: #3cb371;
 -fx-text-fill: white;
 }
