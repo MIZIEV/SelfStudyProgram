@@ -1,13 +1,16 @@
 package Controller.TButtonsControllers;
 
-import View.FirstWindow.FirstWinConstructor;
+import View.FirstWindow.FirstWindow;
 
 public class SelectAllButtonController {
-   FirstWinConstructor firstWinConstructor;
 
-    public SelectAllButtonController(FirstWinConstructor firstWindow) {
-        this.firstWinConstructor = firstWindow;
+    private final FirstWindow firstWindow;
 
+    public SelectAllButtonController(FirstWindow firstWindow) {
+        this.firstWindow = firstWindow;
+    }
+
+    public void selectAllOrNothing() {
         if (firstWindow.getSelectAllButton().isSelected()) {
 
             firstWindow.getCoreButton().setSelected(true);
