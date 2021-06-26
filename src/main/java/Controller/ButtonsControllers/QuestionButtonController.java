@@ -13,7 +13,7 @@ public class QuestionButtonController implements Changer {
     }
 
     @Override
-    public String changeQuestion() {
+    public String startController() {
         int randomDigit = (int) (Math.random() * worker.getBufferList().size());
 
         String question = "";

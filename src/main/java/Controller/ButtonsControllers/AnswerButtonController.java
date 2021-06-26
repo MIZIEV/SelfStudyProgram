@@ -2,7 +2,7 @@ package Controller.ButtonsControllers;
 
 import Model.*;
 
-public class AnswerButtonController {
+public class AnswerButtonController implements Changer{
     private final DBWorker worker;
     private final Counter counter;
 
@@ -10,8 +10,8 @@ public class AnswerButtonController {
         this.worker = work;
         this.counter = count;
     }
-
-    public String getAnswer() {
+@Override
+    public String startController() {
         int digit = counter.getDigit();
 
         return worker.getBufferList().get(digit).getIndex()+" - "+

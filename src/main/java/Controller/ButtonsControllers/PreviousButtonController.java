@@ -13,7 +13,7 @@ public class PreviousButtonController implements Changer {
     }
 
     @Override
-    public String changeQuestion() {
+    public String startController() {
         int textCounter = counter.getDigit();
 //todo придумать заменитель "error messege"!!!!!
         if (textCounter <= 0) {

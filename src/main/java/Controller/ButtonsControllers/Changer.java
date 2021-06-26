@@ -2,5 +2,5 @@ package Controller.ButtonsControllers;
 
 public interface Changer {
 
-    String changeQuestion();
+    String startController();
 }

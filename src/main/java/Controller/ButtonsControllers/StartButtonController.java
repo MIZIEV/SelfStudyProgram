@@ -3,7 +3,7 @@ package Controller.ButtonsControllers;
 import Model.Counter;
 import Model.DBWorker;
 
-public class StartButtonController {
+public class StartButtonController implements Changer {
 
     private final DBWorker worker;
     private final Counter counter;
@@ -13,7 +13,8 @@ public class StartButtonController {
         this.counter = count;
     }
 
-    public String getTextFromList() {
+    @Override
+    public String startController() {
         int startDigit = 0;
         counter.setDigit(startDigit);
 
