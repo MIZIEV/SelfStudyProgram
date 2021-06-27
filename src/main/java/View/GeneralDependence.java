@@ -5,15 +5,9 @@ import Model.*;
 public class GeneralDependence {
 
     private final DBWorker worker = new DBWorker();
-    private final Counter digit = new Counter();
-    private final OutputText outputText = new OutputText();
-    private final ResultMessage resultMessage = new ResultMessage();
+    private final ListIndex listIndex = new ListIndex();
 
     public DBWorker getWorker() { return worker; }
 
-    public Counter getDigit() { return digit; }
-
-    public OutputText getOutputText() { return outputText; }
-
-    public ResultMessage getResultMassage() { return resultMessage; }
+    public ListIndex getListIndex() { return listIndex; }
 }
