@@ -2,7 +2,6 @@ package View;
 
 import Controller.ButtonsControllers.StartLearnButController;
 import Controller.TButtonsControllers.SelectAllButtonController;
-import View.SecondWindow.SecondWindow;
 import View.buttonsPatterns.ButtonsPattern;
 import View.buttonsPatterns.TButtonPattern;
 import javafx.geometry.Pos;
@@ -69,11 +68,11 @@ public class FirstWindow {
 
         this.secondWindow = secWindow;
 
+        generalDependence.getWorker().distributeLists();
         String stylesheet = getClass().getResource("/FirstWindowStyle.css").toExternalForm();
         selectAllButton.setTooltip(new Tooltip("Select at least one theme"));
         startLearningButton.setTooltip(new Tooltip("Select at least one theme"));
         selectAllButton.getStyleClass().add(SELECT_ALL_BUTTON_STYLE);
-
         //________________________________________create main pane and add decorated elements
         BorderPane mainPane = new BorderPane();
         BorderPane insertTopPane = new BorderPane();
@@ -102,11 +101,11 @@ public class FirstWindow {
         //________________________________________right box with buttons
         HBox rightHBox = new HBox(INTERVAL);
         VBox firstRightVBox = new VBox(INTERVAL);
+        firstRightVBox.setAlignment(Pos.CENTER);
         VBox secondRightVBox = new VBox(INTERVAL);
+        secondRightVBox.setAlignment(Pos.CENTER);
         rightHBox.setPrefSize(PREFERRED_HBOX_WIDTH, PREFERRED_HBOX_HEIGHT);
         rightHBox.setAlignment(Pos.CENTER);
-        firstRightVBox.setAlignment(Pos.CENTER);
-        secondRightVBox.setAlignment(Pos.CENTER);
 
         firstRightVBox.getChildren().addAll(java8Button, dataBaseButton, JDBCButton);
         secondRightVBox.getChildren().addAll(IOandNIOButton, SQLButton, XMLButton);

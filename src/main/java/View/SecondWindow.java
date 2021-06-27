@@ -6,6 +6,8 @@ import View.buttonsPatterns.ButtonsPattern;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -37,6 +39,9 @@ public class SecondWindow {
     private final static short PREF_WIDTH_YESBUTTON = 180;
     private final static short PREF_HEIGHT_YESBUTTON = 140;
 
+    private final static short PREF_WIDTH_INDICATOR = 180;
+    private final static short PREF_HEIGHT_INDICATOR = 140;
+
     private final static String WIN_ICON = "icon.jpg";
     private final static String TOP_DECOR_PANE_STYLE = "top-border-pane";
     private final static String BOTTOM_DECOR_PANE_STYLE = "bottom-border-pane";
@@ -50,7 +55,7 @@ public class SecondWindow {
     public void startWin() {
         Insets margin = new Insets(INTERVAL);
         String stylesheet = getClass().getResource("/SecondStyle.css").toExternalForm();
-        CountingResult countingResult = new CountingResult(generalDependence.getWorker(), generalDependence.getDigit());
+        CountingResult countingResult = new CountingResult(generalDependence.getWorker(), generalDependence.getListIndex());
         //_________________________________________create all buttons
         ButtonsPattern startButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Start");
         ButtonsPattern nextButton = new ButtonsPattern(PREF_WIDTH_SMALL, PREF_HEIGHT, "→");
@@ -62,16 +67,19 @@ public class SecondWindow {
         startButton.getStyleClass().add(START_BUTTON_STYLE);
         yesButton.getStyleClass().add(YES_BUTTON_STYLE);
         //_________________________________________create all controllers
-        Changer startButtonController = new StartButtonController(generalDependence.getWorker(), generalDependence.getDigit());
-        Changer nextButtonController = new NextButtonController(generalDependence.getWorker(), generalDependence.getDigit());
-        Changer previousButtonController = new PreviousButtonController(generalDependence.getWorker(), generalDependence.getDigit());
-        Changer questionButtonController = new QuestionButtonController(generalDependence.getWorker(), generalDependence.getDigit());
-        Changer answerButtonController = new AnswerButtonController(generalDependence.getWorker(), generalDependence.getDigit());
-        YesButtonController yesButtonController = new YesButtonController(generalDependence.getWorker(), generalDependence.getDigit(), generalDependence.getResultMassage(), countingResult);
+        Changer startButtonController = new StartButtonController(generalDependence.getWorker(), generalDependence.getListIndex());
+        Changer nextButtonController = new NextButtonController(generalDependence.getWorker(), generalDependence.getListIndex());
+        Changer previousButtonController = new PreviousButtonController(generalDependence.getWorker(), generalDependence.getListIndex());
+        Changer questionButtonController = new QuestionButtonController(generalDependence.getWorker(), generalDependence.getListIndex());
+        Changer answerButtonController = new AnswerButtonController(generalDependence.getWorker(), generalDependence.getListIndex());
+        YesButtonController yesButtonController = new YesButtonController(generalDependence.getWorker(), generalDependence.getListIndex());
         //_________________________________________create main pane and all view elements
         BorderPane mainPane = new BorderPane();
         BorderPane topDecorPane = new BorderPane();
         BorderPane bottomDecorPane = new BorderPane();
+        TextArea outputText = new TextArea();
+        ProgressIndicator resultIndicator = new ProgressIndicator();
+        resultIndicator.setPrefSize(PREF_WIDTH_INDICATOR,PREF_HEIGHT_INDICATOR);
         //_________________________________________set decorate top & bottom panel
         topDecorPane.setPrefSize(PREF_DECORATED_PANE_WIDTH, PREF_DECORATED_PANE_HEIGHT);
         topDecorPane.getStyleClass().add(TOP_DECOR_PANE_STYLE);
@@ -96,7 +104,7 @@ public class SecondWindow {
         //_________________________________________create right VBox & add all element
         VBox rightVBox = new VBox(INTERVAL);
         rightVBox.setAlignment(Pos.TOP_CENTER);
-        rightVBox.getChildren().addAll(generalDependence.getResultMassage(), yesButton);
+        rightVBox.getChildren().addAll(resultIndicator, yesButton);
 
         nextButton.setDisable(true);
         previousButton.setDisable(true);
@@ -105,7 +113,7 @@ public class SecondWindow {
         yesButton.setDisable(true);
         //_________________________________________add listeners to all buttons
         startButton.setOnAction((event) -> {
-            generalDependence.getOutputText().setText(startButtonController.startController());
+            outputText.setText(startButtonController.startController());
             startButton.setDisable(true);
             nextButton.setDisable(false);
             previousButton.setDisable(false);
@@ -114,18 +122,21 @@ public class SecondWindow {
             yesButton.setDisable(false);
         });
         //_________________________________________add all listeners
-        nextButton.setOnAction((event) -> generalDependence.getOutputText().setText(nextButtonController.startController()));
-        previousButton.setOnAction((event) -> generalDependence.getOutputText().setText(previousButtonController.startController()));
-        questionButton.setOnAction((event) -> generalDependence.getOutputText().setText(questionButtonController.startController()));
-        answerButton.setOnAction((event) -> generalDependence.getOutputText().setText(answerButtonController.startController()));
-        yesButton.setOnAction((event) -> yesButtonController.setYesNo());
+        nextButton.setOnAction((event) -> outputText.setText(nextButtonController.startController()));
+        previousButton.setOnAction((event) -> outputText.setText(previousButtonController.startController()));
+        questionButton.setOnAction((event) -> outputText.setText(questionButtonController.startController()));
+        answerButton.setOnAction((event) -> outputText.setText(answerButtonController.startController()));
+        yesButton.setOnAction((event) -> {
+            resultIndicator.setProgress(countingResult.counting());
+            yesButtonController.setYesNo();
+        });
 
-        generalDependence.getOutputText().setWrapText(true);
+        outputText.setWrapText(true);
 
         mainPane.setTop(topDecorPane);
         mainPane.setBottom(bottomDecorPane);
-        mainPane.setCenter(generalDependence.getOutputText());
-        BorderPane.setMargin(generalDependence.getOutputText(), margin);
+        mainPane.setCenter(outputText);
+        BorderPane.setMargin(outputText, margin);
         mainPane.setLeft(leftVBox);
         mainPane.setRight(rightVBox);
         BorderPane.setMargin(rightVBox, new Insets(INTERVAL, INTERVAL, INTERVAL, LEFT_INTERVAL_RIGHT_VBOX));

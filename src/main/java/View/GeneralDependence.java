@@ -3,8 +3,8 @@ package View;
 import Model.*;
 
 public class GeneralDependence {
-
-    private final DBWorker worker = new DBWorker();
+    private final DBConnector connector = new DBConnector();
+    private final DBWorker worker = new DBWorker(connector);
     private final ListIndex listIndex = new ListIndex();
 
     public DBWorker getWorker() { return worker; }
