@@ -1,0 +1,7 @@
+.Border-Pane{
+-fx-background-color: #dc143c;
+}
+.Label{
+-fx-font-size: 30px;
+-fx-text-fill: white;
+}
