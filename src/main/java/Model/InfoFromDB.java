@@ -1,6 +1,6 @@
 package Model;
 
-public class StringFromDB {
+public class InfoFromDB {
 
     private final int index;
     private final String question;
@@ -8,7 +8,7 @@ public class StringFromDB {
     private final String theme;
     private boolean yesNo;
 
-    public StringFromDB(int i, String t, String q, String a, boolean YN) {
+    public InfoFromDB(int i, String t, String q, String a, boolean YN) {
         this.index = i;
         this.theme = t;
         this.question = q;

@@ -1,53 +1,50 @@
 package Model;
 
+import View.ErrorWindow;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DBWorker {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/java_learning";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "qw20011993QW";
-    private static final String query = "SELECT * from java_learning.javalearning";
+    private final DBConnector connector;
 
     private static final byte INDEX_COLUMN = 2;
     private static final byte THEME_COLUMN = 3;
     private static final byte QUESTION_COLUMN = 4;
     private static final byte ANSWER_COLUMN = 5;
 
-    private Connection connection;
+    private static final String query = "SELECT * from java_learning.javalearning";
 
-    private final ArrayList<StringFromDB> bufferList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> bufferList = new ArrayList<>();
 
-    private final ArrayList<StringFromDB> coreList = new ArrayList<>();
-    private final ArrayList<StringFromDB> collectionList = new ArrayList<>();
-    private final ArrayList<StringFromDB> java8List = new ArrayList<>();
-    private final ArrayList<StringFromDB> IOList = new ArrayList<>();
-    private final ArrayList<StringFromDB> serializationList = new ArrayList<>();
-    private final ArrayList<StringFromDB> MTList = new ArrayList<>();
-    private final ArrayList<StringFromDB> dataBaseList = new ArrayList<>();
-    private final ArrayList<StringFromDB> SQLList = new ArrayList<>();
-    private final ArrayList<StringFromDB> JDBCList = new ArrayList<>();
-    private final ArrayList<StringFromDB> XMLList = new ArrayList<>();
-    private final ArrayList<StringFromDB> HTMLList = new ArrayList<>();
-    private final ArrayList<StringFromDB> CSSList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> coreList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> collectionList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> java8List = new ArrayList<>();
+    private final ArrayList<InfoFromDB> IOList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> serializationList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> MTList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> dataBaseList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> SQLList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> JDBCList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> XMLList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> HTMLList = new ArrayList<>();
+    private final ArrayList<InfoFromDB> CSSList = new ArrayList<>();
 
-    public DBWorker() {
+    public DBWorker(DBConnector connector) {
+        this.connector = connector;
+        connector.openConnection();
+    }
 
-        ArrayList<StringFromDB> allQAList = new ArrayList<>();
-        StringFromDB stringFromDB;
+    public void distributeLists() {
+        ArrayList<InfoFromDB> allQAList = new ArrayList<>();
+        InfoFromDB infoFromDB;
 
-        try {
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException throwables) {
-            System.out.println("error in worker");
-        }
-
-        try (Statement statement = this.getConnection().createStatement();
+        try (Statement statement = connector.getConnector().createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
 
             while (resultSet.next()) {
-                stringFromDB = new StringFromDB(
+                infoFromDB = new InfoFromDB(
                         resultSet.getInt(INDEX_COLUMN),
                         resultSet.getString(THEME_COLUMN),
                         resultSet.getString(QUESTION_COLUMN),
@@ -55,12 +52,10 @@ public class DBWorker {
                         false
                 );
 
-                allQAList.add(stringFromDB);
+                allQAList.add(infoFromDB);
             }
-
             int counter = 0;
             while (allQAList.size() > counter) {
-
                 switch (allQAList.get(counter).getTheme()) {
                     case "Core":
                         coreList.add(allQAList.get(counter));
@@ -102,37 +97,33 @@ public class DBWorker {
                 counter++;
             }
         } catch (SQLException throwables) {
-            System.out.println("error int worker2");
+            new ErrorWindow().launchWin("Error in distributor","Check distributor");
         }
     }
 
-    public Connection getConnection() {
-        return connection;
-    }
+    public ArrayList<InfoFromDB> getBufferList() { return bufferList; }
 
-    public ArrayList<StringFromDB> getBufferList() { return bufferList; }
+    public ArrayList<InfoFromDB> getCoreList() { return coreList; }
 
-    public ArrayList<StringFromDB> getCoreList() { return coreList; }
+    public ArrayList<InfoFromDB> getCollectionList() { return collectionList; }
 
-    public ArrayList<StringFromDB> getCollectionList() { return collectionList; }
+    public ArrayList<InfoFromDB> getJava8List() { return java8List; }
 
-    public ArrayList<StringFromDB> getJava8List() { return java8List; }
+    public ArrayList<InfoFromDB> getIOList() { return IOList; }
 
-    public ArrayList<StringFromDB> getIOList() { return IOList; }
+    public ArrayList<InfoFromDB> getSerializationList() { return serializationList; }
 
-    public ArrayList<StringFromDB> getSerializationList() { return serializationList; }
+    public ArrayList<InfoFromDB> getMTList() { return MTList; }
 
-    public ArrayList<StringFromDB> getMTList() { return MTList; }
+    public ArrayList<InfoFromDB> getDataBaseList() { return dataBaseList; }
 
-    public ArrayList<StringFromDB> getDataBaseList() { return dataBaseList; }
+    public ArrayList<InfoFromDB> getSQLList() { return SQLList; }
 
-    public ArrayList<StringFromDB> getSQLList() { return SQLList; }
+    public ArrayList<InfoFromDB> getJDBCList() { return JDBCList; }
 
-    public ArrayList<StringFromDB> getJDBCList() { return JDBCList; }
+    public ArrayList<InfoFromDB> getXMLList() { return XMLList; }
 
-    public ArrayList<StringFromDB> getXMLList() { return XMLList; }
+    public ArrayList<InfoFromDB> getHTMLList() { return HTMLList; }
 
-    public ArrayList<StringFromDB> getHTMLList() { return HTMLList; }
-
-    public ArrayList<StringFromDB> getCSSList() { return CSSList; }
+    public ArrayList<InfoFromDB> getCSSList() { return CSSList; }
 }
