@@ -1,0 +1,44 @@
+.toggle-button{
+-fx-background-color: transparent;
+}
+
+.toggle-button: selected{
+-fx-background-color: #1e90ff;
+}
+
+.toggle-button:hover{
+-fx-border-color: red;
+}
+
+.button-load{
+-fx-border-radius: 20px;
+-fx-background-radius: 20px;
+-fx-background-color: #6495ed;
+-fx-border-color: white;
+-fx-text-fill: white;
+}
+
+.button-load: hover{
+-fx-background-color:  #3cb371;
+}
+
+.button-delete{
+-fx-border-radius: 20px;
+-fx-background-radius: 20px;
+-fx-background-color: #6495ed;
+-fx-border-color: white;
+-fx-text-fill: white;
+}
+
+.button-delete: hover{
+-fx-background-color:  #dc143c;
+}
+
+.top-pane{
+-fx-background-color: #6495ed;
+-fx-background-radius: 0 0 30 30;
+}
+.bottom-pane{
+-fx-background-color: #6495ed;
+-fx-background-radius: 30 30 0 0;
+}
