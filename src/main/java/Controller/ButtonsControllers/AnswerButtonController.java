@@ -4,15 +4,15 @@ import Model.*;
 
 public class AnswerButtonController implements Changer{
     private final DBWorker worker;
-    private final Counter counter;
+    private final ListIndex listIndex;
 
-    public AnswerButtonController(DBWorker work, Counter count) {
+    public AnswerButtonController(DBWorker work, ListIndex count) {
         this.worker = work;
-        this.counter = count;
+        this.listIndex = count;
     }
 @Override
     public String startController() {
-        int digit = counter.getDigit();
+        int digit = listIndex.getIndex();
 
         return worker.getBufferList().get(digit).getIndex()+" - "+
                 worker.getBufferList().get(digit).getTheme()+": "+"\n"+

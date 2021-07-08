@@ -5,11 +5,11 @@ import Model.*;
 public class QuestionButtonController implements Changer {
 
     private final DBWorker worker;
-    private final Counter counter;
+    private final ListIndex listIndex;
 
-    public QuestionButtonController(DBWorker work, Counter count) {
+    public QuestionButtonController(DBWorker work, ListIndex count) {
         this.worker = work;
-        this.counter = count;
+        this.listIndex = count;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class QuestionButtonController implements Changer {
                         worker.getBufferList().get(randomDigit).getQuestion();
             }
         }
-        counter.setDigit(randomDigit);
+        listIndex.setIndex(randomDigit);
         return question;
     }
 }

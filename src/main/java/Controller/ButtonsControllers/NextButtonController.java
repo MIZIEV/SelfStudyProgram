@@ -1,28 +1,26 @@
 package Controller.ButtonsControllers;
 
-import Model.Counter;
+import Model.ListIndex;
 import Model.DBWorker;
 
 public class NextButtonController implements Changer {
     private final DBWorker worker;
-    private final Counter counter;
+    private final ListIndex listIndex;
 
-    public NextButtonController(DBWorker work, Counter count) {
+    public NextButtonController(DBWorker work, ListIndex count) {
         this.worker = work;
-        this.counter = count;
+        this.listIndex = count;
     }
 
     @Override
     public String startController() {
-        int textCounter = counter.getDigit();
-//todo придумать заменитель "error messege"!!!!!
+        int textCounter = listIndex.getIndex();
         if (textCounter >= worker.getBufferList().size() - 1) {
             textCounter = textCounter;
 
-
         } else textCounter++;
 
-        counter.setDigit(textCounter);
+        listIndex.setIndex(textCounter);
 
         return worker.getBufferList().get(textCounter).getIndex() + " - " +
                 worker.getBufferList().get(textCounter).getTheme() + ": " + "\n" +

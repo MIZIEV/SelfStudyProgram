@@ -1,22 +1,23 @@
 package Controller.ButtonsControllers;
 
-import Model.Counter;
+import Model.JSONWorker;
+import Model.ListIndex;
 import Model.DBWorker;
 
 public class StartButtonController implements Changer {
 
     private final DBWorker worker;
-    private final Counter counter;
+    private final ListIndex listIndex;
 
-    public StartButtonController(DBWorker worker, Counter count) {
+    public StartButtonController(DBWorker worker, ListIndex count) {
         this.worker = worker;
-        this.counter = count;
+        this.listIndex = count;
     }
 
     @Override
     public String startController() {
         int startDigit = 0;
-        counter.setDigit(startDigit);
+        listIndex.setIndex(startDigit);
 
         return worker.getBufferList().get(startDigit).getIndex() + " - " +
                 worker.getBufferList().get(startDigit).getTheme() + ": " + "\n" +

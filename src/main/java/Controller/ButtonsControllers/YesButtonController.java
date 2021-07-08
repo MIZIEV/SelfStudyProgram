@@ -1,44 +1,21 @@
 package Controller.ButtonsControllers;
 
 import Model.*;
-import View.ResultMessage;
 
 public class YesButtonController {
+
     private final DBWorker worker;
-    private final Counter counter;
-    private final CountingResult countingResult;
-    private final ResultMessage resultMessage;
+    private final ListIndex listIndex;
 
-    public YesButtonController(DBWorker work, Counter count, ResultMessage result, CountingResult counting) {
+    public YesButtonController(DBWorker work, ListIndex count) {
 
-        this.countingResult = counting;
-        this.counter = count;
+        this.listIndex = count;
         this.worker = work;
-        this.resultMessage = result;
     }
 
     public void setYesNo() {
-        int count = counter.getDigit();
 
-        if (worker.getBufferList().get(count).getYesNo() != true) {
-
-            worker.getBufferList().get(count).setYesNo(true);
-            String result = countingResult.counting();
-
-            if (countingResult.getTotalResult() < 20) {
-                resultMessage.setStyle("-fx-text-inner-color: red;-fx-font-size: 14px;");
-            } else if (countingResult.getTotalResult() < 40) {
-                resultMessage.setStyle("-fx-text-inner-color: OrangeRed;-fx-font-size: 14px;");
-            } else if (countingResult.getTotalResult() < 60) {
-                resultMessage.setStyle("-fx-text-inner-color: orange;-fx-font-size: 14px;");
-            } else if (countingResult.getTotalResult() < 80) {
-                resultMessage.setStyle("-fx-text-inner-color: gold;-fx-font-size: 14px;");
-            } else if (countingResult.getTotalResult() < 90) {
-                resultMessage.setStyle("-fx-text-inner-color: lime;-fx-font-size: 14px;");
-            } else if (countingResult.getTotalResult() > 90) {
-                resultMessage.setStyle("-fx-text-inner-color: DarkGreen;-fx-font-size: 14px;");
-            }
-            resultMessage.setText(result);
-        }
+        int count = listIndex.getIndex();
+        if (worker.getBufferList().get(count).getYesNo() != true) worker.getBufferList().get(count).setYesNo(true);
     }
 }
