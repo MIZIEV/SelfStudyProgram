@@ -3,14 +3,15 @@ package View;
 import Controller.ButtonsControllers.StartLearnButController;
 import Controller.TButtonsControllers.SelectAllButtonController;
 import View.buttonsPatterns.ButtonsPattern;
+import View.buttonsPatterns.HBoxPattern;
 import View.buttonsPatterns.TButtonPattern;
+import View.buttonsPatterns.VBoxPattern;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class FirstWindow {
@@ -30,6 +31,8 @@ public class FirstWindow {
     private final static short MIN_WINDOW_WIDTH = 650;
     private final static short MIN_WINDOW_HEIGHT = 450;
 
+    private final static byte CENTRAL_VBOX_SPACING = 10;
+
     private final static short PREF_WIDTH = 100;
     private final static short PREF_HEIGHT = 40;
     private final static short PREF_WIDTH_CENTRAL_BUTTON = 150;
@@ -37,6 +40,7 @@ public class FirstWindow {
 
     private final static String WIN_TITLE = "Self study program";
     private final static String WIN_ICON = "icon.jpg";
+    private final static String STYLE_FILE = "/Styles/FirstWindowStyle.css";
     private final static String SELECT_ALL_BUTTON_STYLE = "selectAll-toggle-button";
     private final static String TOP_BORDER_PANE_DECOR = "top-border-pane";
     private final static String BOTTOM_BORDER_PANE_DECOR = "bottom-border-pane";
@@ -58,7 +62,7 @@ public class FirstWindow {
 
     private final TButtonPattern selectAllButton = new TButtonPattern(PREF_WIDTH_CENTRAL_BUTTON, PREF_HEIGHT_CENTRAL_BUTTON, "Select all");
     private final ButtonsPattern startLearningButton = new ButtonsPattern(PREF_WIDTH_CENTRAL_BUTTON, PREF_HEIGHT_CENTRAL_BUTTON, "Start learning");
-
+    private final ButtonsPattern loadButton = new ButtonsPattern(PREF_WIDTH_CENTRAL_BUTTON, PREF_HEIGHT_CENTRAL_BUTTON, "Load");
 
     public FirstWindow(GeneralDependence genDependence) {
         this.generalDependence = genDependence;
@@ -67,15 +71,16 @@ public class FirstWindow {
     public void startWindow(SecondWindow secWindow) {
 
         this.secondWindow = secWindow;
-
-        generalDependence.getWorker().distributeLists();
-        String stylesheet = getClass().getResource("/FirstWindowStyle.css").toExternalForm();
+        generalDependence.getDBWorker().distributeLists();
+        String stylesheet = getClass().getResource(STYLE_FILE).toExternalForm();
         selectAllButton.setTooltip(new Tooltip("Select at least one theme"));
         startLearningButton.setTooltip(new Tooltip("Select at least one theme"));
         selectAllButton.getStyleClass().add(SELECT_ALL_BUTTON_STYLE);
+        LoadWindow loadWindow = new LoadWindow(this, generalDependence);
         //________________________________________create main pane and add decorated elements
         BorderPane mainPane = new BorderPane();
         BorderPane insertTopPane = new BorderPane();
+        VBoxPattern centralVBox = new VBoxPattern(Pos.CENTER, CENTRAL_VBOX_SPACING);
         insertTopPane.setPrefSize(PREFERRED_DECORATE_PANEL_WIDTH, PREFERRED_DECORATE_PANEL_HEIGHT);
         Label title = new Label(WIN_TITLE);
         insertTopPane.setCenter(title);
@@ -86,39 +91,30 @@ public class FirstWindow {
         insertBottomPane.setCenter(startLearningButton);
         insertBottomPane.getStyleClass().add(BOTTOM_BORDER_PANE_DECOR);
         //________________________________________set left box with buttons
-        HBox leftHBox = new HBox(INTERVAL);
-        VBox firstLiftVBox = new VBox(INTERVAL);
-        VBox secondLeftVBox = new VBox(INTERVAL);
+        HBoxPattern leftHBox = new HBoxPattern(Pos.CENTER, INTERVAL);
         leftHBox.setPrefSize(PREFERRED_HBOX_WIDTH, PREFERRED_HBOX_HEIGHT);
-        leftHBox.setAlignment(Pos.CENTER);
-        firstLiftVBox.setAlignment(Pos.CENTER);
-        secondLeftVBox.setAlignment(Pos.CENTER);
+        VBoxPattern firstLiftVBox = new VBoxPattern(Pos.CENTER, INTERVAL);
+        VBoxPattern secondLeftVBox = new VBoxPattern(Pos.CENTER, INTERVAL);
 
         firstLiftVBox.getChildren().addAll(coreButton, serializationButton, HTMLButton);
         secondLeftVBox.getChildren().addAll(collectionButton, MTButton, CSSButton);
         leftHBox.getChildren().addAll(firstLiftVBox, secondLeftVBox);
-
         //________________________________________right box with buttons
-        HBox rightHBox = new HBox(INTERVAL);
-        VBox firstRightVBox = new VBox(INTERVAL);
-        firstRightVBox.setAlignment(Pos.CENTER);
-        VBox secondRightVBox = new VBox(INTERVAL);
-        secondRightVBox.setAlignment(Pos.CENTER);
+        HBoxPattern rightHBox = new HBoxPattern(Pos.CENTER, INTERVAL);
         rightHBox.setPrefSize(PREFERRED_HBOX_WIDTH, PREFERRED_HBOX_HEIGHT);
-        rightHBox.setAlignment(Pos.CENTER);
+        VBoxPattern firstRightVBox = new VBoxPattern(Pos.CENTER, INTERVAL);
+        VBoxPattern secondRightVBox = new VBoxPattern(Pos.CENTER, INTERVAL);
 
         firstRightVBox.getChildren().addAll(java8Button, dataBaseButton, JDBCButton);
         secondRightVBox.getChildren().addAll(IOandNIOButton, SQLButton, XMLButton);
         rightHBox.getChildren().addAll(firstRightVBox, secondRightVBox);
-
         //________________________________________create all controllers
         SelectAllButtonController selectAllController = new SelectAllButtonController(this);
-        StartLearnButController startLearnController = new StartLearnButController(generalDependence.getWorker(),
-                startLearningButton, coreButton, collectionButton, java8Button, IOandNIOButton, serializationButton,
+        StartLearnButController startLearnController = new StartLearnButController(generalDependence.getDBWorker(),
+                coreButton, collectionButton, java8Button, IOandNIOButton, serializationButton,
                 MTButton, dataBaseButton, SQLButton, JDBCButton, XMLButton, HTMLButton, CSSButton);
-
         //________________________________________all listeners
-        selectAllButton.setOnAction((event) -> { selectAllController.selectAllOrNothing(); });
+        selectAllButton.setOnAction((event) -> selectAllController.selectAllOrNothing());
 
         startLearningButton.setOnAction((event) -> {
             if (startLearnController.ifNotSelected()) {
@@ -127,12 +123,16 @@ public class FirstWindow {
                 startLearnController.startProg();
             }
         });
+
+        loadButton.setOnAction(event -> loadWindow.launchWin(secondWindow));
         //________________________________________add all view element
+        centralVBox.getChildren().addAll(selectAllButton, loadButton);
+
         mainPane.setTop(insertTopPane);
         mainPane.setBottom(insertBottomPane);
         mainPane.setLeft(leftHBox);
         mainPane.setRight(rightHBox);
-        mainPane.setCenter(selectAllButton);
+        mainPane.setCenter(centralVBox);
 
         Scene firstWindowScene = new Scene(mainPane, PREFERRED_WINDOW_WIDTH, PREFERRED_WINDOW_HEIGHT);
         firstWindowScene.getStylesheets().add(stylesheet);
@@ -143,6 +143,8 @@ public class FirstWindow {
         firstWindow.getIcons().add(new Image(WIN_ICON));
         firstWindow.show();
     }
+
+    public void closeWin() { firstWindow.close(); }
 
     public TButtonPattern getCoreButton() {
         return coreButton;
