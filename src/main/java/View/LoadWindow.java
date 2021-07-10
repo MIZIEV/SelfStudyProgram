@@ -1,33 +1,125 @@
 package View;
 
 import Controller.ButtonsControllers.LoadButtonController;
-import View.buttonsPatterns.ButtonsPattern;
+import View.buttonsPatterns.*;
+import animatefx.animation.FadeIn;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class LoadWindow {
 
-    GeneralDependence generalDependence;
+    private final FirstWindow firstWindow;
+    private final GeneralDependence generalDependence;
+    private final ArrayList<TButtonPattern> buttonsList = new ArrayList<>();
 
-    public LoadWindow(GeneralDependence generalDependence) {
+    private final static String ICON_URL = "/load_window_icon.png";
+    private final static String SC_FILE="/Styles/LoadWindowStyle.css";
+    private final static String TOP_DECOR_PANE_SC = "top-pane";
+    private final static String BOTTOM_DECOR_PANE_SC = "bottom-pane";
+    private final static String LOAD_BUTTON_SC = "button-load";
+    private final static String DELETE_BUTTON_SC = "button-delete";
+
+    private final static short TB_WIDTH = 540;
+    private final static short TB_HEIGHT = 60;
+    private final static short BUTTON_WIDTH = 100;
+    private final static short BUTTON_HEIGHT = 60;
+
+    private final static byte SIDE_PANE_INSERT_WIDTH = 30;
+    private final static byte CENTRAL_VBOX_SPACING = 10;
+    private final static byte BOTTOM_HBOX_SPACING = 100;
+    private final static byte DECOR_PANE_HEIGHT = 100;
+    private final static short WIN_WIDTH = 600;
+    private final static short WIN_HEIGHT = 500;
+
+
+    public LoadWindow(FirstWindow firstWindow, GeneralDependence generalDependence) {
+        this.firstWindow = firstWindow;
         this.generalDependence = generalDependence;
     }
 
     public void launchWin(SecondWindow secondWindow) {
+        String stylesheets = getClass().getResource(SC_FILE).toExternalForm();
+
         Stage window = new Stage();
         BorderPane mainPane = new BorderPane();
+        DecorPanePattern topDecorPane = new DecorPanePattern(TOP_DECOR_PANE_SC, DECOR_PANE_HEIGHT);
+        Pane leftInsertPane = new Pane();
+        Pane rightInsertPane = new Pane();
+        leftInsertPane.setPrefWidth(SIDE_PANE_INSERT_WIDTH);
+        rightInsertPane.setPrefWidth(SIDE_PANE_INSERT_WIDTH);
+        BorderPane bottomDecorPane = new BorderPane();
+        bottomDecorPane.getStyleClass().add(BOTTOM_DECOR_PANE_SC);
+        bottomDecorPane.setPrefHeight(DECOR_PANE_HEIGHT);
+        ScrollPane mainScrollPane = new ScrollPane();
 
-        LoadButtonController controller = new LoadButtonController(generalDependence.getWorker(), generalDependence.getJsonWorker());
-        ButtonsPattern load = new ButtonsPattern(100, 80, "load");
-        load.setOnAction(event -> {
+        VBoxPattern centralVBox = new VBoxPattern(Pos.CENTER, CENTRAL_VBOX_SPACING);
+        HBoxPattern bottomHBox = new HBoxPattern(Pos.CENTER, BOTTOM_HBOX_SPACING);
+        generalDependence.getFileWorker().searchFiles();
+
+        ToggleGroup group = new ToggleGroup();
+        LoadButtonController controller = new LoadButtonController(generalDependence.getDBWorker(),
+                generalDependence.getJsonWorker(), generalDependence.getFileWorker());
+        centralVBox.getChildren().clear();
+
+        for (int i = 0; i < generalDependence.getFileWorker().getFilesName().size(); i++) {
+            buttonsList.add(new TButtonPattern(TB_WIDTH, TB_HEIGHT, generalDependence.getFileWorker().getFilesName().get(i)));
+            group.getToggles().addAll(buttonsList.get(i));
+
+            centralVBox.getChildren().addAll(buttonsList.get(i));
+        }
+
+        ButtonsPattern loadButton = new ButtonsPattern(BUTTON_WIDTH, BUTTON_HEIGHT, LOAD_BUTTON_SC, "Load");
+        ButtonsPattern deleteButton = new ButtonsPattern(BUTTON_WIDTH, BUTTON_HEIGHT, DELETE_BUTTON_SC, "Delete");
+
+        deleteButton.setOnAction(event -> {
             window.close();
-            controller.startController();
+            AdditionalWindow additionalWindow = new AdditionalWindow(generalDependence);
+            additionalWindow.launchWin(this, secondWindow);
+        });
+
+        loadButton.setOnAction(event -> {
+            window.close();
+            firstWindow.closeWin();
+            for (int i = 0; i < generalDependence.getFileWorker().getFilesName().size(); i++) {
+                if (buttonsList.get(i).isSelected()) {
+                    controller.startController(buttonsList.get(i).getText());
+                    break;
+                }
+            }
+            secondWindow.getResultIndicator().setProgress(generalDependence.getJsonWorker().getTotalResult());
             secondWindow.startWin();
         });
-        mainPane.setCenter(load);
-        Scene winScene = new Scene(mainPane, 800, 600);
+
+        bottomHBox.getChildren().addAll(deleteButton, loadButton);
+        mainScrollPane.setContent(centralVBox);
+        bottomDecorPane.setCenter(bottomHBox);
+        mainPane.setLeft(leftInsertPane);
+        mainPane.setRight(rightInsertPane);
+        mainPane.setTop(topDecorPane);
+        mainPane.setBottom(bottomDecorPane);
+        mainPane.setCenter(mainScrollPane);
+
+        Scene winScene = new Scene(mainPane, WIN_WIDTH, WIN_HEIGHT);
+        window.setMaxWidth(WIN_WIDTH);
+        window.setMaxHeight(WIN_HEIGHT);
+        winScene.getStylesheets().add(stylesheets);
+        new FadeIn(mainPane).play();
+        window.getIcons().add(new Image(ICON_URL));
+        window.initModality(Modality.APPLICATION_MODAL);
         window.setScene(winScene);
         window.show();
+    }
+
+    public ArrayList<TButtonPattern> getButtonsList() {
+        return buttonsList;
     }
 }
