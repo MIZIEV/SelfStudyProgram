@@ -1,0 +1,37 @@
+.label{
+-fx-text-fill: #6495ed;
+-fx-font-size: 30px;
+}
+
+.button-ok{
+-fx-border-radius: 20px;
+-fx-background-radius: 20px;
+-fx-background-color: #6495ed;
+-fx-border-color: white;
+-fx-text-fill: white;
+}
+
+.button-ok: hover{
+-fx-background-color: #dc143c;
+}
+
+.button-uups{
+-fx-border-radius: 20px;
+-fx-background-radius: 20px;
+-fx-background-color: #6495ed;
+-fx-border-color: white;
+-fx-text-fill: white;
+}
+
+.button-uups: hover{
+-fx-background-color: #3cb371;
+}
+
+.top-pane{
+-fx-background-color: #6495ed;
+-fx-background-radius: 0 0 30 30;
+}
+.bottom-pane{
+-fx-background-color: #6495ed;
+-fx-background-radius: 30 30 0 0;
+}
