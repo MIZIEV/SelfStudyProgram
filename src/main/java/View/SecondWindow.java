@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ButtonsControllers.*;
+import Controller.ColorController;
 import View.buttonsPatterns.ButtonsPattern;
 import View.buttonsPatterns.HBoxPattern;
 import View.buttonsPatterns.VBoxPattern;
@@ -53,6 +54,7 @@ public class SecondWindow {
     private final static String START_BUTTON_STYLE = "start-button";
     private final static String YES_BUTTON_STYLE = "yes-button";
     private final static String SC_NO_BUTTON = "no-button";
+    private final static String SC_TEXT_AREA = "default-text-area";
 
     public SecondWindow(FirstWindow firstW, GeneralDependence genDependence) {
 
@@ -75,6 +77,7 @@ public class SecondWindow {
         ButtonsPattern saveButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Save");
         ButtonsPattern backButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Back");
         //_________________________________________create all controllers
+        ColorController colorController = new ColorController(generalDependence.getDBWorker(),generalDependence.getListIndex());
         Changer startButtonController = new StartButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
         Changer nextButtonController = new NextButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
         Changer previousButtonController = new PreviousButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
@@ -88,8 +91,11 @@ public class SecondWindow {
         BorderPane topDecorPane = new BorderPane();
         BorderPane bottomDecorPane = new BorderPane();
         TextArea outputText = new TextArea();
+        outputText.getStyleClass().clear();
+        outputText.getStyleClass().add(SC_TEXT_AREA);
         outputText.setWrapText(true);
         outputText.setEditable(false);
+        resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(generalDependence.getCountingResult().getTotalResult()));
         resultIndicator.setPrefSize(PREF_WIDTH_INDICATOR, PREF_HEIGHT_INDICATOR);
         //_________________________________________set decorate top & bottom panel
         topDecorPane.setPrefSize(PREF_DECORATED_PANE_WIDTH, PREF_DECORATED_PANE_HEIGHT);
@@ -134,6 +140,8 @@ public class SecondWindow {
         noButton.setDisable(true);
         //_________________________________________add listeners to all buttons
         startButton.setOnAction((event) -> {
+            outputText.getStyleClass().clear();
+            outputText.getStyleClass().add(colorController.selectTextColor());
             outputText.setText(startButtonController.startController());
             startButton.setDisable(true);
             nextButton.setDisable(false);
@@ -145,17 +153,31 @@ public class SecondWindow {
             noButton.setDisable(false);
         });
         //_________________________________________add all listeners
-        nextButton.setOnAction((event) -> outputText.setText(nextButtonController.startController()));
-        previousButton.setOnAction((event) -> outputText.setText(previousButtonController.startController()));
+        nextButton.setOnAction((event) -> {
+            outputText.getStyleClass().clear();
+            outputText.setText(nextButtonController.startController());
+            outputText.getStyleClass().add(colorController.selectTextColor());
+        });
+        previousButton.setOnAction((event) -> {
+            outputText.getStyleClass().clear();
+            outputText.setText(previousButtonController.startController());
+            outputText.getStyleClass().add(colorController.selectTextColor());
+        });
         questionButton.setOnAction((event) -> outputText.setText(questionButtonController.startController()));
         answerButton.setOnAction((event) -> outputText.setText(answerButtonController.startController()));
         yesButton.setOnAction((event) -> {
+            outputText.getStyleClass().clear();
+            resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(generalDependence.getCountingResult().getTotalResult()));
             resultIndicator.setProgress(generalDependence.getCountingResult().counting());
             yesButtonController.setYes();
+            outputText.getStyleClass().add(colorController.selectTextColor());
         });
         noButton.setOnAction(event -> {
+            outputText.getStyleClass().clear();
+            resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(generalDependence.getCountingResult().getTotalResult()));
             resultIndicator.setProgress(generalDependence.getCountingResult().counting());
             noButtonController.setNo();
+            outputText.getStyleClass().add(colorController.selectTextColor());
         });
         saveButton.setOnAction(event -> saveController.startController());
 
