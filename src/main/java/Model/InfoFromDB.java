@@ -6,9 +6,9 @@ public class InfoFromDB {
     private final String question;
     private final String answer;
     private final String theme;
-    private boolean yesNo;
+    private int yesNo;
 
-    public InfoFromDB(int i, String t, String q, String a, boolean YN) {
+    public InfoFromDB(int i, String t, String q, String a, int YN) {
         this.index = i;
         this.theme = t;
         this.question = q;
@@ -16,11 +16,11 @@ public class InfoFromDB {
         this.yesNo = YN;
     }
 
-    public boolean getYesNo() {
+    public int getYesNo() {
         return yesNo;
     }
 
-    public void setYesNo(boolean yesNo) {
+    public void setYesNo(int yesNo) {
         this.yesNo = yesNo;
     }
 
@@ -42,6 +42,6 @@ public class InfoFromDB {
 
     @Override
     public String toString() {
-        return theme + " " + index + " - " + question+"\n";
+        return theme + " " + index + " - " + question+" YN - "+yesNo+"\n";
     }
 }
