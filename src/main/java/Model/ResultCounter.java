@@ -24,8 +24,7 @@ public class ResultCounter {
     }
 
     public double counting() {
-
-        if (!worker.getBufferList().get(listIndex.getIndex()).getYesNo()) {
+        if (worker.getBufferList().get(listIndex.getIndex()).getYesNo() == 0) {
             double addend = 100.0 / worker.getBufferList().size();
             totalResult += addend / 100.0;
         }
@@ -37,7 +36,7 @@ public class ResultCounter {
         double addend = 100.0 / list.size();
 
         for (InfoFromDB element : list) {
-            if (element.getYesNo()) {
+            if (element.getYesNo() == 1 ^ element.getYesNo() == -1) {
                 totalResult += addend / 100.0;
             }
         }
