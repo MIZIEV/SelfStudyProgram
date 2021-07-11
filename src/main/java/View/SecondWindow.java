@@ -4,6 +4,7 @@ import Controller.ButtonsControllers.*;
 import Controller.ColorController;
 import View.buttonsPatterns.ButtonsPattern;
 import View.buttonsPatterns.HBoxPattern;
+import View.buttonsPatterns.TextAreaPattern;
 import View.buttonsPatterns.VBoxPattern;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,7 +37,6 @@ public class SecondWindow {
     private final static short PREF_DECORATED_PANE_HEIGHT = 70;
 
     private final static short PREF_LEFT_VBOX_WIDTH = 200;
-    private final static short PREF_LEFT_VBOX_HEIGHT = 630;
     private final static short PREF_SIDE_BLOCK_HEIGHT = 300;
 
     private final static short PREF_HEIGHT = 50;
@@ -54,7 +54,6 @@ public class SecondWindow {
     private final static String START_BUTTON_STYLE = "start-button";
     private final static String YES_BUTTON_STYLE = "yes-button";
     private final static String SC_NO_BUTTON = "no-button";
-    private final static String SC_TEXT_AREA = "default-text-area";
 
     public SecondWindow(FirstWindow firstW, GeneralDependence genDependence) {
 
@@ -78,11 +77,11 @@ public class SecondWindow {
         ButtonsPattern backButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Back");
         //_________________________________________create all controllers
         ColorController colorController = new ColorController(generalDependence.getDBWorker(),generalDependence.getListIndex());
-        Changer startButtonController = new StartButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        Changer nextButtonController = new NextButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        Changer previousButtonController = new PreviousButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        Changer questionButtonController = new QuestionButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        Changer answerButtonController = new AnswerButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
+        StartButtonController startButtonController = new StartButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
+        NextButtonController nextButtonController = new NextButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
+        PreviousButtonController previousButtonController = new PreviousButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
+        QuestionButtonController questionButtonController = new QuestionButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
+        AnswerButtonController answerButtonController = new AnswerButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
         YesButtonController yesButtonController = new YesButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
         NoButtonController noButtonController = new NoButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
         SaveButtonController saveController = new SaveButtonController(generalDependence.getDBWorker(), generalDependence.getJsonWorker());
@@ -90,11 +89,7 @@ public class SecondWindow {
         BorderPane mainPane = new BorderPane();
         BorderPane topDecorPane = new BorderPane();
         BorderPane bottomDecorPane = new BorderPane();
-        TextArea outputText = new TextArea();
-        outputText.getStyleClass().clear();
-        outputText.getStyleClass().add(SC_TEXT_AREA);
-        outputText.setWrapText(true);
-        outputText.setEditable(false);
+        TextAreaPattern outputText = new TextAreaPattern(colorController);
         resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(generalDependence.getCountingResult().getTotalResult()));
         resultIndicator.setPrefSize(PREF_WIDTH_INDICATOR, PREF_HEIGHT_INDICATOR);
         //_________________________________________set decorate top & bottom panel
@@ -104,14 +99,14 @@ public class SecondWindow {
         bottomDecorPane.getStyleClass().add(BOTTOM_DECOR_PANE_STYLE);
         //_________________________________________set left part without buttons
         VBox leftVBox = new VBox(INTERVAL);
+        leftVBox.setPrefWidth(PREF_LEFT_VBOX_WIDTH);
+        leftVBox.setPadding(margin);
         VBoxPattern topLeftBlock = new VBoxPattern(Pos.TOP_CENTER, INTERVAL);
         topLeftBlock.setPrefHeight(PREF_SIDE_BLOCK_HEIGHT);
         VBoxPattern centralLeftBlock = new VBoxPattern(Pos.CENTER, INTERVAL);
         centralLeftBlock.setPrefHeight(PREF_SIDE_BLOCK_HEIGHT);
         VBoxPattern bottomLeftBlock = new VBoxPattern(Pos.BOTTOM_CENTER, INTERVAL);
         bottomLeftBlock.setPrefHeight(PREF_SIDE_BLOCK_HEIGHT);
-        leftVBox.setPrefSize(PREF_LEFT_VBOX_WIDTH, PREF_LEFT_VBOX_HEIGHT);
-        leftVBox.setPadding(margin);
         HBoxPattern centerHBox = new HBoxPattern(Pos.CENTER, CENTER_HBOX_INTERVAL);
         //_________________________________________set buttons in HBox & set this box to VBox
         centerHBox.getChildren().addAll(previousButton, nextButton);
@@ -140,9 +135,7 @@ public class SecondWindow {
         noButton.setDisable(true);
         //_________________________________________add listeners to all buttons
         startButton.setOnAction((event) -> {
-            outputText.getStyleClass().clear();
-            outputText.getStyleClass().add(colorController.selectTextColor());
-            outputText.setText(startButtonController.startController());
+            outputText.showText(startButtonController.startController());
             startButton.setDisable(true);
             nextButton.setDisable(false);
             previousButton.setDisable(false);
@@ -153,18 +146,12 @@ public class SecondWindow {
             noButton.setDisable(false);
         });
         //_________________________________________add all listeners
-        nextButton.setOnAction((event) -> {
-            outputText.getStyleClass().clear();
-            outputText.setText(nextButtonController.startController());
-            outputText.getStyleClass().add(colorController.selectTextColor());
-        });
-        previousButton.setOnAction((event) -> {
-            outputText.getStyleClass().clear();
-            outputText.setText(previousButtonController.startController());
-            outputText.getStyleClass().add(colorController.selectTextColor());
-        });
-        questionButton.setOnAction((event) -> outputText.setText(questionButtonController.startController()));
-        answerButton.setOnAction((event) -> outputText.setText(answerButtonController.startController()));
+        nextButton.setOnAction((event) ->  outputText.showText(nextButtonController.startController()));
+        previousButton.setOnAction((event) ->  outputText.showText(previousButtonController.startController()));
+        questionButton.setOnAction((event) -> outputText.showText(questionButtonController.startController()));
+        answerButton.setOnAction((event) -> outputText.showText(answerButtonController.startController()));
+        saveButton.setOnAction(event -> saveController.startController());
+
         yesButton.setOnAction((event) -> {
             outputText.getStyleClass().clear();
             resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(generalDependence.getCountingResult().getTotalResult()));
@@ -179,8 +166,6 @@ public class SecondWindow {
             noButtonController.setNo();
             outputText.getStyleClass().add(colorController.selectTextColor());
         });
-        saveButton.setOnAction(event -> saveController.startController());
-
         backButton.setOnAction(event -> {
             secondWindow.close();
             generalDependence.getDBWorker().getBufferList().clear();
@@ -205,7 +190,5 @@ public class SecondWindow {
         secondWindow.show();
     }
 
-    public ProgressIndicator getResultIndicator() {
-        return resultIndicator;
-    }
+    public ProgressIndicator getResultIndicator() { return resultIndicator; }
 }

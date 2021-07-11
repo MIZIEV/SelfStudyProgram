@@ -1,0 +1,24 @@
+.default-text-area{
+-fx-border-color:#6495ed;
+-fx-text-fill: black;
+}
+.default-text-area .content{
+-fx-background-color:white;
+-fx-spacing: 10px;
+}
+
+.green-text-area{
+-fx-border-color:#6495ed;
+-fx-text-fill: green;
+}
+.green-text-area .content{
+-fx-background-color: white;
+}
+
+.red-text-area{
+-fx-border-color:#6495ed;
+-fx-text-fill: red;
+}
+.red-text-area .content{
+-fx-background-color:white;
+}
