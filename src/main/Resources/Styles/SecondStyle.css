@@ -38,9 +38,19 @@
 -fx-border-radius: 20px;
 -fx-background-radius: 20px;
 -fx-border-color: #3cb371;
--fx-font-size: 40px;
 }
 .yes-button: hover{
 -fx-base: #3cb371;
+-fx-text-fill: white;
+}
+
+.no-button{
+-fx-base: white;
+-fx-border-radius: 20px;
+-fx-background-radius: 20px;
+-fx-border-color: #dc143c;
+}
+.no-button: hover{
+-fx-base: #dc143c;
 -fx-text-fill: white;
 }
