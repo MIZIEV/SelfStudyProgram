@@ -13,9 +13,10 @@ public class YesButtonController {
         this.worker = work;
     }
 
-    public void setYesNo() {
-
+    public void setYes() {
+        System.out.println(worker.getBufferList());
         int count = listIndex.getIndex();
-        if (worker.getBufferList().get(count).getYesNo() != true) worker.getBufferList().get(count).setYesNo(true);
+        if (worker.getBufferList().get(count).getYesNo() == 0)
+            worker.getBufferList().get(count).setYesNo(1);
     }
 }

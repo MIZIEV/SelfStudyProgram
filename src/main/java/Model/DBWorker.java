@@ -49,7 +49,7 @@ public class DBWorker {
                         resultSet.getString(THEME_COLUMN),
                         resultSet.getString(QUESTION_COLUMN),
                         resultSet.getString(ANSWER_COLUMN),
-                        false
+                        0
                 );
 
                 allQAList.add(infoFromDB);

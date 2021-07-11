@@ -81,6 +81,7 @@ public class SecondWindow {
         Changer questionButtonController = new QuestionButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
         Changer answerButtonController = new AnswerButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
         YesButtonController yesButtonController = new YesButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
+        NoButtonController noButtonController = new NoButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
         SaveButtonController saveController = new SaveButtonController(generalDependence.getDBWorker(), generalDependence.getJsonWorker());
         //_________________________________________create main pane and all view elements
         BorderPane mainPane = new BorderPane();
@@ -150,7 +151,11 @@ public class SecondWindow {
         answerButton.setOnAction((event) -> outputText.setText(answerButtonController.startController()));
         yesButton.setOnAction((event) -> {
             resultIndicator.setProgress(generalDependence.getCountingResult().counting());
-            yesButtonController.setYesNo();
+            yesButtonController.setYes();
+        });
+        noButton.setOnAction(event -> {
+            resultIndicator.setProgress(generalDependence.getCountingResult().counting());
+            noButtonController.setNo();
         });
         saveButton.setOnAction(event -> saveController.startController());
 
