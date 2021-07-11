@@ -1,6 +1,6 @@
 package Controller.TButtonsControllers;
 
-import View.FirstWindow.FirstWindow;
+import View.FirstWindow;
 
 public class SelectAllButtonController {
 
