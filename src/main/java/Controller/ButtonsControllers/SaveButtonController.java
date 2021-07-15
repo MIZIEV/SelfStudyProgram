@@ -1,19 +1,17 @@
 package Controller.ButtonsControllers;
 
-import Model.DBWorker;
-import Model.JSONWorker;
+import View.ProgramModel;
 
 public class SaveButtonController {
 
-    private final DBWorker worker;
-    private final JSONWorker jsonWorker;
+    private final ProgramModel model;
 
-    public SaveButtonController(DBWorker worker, JSONWorker jsonWorker) {
-        this.worker = worker;
-        this.jsonWorker = jsonWorker;
+    public SaveButtonController(ProgramModel model) {
+        this.model = model;
     }
 
-    public void startController() {
-        jsonWorker.convertToJSON(worker.getBufferList());
+    public void saveInfoToFile() {
+        model.getFileWorker().putInfoToFile(model.getDBWorker().getBufferList(), model.getCountingResult(),
+                model.getJsonWorker().convertToJSON(model.getDBWorker().getBufferList()));
     }
 }
