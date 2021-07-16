@@ -1,28 +1,24 @@
 package Controller.ButtonsControllers;
 
-import Model.ListIndex;
-import Model.DBWorker;
+import View.ProgramModel;
 
-public class PreviousButtonController implements Changer {
-    private final DBWorker worker;
-    private final ListIndex listIndex;
+public class PreviousButtonController {
 
-    public PreviousButtonController(DBWorker work, ListIndex count) {
-        this.worker = work;
-        this.listIndex = count;
+    private final ProgramModel model;
+
+    public PreviousButtonController(ProgramModel model) {
+        this.model = model;
     }
 
-    @Override
-    public String startController() {
-        int textCounter = listIndex.getIndex();
-//todo придумать заменитель "error messege"!!!!!
+    public String getPreviousQuestion() {
+        int textCounter = model.getListIndex().getIndex();
         if (textCounter <= 0) {
             textCounter = 0;
         } else textCounter--;
 
-        listIndex.setIndex(textCounter);
-        return worker.getBufferList().get(textCounter).getIndex() + " - " +
-                worker.getBufferList().get(textCounter).getTheme() + ": " + "\n" +
-                worker.getBufferList().get(textCounter).getQuestion();
+        model.getListIndex().setIndex(textCounter);
+        return model.getDBWorker().getBufferList().get(textCounter).getIndex() + " - " +
+                model.getDBWorker().getBufferList().get(textCounter).getTheme() + ": " + "\n" +
+                model.getDBWorker().getBufferList().get(textCounter).getQuestion();
     }
 }

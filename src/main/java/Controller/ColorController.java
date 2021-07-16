@@ -1,22 +1,19 @@
 package Controller;
 
-import Model.DBWorker;
-import Model.ListIndex;
+import View.ProgramModel;
 
 public class ColorController {
-    private final DBWorker dbWorker;
-    private final ListIndex listIndex;
+    private final ProgramModel model;
 
-    public ColorController(DBWorker worker, ListIndex index) {
-        this.dbWorker = worker;
-        this.listIndex = index;
+    public ColorController(ProgramModel model) {
+        this.model=model;
     }
 
     public String selectTextColor() {
-        int index = listIndex.getIndex();
+        int index = model.getListIndex().getIndex();
 
-        if (dbWorker.getBufferList().get(index).getYesNo() == 1) return "green-text-area";
-        else if (dbWorker.getBufferList().get(index).getYesNo() == -1) return "red-text-area";
+        if (model.getDBWorker().getBufferList().get(index).getYesNo() == 1) return "green-text-area";
+        else if (model.getDBWorker().getBufferList().get(index).getYesNo() == -1) return "red-text-area";
         else return "default-text-area";
     }
 

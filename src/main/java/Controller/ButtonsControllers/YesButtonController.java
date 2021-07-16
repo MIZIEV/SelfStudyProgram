@@ -1,22 +1,19 @@
 package Controller.ButtonsControllers;
 
-import Model.*;
+import View.ProgramModel;
 
 public class YesButtonController {
 
-    private final DBWorker worker;
-    private final ListIndex listIndex;
+    private final ProgramModel model;
 
-    public YesButtonController(DBWorker work, ListIndex count) {
+    public YesButtonController(ProgramModel model) {
 
-        this.listIndex = count;
-        this.worker = work;
+        this.model=model;
     }
 
     public void setYes() {
-        System.out.println(worker.getBufferList());
-        int count = listIndex.getIndex();
-        if (worker.getBufferList().get(count).getYesNo() == 0)
-            worker.getBufferList().get(count).setYesNo(1);
+        int count = model.getListIndex().getIndex();
+        if (model.getDBWorker().getBufferList().get(count).getYesNo() == 0)
+            model.getDBWorker().getBufferList().get(count).setYesNo(1);
     }
 }

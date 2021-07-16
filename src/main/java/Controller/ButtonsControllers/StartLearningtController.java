@@ -1,14 +1,12 @@
 package Controller.ButtonsControllers;
 
 import Model.DBWorker;
-import View.buttonsPatterns.ButtonsPattern;
 import View.buttonsPatterns.TButtonPattern;
 
-public class StartLearnButController {
+public class StartLearningtController {
 
     private final DBWorker worker;
 
-    private final ButtonsPattern startLearningButton;
     private final TButtonPattern coreButton;
     private final TButtonPattern collectionButton;
     private final TButtonPattern java8Button;
@@ -22,13 +20,12 @@ public class StartLearnButController {
     private final TButtonPattern HTMLButton;
     private final TButtonPattern CSSButton;
 
-    public StartLearnButController(DBWorker worker, ButtonsPattern startButton, TButtonPattern coreBut,
-                                   TButtonPattern colBut, TButtonPattern java8But, TButtonPattern ioButton,
-                                   TButtonPattern serButton, TButtonPattern mtButton, TButtonPattern DBButton,
-                                   TButtonPattern sqlButton, TButtonPattern jdbcButton, TButtonPattern xmlButton,
-                                   TButtonPattern htmlButton, TButtonPattern cssButton) {
+    public StartLearningtController(DBWorker worker, TButtonPattern coreBut,
+                                    TButtonPattern colBut, TButtonPattern java8But, TButtonPattern ioButton,
+                                    TButtonPattern serButton, TButtonPattern mtButton, TButtonPattern DBButton,
+                                    TButtonPattern sqlButton, TButtonPattern jdbcButton, TButtonPattern xmlButton,
+                                    TButtonPattern htmlButton, TButtonPattern cssButton) {
 
-        this.startLearningButton = startButton;
         this.coreButton = coreBut;
         this.collectionButton = colBut;
         this.java8Button = java8But;
@@ -72,7 +69,7 @@ public class StartLearnButController {
     }
 
     public boolean ifNotSelected() {
-        boolean answer=false;
+        boolean answer = false;
         if (coreButton.isSelected() | collectionButton.isSelected() | java8Button.isSelected() |
                 IOandNIOButton.isSelected() | serializationButton.isSelected() | MultithreadingButton.isSelected() |
                 dataBaseButton.isSelected() | SQLButton.isSelected() | JDBCButton.isSelected() | XMLButton.isSelected() |

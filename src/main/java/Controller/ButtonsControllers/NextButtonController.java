@@ -1,29 +1,27 @@
 package Controller.ButtonsControllers;
 
-import Model.ListIndex;
-import Model.DBWorker;
 
-public class NextButtonController implements Changer {
-    private final DBWorker worker;
-    private final ListIndex listIndex;
+import View.ProgramModel;
 
-    public NextButtonController(DBWorker work, ListIndex count) {
-        this.worker = work;
-        this.listIndex = count;
+public class NextButtonController {
+
+    private final ProgramModel model;
+
+    public NextButtonController(ProgramModel model) {
+        this.model = model;
     }
 
-    @Override
-    public String startController() {
-        int textCounter = listIndex.getIndex();
-        if (textCounter >= worker.getBufferList().size() - 1) {
+    public String getNextQuestion() {
+        int textCounter = model.getListIndex().getIndex();
+        if (textCounter >= model.getDBWorker().getBufferList().size() - 1) {
             textCounter = textCounter;
 
         } else textCounter++;
 
-        listIndex.setIndex(textCounter);
+        model.getListIndex().setIndex(textCounter);
 
-        return worker.getBufferList().get(textCounter).getIndex() + " - " +
-                worker.getBufferList().get(textCounter).getTheme() + ": " + "\n" +
-                worker.getBufferList().get(textCounter).getQuestion();
+        return model.getDBWorker().getBufferList().get(textCounter).getIndex() + " - " +
+                model.getDBWorker().getBufferList().get(textCounter).getTheme() + ": " + "\n" +
+                model.getDBWorker().getBufferList().get(textCounter).getQuestion();
     }
 }

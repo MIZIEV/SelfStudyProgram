@@ -1,21 +1,18 @@
 package Controller.ButtonsControllers;
 
-import Model.DBWorker;
-import Model.ListIndex;
+import View.ProgramModel;
 
 public class NoButtonController {
 
-    private final DBWorker worker;
-    private final ListIndex listIndex;
+    private final ProgramModel model;
 
-    public NoButtonController(DBWorker work, ListIndex count) {
-        this.listIndex = count;
-        this.worker = work;
+    public NoButtonController(ProgramModel model) {
+        this.model=model;
     }
 
     public void setNo() {
-        int index = listIndex.getIndex();
-        if (worker.getBufferList().get(index).getYesNo() == 0)
-            worker.getBufferList().get(index).setYesNo(-1);
+        int index = model.getListIndex().getIndex();
+        if (model.getDBWorker().getBufferList().get(index).getYesNo() == 0)
+            model.getDBWorker().getBufferList().get(index).setYesNo(-1);
     }
 }

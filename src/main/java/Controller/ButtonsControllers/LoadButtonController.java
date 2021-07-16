@@ -1,21 +1,17 @@
 package Controller.ButtonsControllers;
 
-import Model.DBWorker;
-import Model.FileWorker;
-import Model.JSONWorker;
+import View.ProgramModel;
 
 public class LoadButtonController {
-    private final DBWorker worker;
-    private final JSONWorker jsonWorker;
-    private final FileWorker fileWorker;
 
-    public LoadButtonController(DBWorker worker, JSONWorker jsonWorker, FileWorker fileWorker) {
-        this.worker = worker;
-        this.jsonWorker = jsonWorker;
-        this.fileWorker = fileWorker;
+    private final ProgramModel model;
+
+    public LoadButtonController(ProgramModel model) {
+        this.model=model;
     }
 
-    public void startController(String fileName) {
-        worker.getBufferList().addAll(jsonWorker.convertFromJSON(fileWorker.getFile(fileName)));
+    public void loadSavedFile(String fileName) {
+        model.getDBWorker().getBufferList().
+                addAll(model.getJsonWorker().convertFromJSON(model.getFileWorker().getFile(fileName)));
     }
 }

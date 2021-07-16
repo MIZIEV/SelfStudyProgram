@@ -1,39 +1,36 @@
 package Controller.ButtonsControllers;
 
-import Model.*;
+import View.ProgramModel;
 
-public class QuestionButtonController implements Changer {
+public class QuestionButtonController  {
 
-    private final DBWorker worker;
-    private final ListIndex listIndex;
+private final ProgramModel model;
 
-    public QuestionButtonController(DBWorker work, ListIndex count) {
-        this.worker = work;
-        this.listIndex = count;
+    public QuestionButtonController(ProgramModel model) {
+        this.model = model;
     }
 
-    @Override
-    public String startController() {
-        int randomDigit = (int) (Math.random() * worker.getBufferList().size());
+    public String getRandomQuestion() {
+        int randomDigit = (int) (Math.random() * model.getDBWorker().getBufferList().size());
 
         String question = "!!! empty !!!";
 
-        if (worker.getBufferList().get(randomDigit).getYesNo() == 0) {
+        if (model.getDBWorker().getBufferList().get(randomDigit).getYesNo() == 0) {
 
-            question = worker.getBufferList().get(randomDigit).getIndex() + " - " +
-                    worker.getBufferList().get(randomDigit).getTheme() + ": " + "\n" +
-                    worker.getBufferList().get(randomDigit).getQuestion();
+            question = model.getDBWorker().getBufferList().get(randomDigit).getIndex() + " - " +
+                    model.getDBWorker().getBufferList().get(randomDigit).getTheme() + ": " + "\n" +
+                    model.getDBWorker().getBufferList().get(randomDigit).getQuestion();
         } else {
-            while (worker.getBufferList().get(randomDigit).getYesNo() == 1 ^
-                    worker.getBufferList().get(randomDigit).getYesNo() == -1) {
+            while (model.getDBWorker().getBufferList().get(randomDigit).getYesNo() == 1 ^
+                    model.getDBWorker().getBufferList().get(randomDigit).getYesNo() == -1) {
 
-                randomDigit = (int) (Math.random() * worker.getBufferList().size());
-                question = worker.getBufferList().get(randomDigit).getIndex() + " - " +
-                        worker.getBufferList().get(randomDigit).getTheme() + ": " + "\n" +
-                        worker.getBufferList().get(randomDigit).getQuestion();
+                randomDigit = (int) (Math.random() * model.getDBWorker().getBufferList().size());
+                question = model.getDBWorker().getBufferList().get(randomDigit).getIndex() + " - " +
+                        model.getDBWorker().getBufferList().get(randomDigit).getTheme() + ": " + "\n" +
+                        model.getDBWorker().getBufferList().get(randomDigit).getQuestion();
             }
         }
-        listIndex.setIndex(randomDigit);
+        model.getListIndex().setIndex(randomDigit);
         return question;
     }
 }

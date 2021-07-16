@@ -1,21 +1,20 @@
 package Controller.ButtonsControllers;
 
-import Model.*;
+import View.ProgramModel;
 
-public class AnswerButtonController implements Changer{
-    private final DBWorker worker;
-    private final ListIndex listIndex;
+public class AnswerButtonController {
 
-    public AnswerButtonController(DBWorker work, ListIndex count) {
-        this.worker = work;
-        this.listIndex = count;
+    private final ProgramModel model;
+
+    public AnswerButtonController(ProgramModel model) {
+        this.model = model;
     }
-@Override
-    public String startController() {
-        int digit = listIndex.getIndex();
 
-        return worker.getBufferList().get(digit).getIndex()+" - "+
-                worker.getBufferList().get(digit).getTheme()+": "+"\n"+
-                worker.getBufferList().get(digit).getAnswer();
+    public String getAnswer() {
+        int digit = model.getListIndex().getIndex();
+
+        return model.getDBWorker().getBufferList().get(digit).getIndex() + " - " +
+                model.getDBWorker().getBufferList().get(digit).getTheme() + ": " + "\n" +
+                model.getDBWorker().getBufferList().get(digit).getAnswer();
     }
 }

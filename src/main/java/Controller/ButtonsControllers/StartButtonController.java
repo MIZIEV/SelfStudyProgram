@@ -1,26 +1,21 @@
 package Controller.ButtonsControllers;
 
-import Model.JSONWorker;
-import Model.ListIndex;
-import Model.DBWorker;
+import View.ProgramModel;
 
-public class StartButtonController implements Changer {
+public class StartButtonController {
 
-    private final DBWorker worker;
-    private final ListIndex listIndex;
+    private final ProgramModel model;
 
-    public StartButtonController(DBWorker worker, ListIndex count) {
-        this.worker = worker;
-        this.listIndex = count;
+    public StartButtonController(ProgramModel model) {
+        this.model=model;
     }
 
-    @Override
-    public String startController() {
+    public String startLearning() {
         int startDigit = 0;
-        listIndex.setIndex(startDigit);
+        model.getListIndex().setIndex(startDigit);
 
-        return worker.getBufferList().get(startDigit).getIndex() + " - " +
-                worker.getBufferList().get(startDigit).getTheme() + ": " + "\n" +
-                worker.getBufferList().get(startDigit).getQuestion();
+        return model.getDBWorker().getBufferList().get(startDigit).getIndex() + " - " +
+                model.getDBWorker().getBufferList().get(startDigit).getTheme() + ": " + "\n" +
+                model.getDBWorker().getBufferList().get(startDigit).getQuestion();
     }
 }
