@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class LoadWindow {
 
     private final FirstWindow firstWindow;
-    private final GeneralDependence generalDependence;
+    private final ProgramModel model;
     private final ArrayList<TButtonPattern> buttonsList = new ArrayList<>();
 
     private final static String ICON_URL = "/load_window_icon.png";
@@ -41,9 +41,9 @@ public class LoadWindow {
     private final static short WIN_HEIGHT = 500;
 
 
-    public LoadWindow(FirstWindow firstWindow, GeneralDependence generalDependence) {
+    public LoadWindow(FirstWindow firstWindow, ProgramModel model) {
         this.firstWindow = firstWindow;
-        this.generalDependence = generalDependence;
+        this.model = model;
     }
 
     public void launchWin(SecondWindow secondWindow) {
@@ -63,15 +63,14 @@ public class LoadWindow {
 
         VBoxPattern centralVBox = new VBoxPattern(Pos.CENTER, CENTRAL_VBOX_SPACING);
         HBoxPattern bottomHBox = new HBoxPattern(Pos.CENTER, BOTTOM_HBOX_SPACING);
-        generalDependence.getFileWorker().searchFiles();
+        model.getFileWorker().searchFiles();
 
         ToggleGroup group = new ToggleGroup();
-        LoadButtonController controller = new LoadButtonController(generalDependence.getDBWorker(),
-                generalDependence.getJsonWorker(), generalDependence.getFileWorker());
+        LoadButtonController controller = new LoadButtonController(model);
         centralVBox.getChildren().clear();
 
-        for (int i = 0; i < generalDependence.getFileWorker().getFilesName().size(); i++) {
-            buttonsList.add(new TButtonPattern(TB_WIDTH, TB_HEIGHT, generalDependence.getFileWorker().getFilesName().get(i)));
+        for (int i = 0; i < model.getFileWorker().getFilesName().size(); i++) {
+            buttonsList.add(new TButtonPattern(TB_WIDTH, TB_HEIGHT, model.getFileWorker().getFilesName().get(i)));
             group.getToggles().addAll(buttonsList.get(i));
 
             centralVBox.getChildren().addAll(buttonsList.get(i));
@@ -82,21 +81,21 @@ public class LoadWindow {
 
         deleteButton.setOnAction(event -> {
             window.close();
-            AdditionalWindow additionalWindow = new AdditionalWindow(generalDependence);
+            AdditionalWindow additionalWindow = new AdditionalWindow(model);
             additionalWindow.launchWin(this, secondWindow);
         });
 
         loadButton.setOnAction(event -> {
             window.close();
             firstWindow.closeWin();
-            for (int i = 0; i < generalDependence.getFileWorker().getFilesName().size(); i++) {
+            for (int i = 0; i < model.getFileWorker().getFilesName().size(); i++) {
                 if (buttonsList.get(i).isSelected()) {
-                    controller.startController(buttonsList.get(i).getText());
+                    controller.loadSavedFile(buttonsList.get(i).getText());
                     break;
                 }
             }
-            secondWindow.getResultIndicator().setProgress(generalDependence.getJsonWorker().getTotalResult());
-            secondWindow.startWin();
+            secondWindow.getResultIndicator().setProgress(model.getJsonWorker().getTotalResult());
+            secondWindow.initWin();
         });
 
         bottomHBox.getChildren().addAll(deleteButton, loadButton);

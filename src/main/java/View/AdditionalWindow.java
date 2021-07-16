@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class AdditionalWindow {
 
-    private final GeneralDependence dependence;
+    private final ProgramModel model;
 
     private final static String ICON_URL = "/question_icon.png";
     private final static String WIN_STYLE_FILE = "/Styles/AdditionalWinStyle.css";
@@ -31,8 +31,8 @@ public class AdditionalWindow {
     private final static short WIN_WIDTH = 600;
     private final static short WIN_HEIGHT = 500;
 
-    public AdditionalWindow(GeneralDependence generalDependence) {
-        this.dependence = generalDependence;
+    public AdditionalWindow(ProgramModel programModel) {
+        this.model = programModel;
     }
 
     public void launchWin(LoadWindow loadWindow, SecondWindow secondWindow) {
@@ -52,7 +52,7 @@ public class AdditionalWindow {
         yesButton.setOnAction(event -> {
             for (int i = 0; i < loadWindow.getButtonsList().size(); i++) {
                 if (loadWindow.getButtonsList().get(i).isSelected()) {
-                    dependence.getFileWorker().removeFile(loadWindow.getButtonsList().get(i).getText());
+                    model.getFileWorker().removeFile(loadWindow.getButtonsList().get(i).getText());
                 }
             }
             window.close();
