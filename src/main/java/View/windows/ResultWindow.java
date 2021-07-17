@@ -1,6 +1,7 @@
-package View;
+package View.windows;
 
-import View.buttonsPatterns.ButtonsPattern;
+import View.patterns.containers.DecorPanePattern;
+import View.patterns.controls.ButtonsPattern;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,7 +22,7 @@ public class ResultWindow {
     private final static String SC_BOTTOM_DECOR_PANE = "bottom-pane";
 
     private final static short WINDOW_WIDTH = 500;
-    private final static short WINDOW_HEIGHT = 300;
+    private final static short WINDOW_HEIGHT = 350;
     private final static short BUTTON_HEIGHT = 50;
     private final static short BUTTON_WIDTH = 150;
     private final static byte DECOR_PANE_HEIGHT = 50;
@@ -32,15 +33,11 @@ public class ResultWindow {
         Insets margin = new Insets(MARGIN);
         Stage window = new Stage();
         BorderPane mainPane = new BorderPane();
-        Pane topDecorPane = new Pane();
-        Pane bottomDecorPane = new Pane();
+        DecorPanePattern topDecorPane = new DecorPanePattern(SC_TOP_DECOR_PANE,DECOR_PANE_HEIGHT);
+        DecorPanePattern bottomDecorPane = new DecorPanePattern(SC_BOTTOM_DECOR_PANE,DECOR_PANE_HEIGHT);
         VBox mainVbox = new VBox();
 
-        BorderPane.setMargin(mainVbox,margin);
-        topDecorPane.setPrefHeight(DECOR_PANE_HEIGHT);
-        topDecorPane.getStyleClass().add(SC_TOP_DECOR_PANE);
-        bottomDecorPane.setPrefHeight(DECOR_PANE_HEIGHT);
-        bottomDecorPane.getStyleClass().add(SC_BOTTOM_DECOR_PANE);
+        BorderPane.setMargin(mainVbox, margin);
 
         mainVbox.setAlignment(Pos.CENTER);
         mainPane.setTop(topDecorPane);
@@ -48,10 +45,13 @@ public class ResultWindow {
         mainPane.setCenter(mainVbox);
         Label title = new Label("Your result:");
         Label yourResult = new Label();
-        yourResult.setText("" + (int) result * 100);
+        yourResult.setText((int) result + "%");
         ButtonsPattern okButton = new ButtonsPattern(BUTTON_WIDTH, BUTTON_HEIGHT, "ok");
         mainVbox.getChildren().addAll(title, yourResult, okButton);
 
+        okButton.setOnAction(event -> {
+            window.close();
+        });
         Scene winScene = new Scene(mainPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         window.setMaxWidth(WINDOW_WIDTH);
         window.setMaxHeight(WINDOW_HEIGHT);

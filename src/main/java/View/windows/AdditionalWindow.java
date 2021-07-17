@@ -1,6 +1,11 @@
-package View;
+package View.windows;
 
-import View.buttonsPatterns.*;
+import Model.MainModel;
+import View.patterns.containers.DecorPanePattern;
+import View.patterns.containers.HBoxPattern;
+import View.patterns.containers.VBoxPattern;
+import View.patterns.controls.ButtonsPattern;
+import View.patterns.controls.LabelPattern;
 import animatefx.animation.FadeIn;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,7 +16,7 @@ import javafx.stage.Stage;
 
 public class AdditionalWindow {
 
-    private final ProgramModel model;
+    private final MainModel model;
 
     private final static String ICON_URL = "/question_icon.png";
     private final static String WIN_STYLE_FILE = "/Styles/AdditionalWinStyle.css";
@@ -32,8 +37,8 @@ public class AdditionalWindow {
     private final static short WIN_HEIGHT = 500;
     private final static short MIN_WIN_SIZE = 300;
 
-    public AdditionalWindow(ProgramModel programModel) {
-        this.model = programModel;
+    public AdditionalWindow(MainModel mainModel) {
+        this.model = mainModel;
     }
 
     public void launchWin(LoadWindow loadWindow, SecondWindow secondWindow) {

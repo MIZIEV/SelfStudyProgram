@@ -1,11 +1,12 @@
-package View;
+package View.windows;
 
-import Controller.ButtonsControllers.StartLearnButController;
+import Controller.ButtonsControllers.StartLearningtController;
 import Controller.TButtonsControllers.SelectAllButtonController;
-import View.buttonsPatterns.ButtonsPattern;
-import View.buttonsPatterns.HBoxPattern;
-import View.buttonsPatterns.TButtonPattern;
-import View.buttonsPatterns.VBoxPattern;
+import Model.MainModel;
+import View.patterns.controls.ButtonsPattern;
+import View.patterns.containers.HBoxPattern;
+import View.patterns.containers.TButtonPattern;
+import View.patterns.containers.VBoxPattern;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 public class FirstWindow {
 
     private SecondWindow secondWindow;
-    private final GeneralDependence generalDependence;
+    private final MainModel mainModel;
     private final Stage firstWindow = new Stage();
 
     private final static byte INTERVAL = 10;
@@ -44,6 +45,7 @@ public class FirstWindow {
     private final static String SELECT_ALL_BUTTON_STYLE = "selectAll-toggle-button";
     private final static String TOP_BORDER_PANE_DECOR = "top-border-pane";
     private final static String BOTTOM_BORDER_PANE_DECOR = "bottom-border-pane";
+    private final static String SC_LOAD_BUTTON = "button-load";
 
     private final TButtonPattern coreButton = new TButtonPattern(PREF_WIDTH, PREF_HEIGHT, "Core");
     private final TButtonPattern collectionButton = new TButtonPattern(PREF_WIDTH, PREF_HEIGHT, "Collections");
@@ -64,19 +66,20 @@ public class FirstWindow {
     private final ButtonsPattern startLearningButton = new ButtonsPattern(PREF_WIDTH_CENTRAL_BUTTON, PREF_HEIGHT_CENTRAL_BUTTON, "Start learning");
     private final ButtonsPattern loadButton = new ButtonsPattern(PREF_WIDTH_CENTRAL_BUTTON, PREF_HEIGHT_CENTRAL_BUTTON, "Load");
 
-    public FirstWindow(GeneralDependence genDependence) {
-        this.generalDependence = genDependence;
+    public FirstWindow(MainModel genDependence) {
+        this.mainModel = genDependence;
     }
 
-    public void startWindow(SecondWindow secWindow) {
+    public void initWin(SecondWindow secWindow) {
 
         this.secondWindow = secWindow;
-        generalDependence.getDBWorker().distributeLists();
+        mainModel.getDBWorker().distributeLists();
         String stylesheet = getClass().getResource(STYLE_FILE).toExternalForm();
         selectAllButton.setTooltip(new Tooltip("Select at least one theme"));
         startLearningButton.setTooltip(new Tooltip("Select at least one theme"));
         selectAllButton.getStyleClass().add(SELECT_ALL_BUTTON_STYLE);
-        LoadWindow loadWindow = new LoadWindow(this, generalDependence);
+        loadButton.getStyleClass().add(SC_LOAD_BUTTON);
+        LoadWindow loadWindow = new LoadWindow(this, mainModel);
         //________________________________________create main pane and add decorated elements
         BorderPane mainPane = new BorderPane();
         BorderPane insertTopPane = new BorderPane();
@@ -110,7 +113,7 @@ public class FirstWindow {
         rightHBox.getChildren().addAll(firstRightVBox, secondRightVBox);
         //________________________________________create all controllers
         SelectAllButtonController selectAllController = new SelectAllButtonController(this);
-        StartLearnButController startLearnController = new StartLearnButController(generalDependence.getDBWorker(),
+        StartLearningtController startLearnController = new StartLearningtController(mainModel.getDBWorker(),
                 coreButton, collectionButton, java8Button, IOandNIOButton, serializationButton,
                 MTButton, dataBaseButton, SQLButton, JDBCButton, XMLButton, HTMLButton, CSSButton);
         //________________________________________all listeners
@@ -118,7 +121,7 @@ public class FirstWindow {
 
         startLearningButton.setOnAction((event) -> {
             if (startLearnController.ifNotSelected()) {
-                secondWindow.startWin();
+                secondWindow.initWin();
                 firstWindow.close();
                 startLearnController.startProg();
             }

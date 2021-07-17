@@ -1,16 +1,16 @@
-package View;
+package View.windows;
 
 import Controller.ButtonsControllers.*;
 import Controller.ColorController;
-import View.buttonsPatterns.ButtonsPattern;
-import View.buttonsPatterns.HBoxPattern;
-import View.buttonsPatterns.TextAreaPattern;
-import View.buttonsPatterns.VBoxPattern;
+import Model.MainModel;
+import View.patterns.controls.ButtonsPattern;
+import View.patterns.containers.HBoxPattern;
+import View.patterns.controls.TextAreaPattern;
+import View.patterns.containers.VBoxPattern;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class SecondWindow {
 
     private final FirstWindow firstWindow;
-    private final GeneralDependence generalDependence;
+    private final MainModel mainModel;
 
     private final ProgressIndicator resultIndicator = new ProgressIndicator();
 
@@ -43,7 +43,6 @@ public class SecondWindow {
     private final static short PREF_WIDTH_SMALL = 60;
     private final static short PREF_WIDTH_STANDARD = 140;
 
-
     private final static short PREF_WIDTH_INDICATOR = 180;
     private final static short PREF_HEIGHT_INDICATOR = 140;
 
@@ -55,14 +54,16 @@ public class SecondWindow {
     private final static String YES_BUTTON_STYLE = "yes-button";
     private final static String SC_NO_BUTTON = "no-button";
 
-    public SecondWindow(FirstWindow firstW, GeneralDependence genDependence) {
+    public SecondWindow(FirstWindow firstW, MainModel genDependence) {
 
-        this.generalDependence = genDependence;
+        this.mainModel = genDependence;
         this.firstWindow = firstW;
     }
 
-    public void startWin() {
+    public void initWin() {
         Stage secondWindow = new Stage();
+        ResultWindow resultWindow = new ResultWindow();
+        SaveWindow saveWindow = new SaveWindow();
         Insets margin = new Insets(INTERVAL);
         String stylesheet = getClass().getResource(STYLE_FILE).toExternalForm();
         //_________________________________________create all buttons
@@ -76,21 +77,21 @@ public class SecondWindow {
         ButtonsPattern saveButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Save");
         ButtonsPattern backButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Back");
         //_________________________________________create all controllers
-        ColorController colorController = new ColorController(generalDependence.getDBWorker(),generalDependence.getListIndex());
-        StartButtonController startButtonController = new StartButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        NextButtonController nextButtonController = new NextButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        PreviousButtonController previousButtonController = new PreviousButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        QuestionButtonController questionButtonController = new QuestionButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        AnswerButtonController answerButtonController = new AnswerButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        YesButtonController yesButtonController = new YesButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        NoButtonController noButtonController = new NoButtonController(generalDependence.getDBWorker(), generalDependence.getListIndex());
-        SaveButtonController saveController = new SaveButtonController(generalDependence.getDBWorker(), generalDependence.getJsonWorker());
+        ColorController colorController = new ColorController(mainModel);
+        StartButtonController startButtonController = new StartButtonController(mainModel);
+        NextButtonController nextButtonController = new NextButtonController(mainModel);
+        PreviousButtonController previousButtonController = new PreviousButtonController(mainModel);
+        QuestionButtonController questionButtonController = new QuestionButtonController(mainModel);
+        AnswerButtonController answerButtonController = new AnswerButtonController(mainModel);
+        YesButtonController yesButtonController = new YesButtonController(mainModel);
+        NoButtonController noButtonController = new NoButtonController(mainModel);
+        SaveButtonController saveController = new SaveButtonController(mainModel);
         //_________________________________________create main pane and all view elements
         BorderPane mainPane = new BorderPane();
         BorderPane topDecorPane = new BorderPane();
         BorderPane bottomDecorPane = new BorderPane();
         TextAreaPattern outputText = new TextAreaPattern(colorController);
-        resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(generalDependence.getCountingResult().getTotalResult()));
+        resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
         resultIndicator.setPrefSize(PREF_WIDTH_INDICATOR, PREF_HEIGHT_INDICATOR);
         //_________________________________________set decorate top & bottom panel
         topDecorPane.setPrefSize(PREF_DECORATED_PANE_WIDTH, PREF_DECORATED_PANE_HEIGHT);
@@ -135,7 +136,7 @@ public class SecondWindow {
         noButton.setDisable(true);
         //_________________________________________add listeners to all buttons
         startButton.setOnAction((event) -> {
-            outputText.showText(startButtonController.startController());
+            outputText.showText(startButtonController.startLearning());
             startButton.setDisable(true);
             nextButton.setDisable(false);
             previousButton.setDisable(false);
@@ -146,31 +147,40 @@ public class SecondWindow {
             noButton.setDisable(false);
         });
         //_________________________________________add all listeners
-        nextButton.setOnAction((event) ->  outputText.showText(nextButtonController.startController()));
-        previousButton.setOnAction((event) ->  outputText.showText(previousButtonController.startController()));
-        questionButton.setOnAction((event) -> outputText.showText(questionButtonController.startController()));
-        answerButton.setOnAction((event) -> outputText.showText(answerButtonController.startController()));
-        saveButton.setOnAction(event -> saveController.startController());
+        nextButton.setOnAction((event) -> outputText.showText(nextButtonController.getNextQuestion()));
+        previousButton.setOnAction((event) -> outputText.showText(previousButtonController.getPreviousQuestion()));
+        questionButton.setOnAction((event) -> outputText.showText(questionButtonController.getRandomQuestion()));
+        answerButton.setOnAction((event) -> outputText.showText(answerButtonController.getAnswer()));
+        saveButton.setOnAction(event -> {
+            saveController.saveInfoToFile();
+            saveWindow.initWindow();
+        });
 
         yesButton.setOnAction((event) -> {
             outputText.getStyleClass().clear();
-            resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(generalDependence.getCountingResult().getTotalResult()));
-            resultIndicator.setProgress(generalDependence.getCountingResult().counting());
+            resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
+            resultIndicator.setProgress(mainModel.getCountingResult().countingTotalResult());
             yesButtonController.setYes();
             outputText.getStyleClass().add(colorController.selectTextColor());
+            if (resultIndicator.getProgress() >= 1.0) {
+                resultWindow.initResultWin(mainModel.getCountingResult().getEndLearningResult());
+            }
         });
         noButton.setOnAction(event -> {
             outputText.getStyleClass().clear();
-            resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(generalDependence.getCountingResult().getTotalResult()));
-            resultIndicator.setProgress(generalDependence.getCountingResult().counting());
+            resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
+            resultIndicator.setProgress(mainModel.getCountingResult().countingTotalResult());
             noButtonController.setNo();
             outputText.getStyleClass().add(colorController.selectTextColor());
+            if (resultIndicator.getProgress() >= 1.0) {
+                resultWindow.initResultWin(mainModel.getCountingResult().getEndLearningResult());
+            }
         });
         backButton.setOnAction(event -> {
             secondWindow.close();
-            generalDependence.getDBWorker().getBufferList().clear();
-            resultIndicator.setProgress(generalDependence.getCountingResult().resetResult());
-            firstWindow.startWindow(this);
+            mainModel.getDBWorker().getBufferList().clear();
+            resultIndicator.setProgress(mainModel.getCountingResult().resetResult());
+            firstWindow.initWin(this);
         });
 
         mainPane.setTop(topDecorPane);
@@ -189,6 +199,7 @@ public class SecondWindow {
         secondWindow.getIcons().add(new Image(WIN_ICON));
         secondWindow.show();
     }
-
-    public ProgressIndicator getResultIndicator() { return resultIndicator; }
+    public ProgressIndicator getResultIndicator() {
+        return resultIndicator;
+    }
 }

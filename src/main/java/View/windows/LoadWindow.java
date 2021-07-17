@@ -1,7 +1,12 @@
-package View;
+package View.windows;
 
 import Controller.ButtonsControllers.LoadButtonController;
-import View.buttonsPatterns.*;
+import Model.MainModel;
+import View.patterns.containers.DecorPanePattern;
+import View.patterns.containers.HBoxPattern;
+import View.patterns.containers.TButtonPattern;
+import View.patterns.containers.VBoxPattern;
+import View.patterns.controls.ButtonsPattern;
 import animatefx.animation.FadeIn;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,7 +24,7 @@ import java.util.ArrayList;
 public class LoadWindow {
 
     private final FirstWindow firstWindow;
-    private final ProgramModel model;
+    private final MainModel model;
     private final ArrayList<TButtonPattern> buttonsList = new ArrayList<>();
 
     private final static String ICON_URL = "/load_window_icon.png";
@@ -43,7 +48,7 @@ public class LoadWindow {
     private final static short WIN_HEIGHT = 500;
     private final static short MIN_WIN_HEIGHT = 400;
 
-    public LoadWindow(FirstWindow firstWindow, ProgramModel model) {
+    public LoadWindow(FirstWindow firstWindow, MainModel model) {
         this.firstWindow = firstWindow;
         this.model = model;
     }
@@ -130,6 +135,5 @@ public class LoadWindow {
         window.setScene(winScene);
         window.show();
     }
-
     public ArrayList<TButtonPattern> getButtonsList() { return buttonsList; }
 }

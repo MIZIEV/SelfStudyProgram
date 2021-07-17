@@ -1,6 +1,7 @@
-package View;
+package View.windows;
 
-import View.buttonsPatterns.ButtonsPattern;
+import View.patterns.containers.DecorPanePattern;
+import View.patterns.controls.ButtonsPattern;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -36,21 +37,17 @@ public class SaveWindow {
 
         BorderPane mainPane = new BorderPane();
         VBox mainVBox = new VBox();
-        Pane topDecorePane = new Pane();
-        Pane bottomDecorPane = new Pane();
+        DecorPanePattern topDecorPane = new DecorPanePattern(SC_TOP_DECOR_PANE,DECOR_PANE_HEIGHT);
+        DecorPanePattern bottomDecorPane = new DecorPanePattern(SC_BOTTOM_PANE,DECOR_PANE_HEIGHT);
         Label text = new Label("File was saved");
 
-        topDecorePane.setPrefHeight(DECOR_PANE_HEIGHT);
-        bottomDecorPane.setPrefHeight(DECOR_PANE_HEIGHT);
-        topDecorePane.getStyleClass().add(SC_TOP_DECOR_PANE);
-        bottomDecorPane.getStyleClass().add(SC_BOTTOM_PANE);
         ButtonsPattern okButton = new ButtonsPattern(BUTTON_WIDTH, BUTTON_HEIGHT, "ok");
 
         okButton.setOnAction(event -> window.close());
         mainVBox.setAlignment(Pos.CENTER);
 
         mainVBox.getChildren().addAll(text, okButton);
-        mainPane.setTop(topDecorePane);
+        mainPane.setTop(topDecorPane);
         mainPane.setBottom(bottomDecorPane);
         mainPane.setCenter(mainVBox);
         Scene winScene = new Scene(mainPane, WINDOW_WIDTH, WINDOW_HEIGHT);
