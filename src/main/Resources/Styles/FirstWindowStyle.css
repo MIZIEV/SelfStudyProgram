@@ -25,8 +25,15 @@
 }
 
 .button:hover{
--fx-background-color:  #6495ed;
+-fx-background-color: #6495ed;
 -fx-text-fill: white;
+}
+
+.button-load{
+-fx-border-color: #6495ed;
+}
+.button-load: hover{
+-fx-background-color: #3cb371;
 }
 
 .toggle-button{
