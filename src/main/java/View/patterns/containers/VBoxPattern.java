@@ -1,4 +1,4 @@
-package View.buttonsPatterns;
+package View.patterns.containers;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;

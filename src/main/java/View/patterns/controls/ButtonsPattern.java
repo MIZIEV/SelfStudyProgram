@@ -1,4 +1,4 @@
-package View.buttonsPatterns;
+package View.patterns.controls;
 
 import javafx.scene.control.*;
 

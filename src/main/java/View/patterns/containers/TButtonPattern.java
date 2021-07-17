@@ -1,4 +1,4 @@
-package View.buttonsPatterns;
+package View.patterns.containers;
 
 import javafx.scene.control.ToggleButton;
 

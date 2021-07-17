@@ -1,4 +1,4 @@
-package View.buttonsPatterns;
+package View.patterns.controls;
 
 import Controller.ColorController;
 import javafx.scene.control.TextArea;
