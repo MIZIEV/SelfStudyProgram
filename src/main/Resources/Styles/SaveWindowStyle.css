@@ -16,6 +16,7 @@
 -fx-border-radius: 20px;
 -fx-background-radius: 20px;
 -fx-border-color: #3cb371;
+-fx-base: white;
 }
 .button: hover{
 -fx-background-color: #3cb371;
