@@ -30,6 +30,7 @@ public class AdditionalWindow {
 
     private final static short WIN_WIDTH = 600;
     private final static short WIN_HEIGHT = 500;
+    private final static short MIN_WIN_SIZE = 300;
 
     public AdditionalWindow(ProgramModel programModel) {
         this.model = programModel;
@@ -73,6 +74,10 @@ public class AdditionalWindow {
         Scene winScene = new Scene(mainPane, WIN_WIDTH, WIN_HEIGHT);
         winScene.getStylesheets().add(stylesheets);
         new FadeIn(mainPane).play();
+        window.setMaxWidth(WIN_WIDTH);
+        window.setMaxHeight(WIN_HEIGHT);
+        window.setMinWidth(MIN_WIN_SIZE);
+        window.setMinHeight(MIN_WIN_SIZE);
         window.getIcons().add(new Image(ICON_URL));
         window.initModality(Modality.APPLICATION_MODAL);
         window.setScene(winScene);

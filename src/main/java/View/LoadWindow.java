@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -22,7 +23,8 @@ public class LoadWindow {
     private final ArrayList<TButtonPattern> buttonsList = new ArrayList<>();
 
     private final static String ICON_URL = "/load_window_icon.png";
-    private final static String SC_FILE="/Styles/LoadWindowStyle.css";
+    private final static String WIN_TITLE = "Loading saved files";
+    private final static String SC_FILE = "/Styles/LoadWindowStyle.css";
     private final static String TOP_DECOR_PANE_SC = "top-pane";
     private final static String BOTTOM_DECOR_PANE_SC = "bottom-pane";
     private final static String LOAD_BUTTON_SC = "button-load";
@@ -39,7 +41,7 @@ public class LoadWindow {
     private final static byte DECOR_PANE_HEIGHT = 100;
     private final static short WIN_WIDTH = 600;
     private final static short WIN_HEIGHT = 500;
-
+    private final static short MIN_WIN_HEIGHT = 400;
 
     public LoadWindow(FirstWindow firstWindow, ProgramModel model) {
         this.firstWindow = firstWindow;
@@ -80,22 +82,30 @@ public class LoadWindow {
         ButtonsPattern deleteButton = new ButtonsPattern(BUTTON_WIDTH, BUTTON_HEIGHT, DELETE_BUTTON_SC, "Delete");
 
         deleteButton.setOnAction(event -> {
-            window.close();
-            AdditionalWindow additionalWindow = new AdditionalWindow(model);
-            additionalWindow.launchWin(this, secondWindow);
+            if (group.getSelectedToggle() == null) {
+                deleteButton.setTooltip(new Tooltip("Nothing to delete"));
+            } else {
+                window.close();
+                AdditionalWindow additionalWindow = new AdditionalWindow(model);
+                additionalWindow.launchWin(this, secondWindow);
+            }
         });
 
         loadButton.setOnAction(event -> {
-            window.close();
-            firstWindow.closeWin();
-            for (int i = 0; i < model.getFileWorker().getFilesName().size(); i++) {
-                if (buttonsList.get(i).isSelected()) {
-                    controller.loadSavedFile(buttonsList.get(i).getText());
-                    break;
+            if (group.getSelectedToggle() == null) {
+                loadButton.setTooltip(new Tooltip("Nothing to load"));
+            } else {
+                window.close();
+                firstWindow.closeWin();
+                for (int i = 0; i < model.getFileWorker().getFilesName().size(); i++) {
+                    if (buttonsList.get(i).isSelected()) {
+                        controller.loadSavedFile(buttonsList.get(i).getText());
+                        break;
+                    }
                 }
+                secondWindow.getResultIndicator().setProgress(model.getJsonWorker().getTotalResult());
+                secondWindow.initWin();
             }
-            secondWindow.getResultIndicator().setProgress(model.getJsonWorker().getTotalResult());
-            secondWindow.initWin();
         });
 
         bottomHBox.getChildren().addAll(deleteButton, loadButton);
@@ -110,15 +120,16 @@ public class LoadWindow {
         Scene winScene = new Scene(mainPane, WIN_WIDTH, WIN_HEIGHT);
         window.setMaxWidth(WIN_WIDTH);
         window.setMaxHeight(WIN_HEIGHT);
+        window.setMinWidth(WIN_WIDTH);
+        window.setMinHeight(MIN_WIN_HEIGHT);
         winScene.getStylesheets().add(stylesheets);
         new FadeIn(mainPane).play();
+        window.setTitle(WIN_TITLE);
         window.getIcons().add(new Image(ICON_URL));
         window.initModality(Modality.APPLICATION_MODAL);
         window.setScene(winScene);
         window.show();
     }
 
-    public ArrayList<TButtonPattern> getButtonsList() {
-        return buttonsList;
-    }
+    public ArrayList<TButtonPattern> getButtonsList() { return buttonsList; }
 }
