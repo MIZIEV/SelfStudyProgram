@@ -1,0 +1,24 @@
+.top-pane{
+-fx-background-color: #dc143c;
+-fx-background-radius: 0 0 30 30;
+}
+.bottom-pane{
+-fx-background-color: #dc143c;
+-fx-background-radius: 30 30 0 0;
+}
+
+.label{
+-fx-text-fill: #dc143c;
+-fx-font-size: 30px;
+}
+
+.button{
+-fx-border-radius: 20px;
+-fx-background-radius: 20px;
+-fx-border-color: #dc143c;
+-fx-base: white;
+}
+.button: hover{
+-fx-background-color: #dc143c;
+-fx-text-fill: white;
+}

@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 public class SaveWindow {
 
     private final static String STYLE_WINDOW_FILE = "/Styles/SaveWindowStyle.css";
+    private final static String STYLE_WINDOW_FILE_ERROR = "/Styles/SaveWindowStyleError.css";
+
     private final static String SC_TOP_DECOR_PANE = "top-pane";
     private final static String SC_BOTTOM_PANE = "bottom-pane";
 
@@ -30,16 +32,26 @@ public class SaveWindow {
     private final static byte BUTTON_WIDTH = 80;
     private final static byte BUTTON_HEIGHT = 40;
 
-    private final Stage window = new Stage();
+    private final static String DONE_RESULT = "File was saved";
+    private final static String ERROR_RESULT = "File was not saved";
 
-    public void initWindow() {
-        String stylesheet = getClass().getResource(STYLE_WINDOW_FILE).toExternalForm();
+
+    public static void initWindow(boolean savingResult) {
+        Stage window = new Stage();
+        String stylesheet;
+        Label text = new Label();
+        if (savingResult) {
+            stylesheet = SaveWindow.class.getResource(STYLE_WINDOW_FILE).toExternalForm();
+            text.setText(DONE_RESULT);
+        } else {
+            stylesheet = SaveWindow.class.getClass().getResource(STYLE_WINDOW_FILE_ERROR).toExternalForm();
+            text.setText(ERROR_RESULT);
+        }
 
         BorderPane mainPane = new BorderPane();
         VBox mainVBox = new VBox();
-        DecorPanePattern topDecorPane = new DecorPanePattern(SC_TOP_DECOR_PANE,DECOR_PANE_HEIGHT);
-        DecorPanePattern bottomDecorPane = new DecorPanePattern(SC_BOTTOM_PANE,DECOR_PANE_HEIGHT);
-        Label text = new Label("File was saved");
+        DecorPanePattern topDecorPane = new DecorPanePattern(SC_TOP_DECOR_PANE, DECOR_PANE_HEIGHT);
+        DecorPanePattern bottomDecorPane = new DecorPanePattern(SC_BOTTOM_PANE, DECOR_PANE_HEIGHT);
 
         ButtonsPattern okButton = new ButtonsPattern(BUTTON_WIDTH, BUTTON_HEIGHT, "ok");
 
