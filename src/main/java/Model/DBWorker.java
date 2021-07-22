@@ -1,6 +1,6 @@
 package Model;
 
-import View.ErrorWindow;
+import View.windows.ErrorWindow;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class DBWorker {
                     case "Multithreading ":
                         MTList.add(allQAList.get(counter));
                         break;
-                    case "Model":
+                    case "DataBase":
                         dataBaseList.add(allQAList.get(counter));
                         break;
                     case "SQL":

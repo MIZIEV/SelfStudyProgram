@@ -1,5 +1,6 @@
 package Model;
 
+import View.windows.SaveWindow;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -53,11 +54,12 @@ public class FileWorker {
 
         HashSet<String> selectedTheme = new HashSet<>();
         for (InfoFromDB element : list) {
-            selectedTheme.add(element.getTheme());
+            if(element.getTheme().equals("Java IO/NIO")) selectedTheme.add("Java IO&NIO"); //todo this is shit???
+            else selectedTheme.add(element.getTheme());
         }
 
         String splitString[] = nowTime.split("\\s|\\:");
-        double resultPercent = result.counting() * 100;
+        double resultPercent = result.countingTotalResult() * 100;
         String fileName = splitString[1] + " " + splitString[2] +
                 " " + splitString[3] + " " + splitString[4] +
                 " Theme" + selectedTheme +
@@ -71,10 +73,14 @@ public class FileWorker {
             for (int i = 0; i < buf.length; i++) {
                 writer.write(buf[i]);
             }
+            SaveWindow.initWindow(true);
         } catch (IOException e) {
-            System.out.println("error");
+            SaveWindow.initWindow(false);
+            e.printStackTrace();
         }
     }
 
-    public ArrayList<String> getFilesName() { return filesName; }
+    public ArrayList<String> getFilesName() {
+        return filesName;
+    }
 }
