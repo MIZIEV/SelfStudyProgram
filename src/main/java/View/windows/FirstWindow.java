@@ -5,7 +5,7 @@ import Controller.TButtonsControllers.SelectAllButtonController;
 import Model.MainModel;
 import View.patterns.controls.ButtonsPattern;
 import View.patterns.containers.HBoxPattern;
-import View.patterns.containers.TButtonPattern;
+import View.patterns.controls.TButtonPattern;
 import View.patterns.containers.VBoxPattern;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -73,7 +73,7 @@ public class FirstWindow {
     public void initWin(SecondWindow secWindow) {
 
         this.secondWindow = secWindow;
-        mainModel.getDBWorker().distributeLists();
+        //mainModel.getDBWorker().distributeLists();
         String stylesheet = getClass().getResource(STYLE_FILE).toExternalForm();
         selectAllButton.setTooltip(new Tooltip("Select at least one theme"));
         startLearningButton.setTooltip(new Tooltip("Select at least one theme"));
@@ -123,7 +123,7 @@ public class FirstWindow {
             if (startLearnController.ifNotSelected()) {
                 secondWindow.initWin();
                 firstWindow.close();
-                startLearnController.startProg();
+                startLearnController.startLearning();
             }
         });
 

@@ -4,7 +4,7 @@ import Controller.ButtonsControllers.LoadButtonController;
 import Model.MainModel;
 import View.patterns.containers.DecorPanePattern;
 import View.patterns.containers.HBoxPattern;
-import View.patterns.containers.TButtonPattern;
+import View.patterns.controls.TButtonPattern;
 import View.patterns.containers.VBoxPattern;
 import View.patterns.controls.ButtonsPattern;
 import animatefx.animation.FadeIn;

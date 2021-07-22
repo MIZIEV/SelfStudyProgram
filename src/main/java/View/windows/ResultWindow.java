@@ -23,6 +23,7 @@ public class ResultWindow {
 
     private final static short WINDOW_WIDTH = 500;
     private final static short WINDOW_HEIGHT = 350;
+    private final static short WINDOW_MIN_SIZE = 300;
     private final static short BUTTON_HEIGHT = 50;
     private final static short BUTTON_WIDTH = 150;
     private final static byte DECOR_PANE_HEIGHT = 50;
@@ -55,6 +56,8 @@ public class ResultWindow {
         Scene winScene = new Scene(mainPane, WINDOW_WIDTH, WINDOW_HEIGHT);
         window.setMaxWidth(WINDOW_WIDTH);
         window.setMaxHeight(WINDOW_HEIGHT);
+        window.setMinWidth(WINDOW_MIN_SIZE);
+        window.setMinHeight(WINDOW_MIN_SIZE);
         winScene.getStylesheets().add(stylesheet);
         window.setTitle(WINDOW_TITLE);
         window.initModality(Modality.APPLICATION_MODAL);
