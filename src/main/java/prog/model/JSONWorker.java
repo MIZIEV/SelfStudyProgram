@@ -1,4 +1,4 @@
-package Model;
+package prog.model;
 
 import org.json.JSONObject;
 
@@ -62,7 +62,7 @@ public class JSONWorker {
             }
             totalResult = result.countingFromFile(bufferList);
         } catch (IOException e) {
-            System.out.println("error");
+            System.out.println("error in ArrayList<InfoFromDB> convertFromJSON(File fileWithJSON)");
         }
         return bufferList;
     }

@@ -1,6 +1,6 @@
-package Model;
+package prog.model;
 
-import View.windows.ErrorWindow;
+import prog.view.windows.ErrorWindow;
 
 import java.sql.*;
 import java.util.ArrayList;

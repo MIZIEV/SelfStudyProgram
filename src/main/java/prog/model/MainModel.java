@@ -1,15 +1,18 @@
-package View;
+package prog.model;
 
-import Model.*;
 
-public class GeneralDependence {
+public class MainModel {
 
     private final DBConnector connector = new DBConnector();
     private final DBWorker DBWorker = new DBWorker(connector);
     private final ListIndex listIndex = new ListIndex();
     private final ResultCounter resultCounter = new ResultCounter(DBWorker, listIndex);
     private final FileWorker fileWorker = new FileWorker();
-    private final JSONWorker jsonWorker = new JSONWorker(resultCounter, DBWorker);
+    private final JSONWorker jsonWorker = new JSONWorker(resultCounter);
+
+    public MainModel(){
+        DBWorker.distributeLists();
+    }
 
     public FileWorker getFileWorker() { return fileWorker; }
 

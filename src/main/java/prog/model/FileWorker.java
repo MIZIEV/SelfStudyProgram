@@ -1,6 +1,6 @@
-package Model;
+package prog.model;
 
-import View.windows.SaveWindow;
+import prog.view.windows.SaveWindow;
 import org.json.JSONObject;
 
 import java.io.File;
