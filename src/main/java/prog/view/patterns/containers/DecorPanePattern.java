@@ -1,4 +1,4 @@
-package View.patterns.containers;
+package prog.view.patterns.containers;
 
 import javafx.scene.layout.Pane;
 

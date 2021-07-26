@@ -1,4 +1,4 @@
-package View.patterns.containers;
+package prog.view.patterns.containers;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;

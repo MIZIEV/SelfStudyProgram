@@ -1,4 +1,4 @@
-package View.patterns.controls;
+package prog.view.patterns.controls;
 
 import javafx.scene.control.Label;
 

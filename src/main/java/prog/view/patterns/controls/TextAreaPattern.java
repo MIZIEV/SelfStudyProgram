@@ -1,8 +1,15 @@
-package View.patterns.controls;
+package prog.view.patterns.controls;
 
-import Controller.ColorController;
+import prog.controller.ColorController;
 import javafx.scene.control.TextArea;
 
+/**
+ * class description:
+ * this class needed for showing text by different color.
+ * Color dependency from yasNo variable:
+ * if var=1, color = green, if var =-1, color = red, if var=0, color = black.
+ * todo check this description!!!
+ */
 public class TextAreaPattern extends TextArea {
 
     private final ColorController controller;
