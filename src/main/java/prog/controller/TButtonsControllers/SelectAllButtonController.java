@@ -1,6 +1,6 @@
-package Controller.TButtonsControllers;
+package prog.controller.TButtonsControllers;
 
-import View.FirstWindow;
+import prog.view.windows.FirstWindow;
 
 public class SelectAllButtonController {
 

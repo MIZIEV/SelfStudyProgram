@@ -1,25 +1,22 @@
-package Controller.ButtonsControllers;
+package prog.controller.ButtonsControllers;
 
+import prog.model.MainModel;
 
-import View.ProgramModel;
+public class PreviousButtonController {
 
-public class NextButtonController {
+    private final MainModel model;
 
-    private final ProgramModel model;
-
-    public NextButtonController(ProgramModel model) {
+    public PreviousButtonController(MainModel model) {
         this.model = model;
     }
 
-    public String getNextQuestion() {
+    public String getPreviousQuestion() {
         int textCounter = model.getListIndex().getIndex();
-        if (textCounter >= model.getDBWorker().getBufferList().size() - 1) {
-            textCounter = textCounter;
-
-        } else textCounter++;
+        if (textCounter <= 0) {
+            textCounter = 0;
+        } else textCounter--;
 
         model.getListIndex().setIndex(textCounter);
-
         return model.getDBWorker().getBufferList().get(textCounter).getIndex() + " - " +
                 model.getDBWorker().getBufferList().get(textCounter).getTheme() + ": " + "\n" +
                 model.getDBWorker().getBufferList().get(textCounter).getQuestion();

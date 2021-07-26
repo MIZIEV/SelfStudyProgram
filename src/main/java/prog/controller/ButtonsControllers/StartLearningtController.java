@@ -1,7 +1,7 @@
-package Controller.ButtonsControllers;
+package prog.controller.ButtonsControllers;
 
-import Model.DBWorker;
-import View.buttonsPatterns.TButtonPattern;
+import prog.model.DBWorker;
+import prog.view.patterns.controls.TButtonPattern;
 
 public class StartLearningtController {
 
@@ -41,7 +41,7 @@ public class StartLearningtController {
         this.worker = worker;
     }
 
-    public void startProg() {
+    public void startLearning() {
 
         if (coreButton.isSelected()) worker.getBufferList().addAll(worker.getCoreList());
 

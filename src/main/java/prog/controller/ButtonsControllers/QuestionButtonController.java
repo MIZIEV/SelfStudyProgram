@@ -1,6 +1,6 @@
-package Controller.ButtonsControllers;
+package prog.controller.ButtonsControllers;
 
-import Model.MainModel;
+import prog.model.MainModel;
 
 public class QuestionButtonController {
 

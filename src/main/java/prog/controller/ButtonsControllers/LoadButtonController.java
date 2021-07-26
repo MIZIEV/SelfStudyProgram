@@ -1,12 +1,12 @@
-package Controller.ButtonsControllers;
+package prog.controller.ButtonsControllers;
 
-import View.ProgramModel;
+import prog.model.MainModel;
 
 public class LoadButtonController {
 
-    private final ProgramModel model;
+    private final MainModel model;
 
-    public LoadButtonController(ProgramModel model) {
+    public LoadButtonController(MainModel model) {
         this.model=model;
     }
 

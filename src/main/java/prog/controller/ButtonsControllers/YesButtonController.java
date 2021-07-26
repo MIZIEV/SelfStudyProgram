@@ -1,12 +1,12 @@
-package Controller.ButtonsControllers;
+package prog.controller.ButtonsControllers;
 
-import View.ProgramModel;
+import prog.model.MainModel;
 
 public class YesButtonController {
 
-    private final ProgramModel model;
+    private final MainModel model;
 
-    public YesButtonController(ProgramModel model) {
+    public YesButtonController(MainModel model) {
 
         this.model=model;
     }

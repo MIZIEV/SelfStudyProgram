@@ -1,12 +1,12 @@
-package Controller.ButtonsControllers;
+package prog.controller.ButtonsControllers;
 
-import View.ProgramModel;
+import prog.model.MainModel;
 
 public class AnswerButtonController {
 
-    private final ProgramModel model;
+    private final MainModel model;
 
-    public AnswerButtonController(ProgramModel model) {
+    public AnswerButtonController(MainModel model) {
         this.model = model;
     }
 

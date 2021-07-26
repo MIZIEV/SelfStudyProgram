@@ -1,12 +1,12 @@
-package Controller.ButtonsControllers;
+package prog.controller.ButtonsControllers;
 
-import View.ProgramModel;
+import prog.model.MainModel;
 
 public class SaveButtonController {
 
-    private final ProgramModel model;
+    private final MainModel model;
 
-    public SaveButtonController(ProgramModel model) {
+    public SaveButtonController(MainModel model) {
         this.model = model;
     }
 

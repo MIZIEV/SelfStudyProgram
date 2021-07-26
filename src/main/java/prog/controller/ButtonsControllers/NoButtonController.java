@@ -1,12 +1,12 @@
-package Controller.ButtonsControllers;
+package prog.controller.ButtonsControllers;
 
-import View.ProgramModel;
+import prog.model.MainModel;
 
 public class NoButtonController {
 
-    private final ProgramModel model;
+    private final MainModel model;
 
-    public NoButtonController(ProgramModel model) {
+    public NoButtonController(MainModel model) {
         this.model=model;
     }
 
