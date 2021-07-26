@@ -29,8 +29,8 @@ public class FileWorker {
     private final static String SAVING_FILE_PATH = "C:\\IT\\Java\\Self study program\\src\\main\\Resources\\SavedFiles\\";
 
     public final void searchFiles() {
-        File searchFile = new File(SAVING_FILE_PATH);
-        String savingFiles[] = searchFile.list();
+        File searchedFile = new File(SAVING_FILE_PATH);
+        String savingFiles[] = searchedFile.list();
 
         filesName.clear();
         for (int x = 0; x < savingFiles.length; x++) {
@@ -74,12 +74,11 @@ public class FileWorker {
                 writer.write(buf[i]);
             }
             SaveWindow.initWindow(true);
+            writer.close();
         } catch (IOException e) {
             SaveWindow.initWindow(false);
-            e.printStackTrace();
         }
     }
-
     public ArrayList<String> getFilesName() {
         return filesName;
     }
