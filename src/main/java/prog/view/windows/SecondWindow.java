@@ -1,12 +1,11 @@
-package View.windows;
+package prog.view.windows;
 
-import Controller.ButtonsControllers.*;
-import Controller.ColorController;
-import Model.MainModel;
-import View.patterns.controls.ButtonsPattern;
-import View.patterns.containers.HBoxPattern;
-import View.patterns.controls.TextAreaPattern;
-import View.patterns.containers.VBoxPattern;
+import prog.controller.MainController;
+import prog.model.MainModel;
+import prog.view.patterns.controls.ButtonsPattern;
+import prog.view.patterns.containers.HBoxPattern;
+import prog.view.patterns.controls.TextAreaPattern;
+import prog.view.patterns.containers.VBoxPattern;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,6 +18,7 @@ public class SecondWindow {
 
     private final FirstWindow firstWindow;
     private final MainModel mainModel;
+    private final MainController controller;
 
     private final ProgressIndicator resultIndicator = new ProgressIndicator();
 
@@ -54,16 +54,16 @@ public class SecondWindow {
     private final static String YES_BUTTON_STYLE = "yes-button";
     private final static String SC_NO_BUTTON = "no-button";
 
-    public SecondWindow(FirstWindow firstW, MainModel genDependence) {
+    public SecondWindow(FirstWindow firstW, MainModel genDependence,MainController controller) {
 
         this.mainModel = genDependence;
         this.firstWindow = firstW;
+        this.controller=controller;
     }
 
     public void initWin() {
         Stage secondWindow = new Stage();
         ResultWindow resultWindow = new ResultWindow();
-        SaveWindow saveWindow = new SaveWindow();
         Insets margin = new Insets(INTERVAL);
         String stylesheet = getClass().getResource(STYLE_FILE).toExternalForm();
         //_________________________________________create all buttons
@@ -76,22 +76,13 @@ public class SecondWindow {
         ButtonsPattern noButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, SC_NO_BUTTON, "X");
         ButtonsPattern saveButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Save");
         ButtonsPattern backButton = new ButtonsPattern(PREF_WIDTH_STANDARD, PREF_HEIGHT, "Back");
-        //_________________________________________create all controllers
-        ColorController colorController = new ColorController(mainModel);
-        StartButtonController startButtonController = new StartButtonController(mainModel);
-        NextButtonController nextButtonController = new NextButtonController(mainModel);
-        PreviousButtonController previousButtonController = new PreviousButtonController(mainModel);
-        QuestionButtonController questionButtonController = new QuestionButtonController(mainModel);
-        AnswerButtonController answerButtonController = new AnswerButtonController(mainModel);
-        YesButtonController yesButtonController = new YesButtonController(mainModel);
-        NoButtonController noButtonController = new NoButtonController(mainModel);
-        SaveButtonController saveController = new SaveButtonController(mainModel);
-        //_________________________________________create main pane and all view elements
+        //_________________________________________create main pane and all prog.view elements
         BorderPane mainPane = new BorderPane();
         BorderPane topDecorPane = new BorderPane();
         BorderPane bottomDecorPane = new BorderPane();
-        TextAreaPattern outputText = new TextAreaPattern(colorController);
-        resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
+        TextAreaPattern outputText = new TextAreaPattern(controller.getColorController());
+        resultIndicator.getStyleClass().add(controller.getColorController().
+                selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
         resultIndicator.setPrefSize(PREF_WIDTH_INDICATOR, PREF_HEIGHT_INDICATOR);
         //_________________________________________set decorate top & bottom panel
         topDecorPane.setPrefSize(PREF_DECORATED_PANE_WIDTH, PREF_DECORATED_PANE_HEIGHT);
@@ -136,7 +127,7 @@ public class SecondWindow {
         noButton.setDisable(true);
         //_________________________________________add listeners to all buttons
         startButton.setOnAction((event) -> {
-            outputText.showText(startButtonController.startLearning());
+            outputText.showText(controller.getStartButtonController().startLearning());
             startButton.setDisable(true);
             nextButton.setDisable(false);
             previousButton.setDisable(false);
@@ -147,37 +138,39 @@ public class SecondWindow {
             noButton.setDisable(false);
         });
         //_________________________________________add all listeners
-        nextButton.setOnAction((event) -> outputText.showText(nextButtonController.getNextQuestion()));
-        previousButton.setOnAction((event) -> outputText.showText(previousButtonController.getPreviousQuestion()));
-        questionButton.setOnAction((event) -> outputText.showText(questionButtonController.getRandomQuestion()));
-        answerButton.setOnAction((event) -> outputText.showText(answerButtonController.getAnswer()));
+        nextButton.setOnAction((event) -> outputText.showText(controller.getNextButtonController().getNextQuestion()));
+        previousButton.setOnAction((event) -> outputText.showText(controller.getPreviousButtonController().getPreviousQuestion()));
+        questionButton.setOnAction((event) -> outputText.showText(controller.getQuestionButtonController().getRandomQuestion()));
+        answerButton.setOnAction((event) -> outputText.showText(controller.getAnswerButtonController().getAnswer()));
         saveButton.setOnAction(event -> {
-            saveController.saveInfoToFile();
-            saveWindow.initWindow();
+            controller.getSaveController().saveInfoToFile();
         });
 
         yesButton.setOnAction((event) -> {
             outputText.getStyleClass().clear();
-            resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
+            resultIndicator.getStyleClass().add(controller.getColorController().
+                    selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
             resultIndicator.setProgress(mainModel.getCountingResult().countingTotalResult());
-            yesButtonController.setYes();
-            outputText.getStyleClass().add(colorController.selectTextColor());
+            controller.getYesButtonController().setYes();
+            outputText.getStyleClass().add(controller.getColorController().selectTextColor());
             if (resultIndicator.getProgress() >= 1.0) {
                 resultWindow.initResultWin(mainModel.getCountingResult().getEndLearningResult());
             }
         });
         noButton.setOnAction(event -> {
             outputText.getStyleClass().clear();
-            resultIndicator.getStyleClass().add(colorController.selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
+            resultIndicator.getStyleClass().add(controller.getColorController().
+                    selectIndicatorColor(mainModel.getCountingResult().getTotalResult()));
             resultIndicator.setProgress(mainModel.getCountingResult().countingTotalResult());
-            noButtonController.setNo();
-            outputText.getStyleClass().add(colorController.selectTextColor());
+            controller.getNoButtonController().setNo();
+            outputText.getStyleClass().add(controller.getColorController().selectTextColor());
             if (resultIndicator.getProgress() >= 1.0) {
                 resultWindow.initResultWin(mainModel.getCountingResult().getEndLearningResult());
             }
         });
         backButton.setOnAction(event -> {
             secondWindow.close();
+            controller.getBackController().setDefaultVarInList();
             mainModel.getDBWorker().getBufferList().clear();
             resultIndicator.setProgress(mainModel.getCountingResult().resetResult());
             firstWindow.initWin(this);
