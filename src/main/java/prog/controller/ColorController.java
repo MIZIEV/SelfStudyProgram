@@ -1,11 +1,11 @@
-package Controller;
+package prog.controller;
 
-import View.ProgramModel;
+import prog.model.MainModel;
 
 public class ColorController {
-    private final ProgramModel model;
+    private final MainModel model;
 
-    public ColorController(ProgramModel model) {
+    public ColorController(MainModel model) {
         this.model=model;
     }
 
