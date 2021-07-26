@@ -1,11 +1,11 @@
-package View.windows;
+package prog.view.windows;
 
-import Model.MainModel;
-import View.patterns.containers.DecorPanePattern;
-import View.patterns.containers.HBoxPattern;
-import View.patterns.containers.VBoxPattern;
-import View.patterns.controls.ButtonsPattern;
-import View.patterns.controls.LabelPattern;
+import prog.model.MainModel;
+import prog.view.patterns.containers.DecorPanePattern;
+import prog.view.patterns.containers.HBoxPattern;
+import prog.view.patterns.containers.VBoxPattern;
+import prog.view.patterns.controls.ButtonsPattern;
+import prog.view.patterns.controls.LabelPattern;
 import animatefx.animation.FadeIn;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -59,9 +59,11 @@ public class AdditionalWindow {
             for (int i = 0; i < loadWindow.getButtonsList().size(); i++) {
                 if (loadWindow.getButtonsList().get(i).isSelected()) {
                     model.getFileWorker().removeFile(loadWindow.getButtonsList().get(i).getText());
+                    break;
                 }
             }
             window.close();
+            loadWindow.getButtonsList().clear();
             loadWindow.launchWin(secondWindow);
         });
 

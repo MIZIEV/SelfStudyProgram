@@ -1,12 +1,12 @@
-package View.windows;
+package prog.view.windows;
 
-import Controller.ButtonsControllers.LoadButtonController;
-import Model.MainModel;
-import View.patterns.containers.DecorPanePattern;
-import View.patterns.containers.HBoxPattern;
-import View.patterns.controls.TButtonPattern;
-import View.patterns.containers.VBoxPattern;
-import View.patterns.controls.ButtonsPattern;
+import prog.controller.ButtonsControllers.LoadButtonController;
+import prog.model.MainModel;
+import prog.view.patterns.containers.DecorPanePattern;
+import prog.view.patterns.containers.HBoxPattern;
+import prog.view.patterns.controls.TButtonPattern;
+import prog.view.patterns.containers.VBoxPattern;
+import prog.view.patterns.controls.ButtonsPattern;
 import animatefx.animation.FadeIn;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

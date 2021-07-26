@@ -30,7 +30,6 @@ public class ResultCounter {
         if (worker.getBufferList().get(listIndex.getIndex()).getYesNo() == 0) totalResult += addend / 100.0;
         if (totalResult > 0.998) totalResult = 1.0;   //todo <-------it is god???
 
-        System.out.println("total result - " + totalResult);
         return totalResult;
     }
 

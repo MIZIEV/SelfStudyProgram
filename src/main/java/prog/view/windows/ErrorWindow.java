@@ -1,4 +1,4 @@
-package View.windows;
+package prog.view.windows;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

@@ -1,14 +1,13 @@
-package View.windows;
+package prog.view.windows;
 
-import View.patterns.containers.DecorPanePattern;
-import View.patterns.controls.ButtonsPattern;
+import prog.view.patterns.containers.DecorPanePattern;
+import prog.view.patterns.controls.ButtonsPattern;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
