@@ -1,6 +1,7 @@
 package prog.model;
 
 import org.json.JSONObject;
+import prog.view.windows.ErrorWindow;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -60,9 +61,11 @@ public class JSONWorker {
                     counter++;
                 }
             }
+            reader.close();
             totalResult = result.countingFromFile(bufferList);
         } catch (IOException e) {
-            System.out.println("error in ArrayList<InfoFromDB> convertFromJSON(File fileWithJSON)");
+            ErrorWindow errorWindow = new ErrorWindow();
+            errorWindow.launchWin("Error in JSON worker","cheek this worker");
         }
         return bufferList;
     }
