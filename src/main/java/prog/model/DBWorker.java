@@ -9,12 +9,12 @@ public class DBWorker {
 
     private final DBConnector connector;
 
-    private static final byte INDEX_COLUMN = 2;
-    private static final byte THEME_COLUMN = 3;
-    private static final byte QUESTION_COLUMN = 4;
-    private static final byte ANSWER_COLUMN = 5;
+    private static final byte INDEX_COLUMN = 1;
+    private static final byte THEME_COLUMN = 2;
+    private static final byte QUESTION_COLUMN = 3;
+    private static final byte ANSWER_COLUMN = 4;
 
-    private static final String query = "SELECT * from java_learning.javalearning";
+    private static final String query = "SELECT * FROM learning_material";
 
     private final ArrayList<InfoFromDB> bufferList = new ArrayList<>();
 
@@ -72,7 +72,7 @@ public class DBWorker {
                     case "Serialization":
                         serializationList.add(allQAList.get(counter));
                         break;
-                    case "Multithreading ":
+                    case "Multithreading":
                         MTList.add(allQAList.get(counter));
                         break;
                     case "DataBase":

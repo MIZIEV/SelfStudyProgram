@@ -25,8 +25,7 @@ import java.util.HashSet;
 public class FileWorker {
 
     private final ArrayList<String> filesName = new ArrayList<>();
-
-    private final static String SAVING_FILE_PATH = "C:\\IT\\Java\\Self study program\\src\\main\\Resources\\SavedFiles\\";
+    private final static String SAVING_FILE_PATH = "C:\\IT\\Java\\Ready projects\\Self study program\\src\\main\\Resources\\SavedFiles\\";
 
     public final void searchFiles() {
         File searchedFile = new File(SAVING_FILE_PATH);

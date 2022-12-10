@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class DBConnector {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/java_learning";
+    private static final String URL = "jdbc:mysql://localhost:3306/java_developer_material";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "qw20011993QW";
 
